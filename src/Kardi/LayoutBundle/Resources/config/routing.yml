@@ -1,0 +1,3 @@
+kardi_layout_homepage:
+    path:     /
+    defaults: { _controller: KardiLayoutBundle:Default:index }

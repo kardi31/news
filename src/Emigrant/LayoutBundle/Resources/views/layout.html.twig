@@ -1,0 +1,49 @@
+{% extends 'KardiLayoutBundle::layout.html.twig' %}
+
+{% block head %}
+    {{ parent() }}
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+
+    <!-- Stylesheets -->
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/reset.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/main-stylesheet.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/lightbox.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/shortcode.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/fonts.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/colors.css') }}" />
+    <!--[if lte IE 8]>
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/ie-ancient.css') }}" />
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/responsive.css') }}" />
+
+    <!-- Demo Only -->
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/demo-settings.css') }}" />
+{% endblock %}
+
+{% block body %}
+
+    <!-- BEGIN .boxed -->
+    <div class="boxed">
+
+        {% include 'EmigrantLayoutBundle:Default:header.html.twig' %}
+
+        {% block content %}
+
+        {% endblock %}
+
+        {% include 'EmigrantLayoutBundle:Default:footer.html.twig' %}
+
+        <!-- END .boxed -->
+    </div>
+{% endblock %}
+
+
+{% block footerscripts %}
+    <!-- Scripts -->
+    <script type="text/javascript" src="{{ asset('bundles/emigrantlayout/jscript/jquery-latest.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/emigrantlayout/jscript/theme-scripts.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/emigrantlayout/jscript/lightbox.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/emigrantlayout/jscript/demo-settings.js') }}"></script>
+{% endblock %}

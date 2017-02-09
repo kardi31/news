@@ -1,0 +1,23 @@
+# src/Kardi/MenuBundle/Resources/config/doctrine/Menu.orm.yml
+Kardi\MenuBundle\Entity\Menu:
+  type: entity
+  table: menu_menu
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title:
+      type: string
+      length: 255
+    slug:
+      type: string
+      length: 255
+      nullable: true
+    custom_url:
+      type: string
+      length: 255
+      nullable: true
+    lft:
+      type: string
+      length: 255

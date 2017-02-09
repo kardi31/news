@@ -1,0 +1,4 @@
+services:
+#    kardi_layout.example:
+#        class: Kardi\LayoutBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

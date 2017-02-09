@@ -1,0 +1,11 @@
+emigrant_layout:
+    resource: "@EmigrantLayoutBundle/Resources/config/routing.yml"
+    prefix:   /
+
+#kardi_menu:
+#    resource: "@KardiMenuBundle/Resources/config/routing.yml"
+#    prefix:   /
+#
+#kardi_layout:
+#    resource: "@KardiLayoutBundle/Resources/config/routing.yml"
+#    prefix:   /

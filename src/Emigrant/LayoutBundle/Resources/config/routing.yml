@@ -1,0 +1,3 @@
+emigrant_layout_homepage:
+    path:     /
+    defaults: { _controller: EmigrantLayoutBundle:Default:index }

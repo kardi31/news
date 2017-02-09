@@ -1,0 +1,39 @@
+
+body {
+	background: #fff!important;
+	padding: 35px 0px;
+	height: auto;
+}
+
+.wrapper {
+	width: 90%!important;
+}
+
+.article-title {
+	display: none!important;
+}
+
+.article-title .author .a-content > span {
+	display: none!important;
+}
+
+.smallinfo {
+	display: block;
+	padding-bottom: 20px;
+}
+
+.smallinfo a,
+.smallinfo span,
+.smallinfo strong {
+	display: block;
+	line-height: 150%;
+}
+
+.smallinfo .tag {
+	display: none;
+}
+
+.logo-image {
+	display: block;
+	padding-bottom: 25px;
+}
