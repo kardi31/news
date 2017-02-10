@@ -1,0 +1,70 @@
+# src/Kardi/MenuBundle/Resources/config/doctrine/MenuItem.orm.yml
+Kardi\MenuBundle\Entity\MenuItem:
+  type: entity
+  repositoryClass: Gedmo\Tree\Entity\Repository\NestedTreeRepository
+  table: menu_menuitem
+  gedmo:
+    tree:
+      type: nested
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title:
+      type: string
+      length: 255
+    slug:
+      type: string
+      length: 255
+      nullable: true
+    custom_url:
+      type: string
+      length: 255
+      nullable: true
+    menu_id:
+      type: integer
+      length: 11
+    lft:
+      type: integer
+      nullable: false
+      options:
+          unsigned: false
+      gedmo:
+        - treeLeft
+    rgt:
+      type: integer
+      gedmo:
+        - treeRight
+    lvl:
+      type: integer
+      gedmo:
+        - treeLevel
+  manyToOne:
+      root:
+        targetEntity: MenuItem
+        joinColumn:
+          referencedColumnName: id
+          onDelete: CASCADE
+        gedmo:
+          - treeRoot
+      parent:
+        targetEntity: MenuItem
+        inversedBy: children
+        joinColumn:
+          referencedColumnName: id
+          onDelete: CASCADE
+        gedmo:
+          - treeParent
+      menu:
+        targetEntity: Menu
+        inversedBy: menu_menu
+        joinColumn:
+          name: menu_id
+          referencedColumnName: id
+  oneToMany:
+    children:
+      targetEntity: MenuItem
+      mappedBy: parent
+      orderBy:
+        lft: ASC

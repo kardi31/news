@@ -10,14 +10,7 @@ Kardi\MenuBundle\Entity\Menu:
     title:
       type: string
       length: 255
-    slug:
-      type: string
-      length: 255
-      nullable: true
-    custom_url:
-      type: string
-      length: 255
-      nullable: true
-    lft:
-      type: string
-      length: 255
+  oneToMany:
+    items:
+      targetEntity: MenuItem
+      mappedBy: menu_menuitem

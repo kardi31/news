@@ -7,6 +7,7 @@ namespace Kardi\MenuBundle\Entity;
  */
 class Menu
 {
+
     /**
      * @var integer
      */
@@ -18,15 +19,17 @@ class Menu
     private $title;
 
     /**
-     * @var string
+     * @var \Doctrine\Common\Collections\Collection
      */
-    private $slug;
+    private $items;
 
     /**
-     * @var string
+     * Constructor
      */
-    private $custom_url;
-
+    public function __construct()
+    {
+        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -63,79 +66,36 @@ class Menu
     }
 
     /**
-     * Set slug
+     * Add item
      *
-     * @param string $slug
+     * @param \Kardi\MenuBundle\Entity\MenuItem $item
      *
      * @return Menu
      */
-    public function setSlug($slug)
+    public function addItem(\Kardi\MenuBundle\Entity\MenuItem $item)
     {
-        $this->slug = $slug;
+        $this->items[] = $item;
 
         return $this;
     }
 
     /**
-     * Get slug
+     * Remove item
      *
-     * @return string
+     * @param \Kardi\MenuBundle\Entity\MenuItem $item
      */
-    public function getSlug()
+    public function removeItem(\Kardi\MenuBundle\Entity\MenuItem $item)
     {
-        return $this->slug;
+        $this->items->removeElement($item);
     }
 
     /**
-     * Set customUrl
+     * Get items
      *
-     * @param string $customUrl
-     *
-     * @return Menu
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setCustomUrl($customUrl)
+    public function getItems()
     {
-        $this->custom_url = $customUrl;
-
-        return $this;
-    }
-
-    /**
-     * Get customUrl
-     *
-     * @return string
-     */
-    public function getCustomUrl()
-    {
-        return $this->custom_url;
-    }
-    /**
-     * @var string
-     */
-    private $lft;
-
-
-    /**
-     * Set lft
-     *
-     * @param string $lft
-     *
-     * @return Menu
-     */
-    public function setLft($lft)
-    {
-        $this->lft = $lft;
-
-        return $this;
-    }
-
-    /**
-     * Get lft
-     *
-     * @return string
-     */
-    public function getLft()
-    {
-        return $this->lft;
+        return $this->items;
     }
 }

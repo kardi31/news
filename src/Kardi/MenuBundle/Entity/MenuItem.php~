@@ -3,9 +3,9 @@
 namespace Kardi\MenuBundle\Entity;
 
 /**
- * Menu
+ * MenuItem
  */
-class Menu
+class MenuItem
 {
 
 }
