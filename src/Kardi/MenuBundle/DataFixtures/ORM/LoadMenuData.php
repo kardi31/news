@@ -13,7 +13,6 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface
     {
         $glowne = new Menu();
         $glowne->setTitle('Glowne');
-//        $glowne->setSlug('glowne');
 
         $em->persist($glowne);
 

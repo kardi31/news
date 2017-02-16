@@ -1,0 +1,27 @@
+<div class="main-menu sticky">
+
+    <!-- BEGIN .wrapper -->
+    <div class="wrapper">
+
+        <ul class="the-menu">
+            {% for item in menu.items %}
+                <li>
+                    <a href="index.html">
+                        {{ item.title }}
+
+                    </a>
+                </li>
+            {% endfor %}
+
+            <li><a href="photo-gallery.html"><span>Photo Gallery</span></a>
+                <ul>
+                    <li><a href="photo-gallery-single.html">Photo Gallery Single</a></li>
+                    <li><a href="photo-gallery-single-lightbox.html">Photo Gallery Single Lightbox</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- END .wrapper -->
+    </div>
+
+</div>

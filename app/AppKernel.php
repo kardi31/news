@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Kardi\LayoutBundle\KardiLayoutBundle(),
             new Kardi\MenuBundle\KardiMenuBundle(),
             new Emigrant\LayoutBundle\EmigrantLayoutBundle(),
+            new Ens\JobeetBundle\EnsJobeetBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -1,6 +1,7 @@
 # src/Kardi/MenuBundle/Resources/config/doctrine/Menu.orm.yml
 Kardi\MenuBundle\Entity\Menu:
   type: entity
+  repositoryClass: Kardi\MenuBundle\Repository\MenuRepository
   table: menu_menu
   id:
     id:
@@ -13,4 +14,4 @@ Kardi\MenuBundle\Entity\Menu:
   oneToMany:
     items:
       targetEntity: MenuItem
-      mappedBy: menu_menuitem
+      mappedBy: menu

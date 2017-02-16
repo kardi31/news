@@ -7,7 +7,6 @@ namespace Kardi\MenuBundle\Entity;
  */
 class MenuItem
 {
-
     /**
      * @var integer
      */

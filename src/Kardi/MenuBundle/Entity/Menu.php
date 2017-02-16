@@ -4,10 +4,11 @@ namespace Kardi\MenuBundle\Entity;
 
 /**
  * Menu
+ * @ORM\Table(name="menu_menu")
+ * @ORM\Entity(repositoryClass="KardiMenuBundle|Repository|MenuRepository")
  */
 class Menu
 {
-
     /**
      * @var integer
      */

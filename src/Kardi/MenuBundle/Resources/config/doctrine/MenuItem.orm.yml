@@ -58,7 +58,7 @@ Kardi\MenuBundle\Entity\MenuItem:
           - treeParent
       menu:
         targetEntity: Menu
-        inversedBy: menu_menu
+        inversedBy: menu_menuitem
         joinColumn:
           name: menu_id
           referencedColumnName: id
