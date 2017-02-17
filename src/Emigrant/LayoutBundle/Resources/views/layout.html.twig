@@ -4,22 +4,22 @@
     {{ parent() }}
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
 
     <!-- Stylesheets -->
-    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/reset.css') }}" />
-    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/main-stylesheet.css') }}" />
-    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/lightbox.css') }}" />
-    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/shortcode.css') }}" />
-    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/fonts.css') }}" />
-    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/colors.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/reset.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/main-stylesheet.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/lightbox.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/shortcode.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/fonts.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/colors.css') }}"/>
     <!--[if lte IE 8]>
-    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/ie-ancient.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/ie-ancient.css') }}"/>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/responsive.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/responsive.css') }}"/>
 
     <!-- Demo Only -->
-    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/demo-settings.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/demo-settings.css') }}"/>
 {% endblock %}
 
 {% block body %}
@@ -29,10 +29,20 @@
 
         {% include 'EmigrantLayoutBundle:Default:header.html.twig' %}
 
-        {% block content %}
 
-        {% endblock %}
+        <!-- BEGIN .content -->
+        <div class="content">
 
+            <!-- BEGIN .wrapper -->
+            <div class="wrapper">
+                {% block content %}
+
+                    {% block topads %}
+                        {{ render(controller('KardiAdBundle:Default:topAds')) }}
+                    {% endblock %}
+                {% endblock %}
+            </div>
+        </div>
         {% include 'EmigrantLayoutBundle:Default:footer.html.twig' %}
 
         <!-- END .boxed -->

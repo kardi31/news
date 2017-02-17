@@ -6,9 +6,8 @@
         <ul class="the-menu">
             {% for item in menu.items %}
                 <li>
-                    <a href="index.html">
+                    <a href="{{ item.getLink }}">
                         {{ item.title }}
-
                     </a>
                 </li>
             {% endfor %}

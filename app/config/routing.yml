@@ -1,3 +1,11 @@
+kardi_news:
+    resource: "@KardiNewsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+kardi_page:
+    resource: "@KardiPageBundle/Resources/config/routing.yml"
+#    prefix:   /
+
 #ens_jobeet:
 #    resource: "@EnsJobeetBundle/Resources/config/routing.yml"
 #    prefix:   /

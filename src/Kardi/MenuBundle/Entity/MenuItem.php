@@ -358,4 +358,15 @@ class MenuItem
     {
         return $this->menu;
     }
+
+    public function getLink()
+    {
+        $children = $this->getChildren();
+
+        if (count($children) > 0) {
+            return 'javascript:void(0)';
+        }
+
+        return $this->getSlug();
+    }
 }

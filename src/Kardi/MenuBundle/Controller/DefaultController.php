@@ -17,10 +17,6 @@ class DefaultController extends Controller
         $menu = $em->getRepository('KardiMenuBundle:Menu')
             ->getMainMenu();
 
-        foreach($menu->getItems() as $item){
-            dump($item->getChildren());exit;
-        }
-
         return $this->render('KardiMenuBundle:Default:main-menu.html.twig', ['menu' => $menu]);
     }
 }

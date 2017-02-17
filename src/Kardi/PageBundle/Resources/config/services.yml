@@ -1,0 +1,4 @@
+services:
+#    kardi_page.example:
+#        class: Kardi\PageBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
