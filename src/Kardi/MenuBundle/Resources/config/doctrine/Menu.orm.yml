@@ -2,6 +2,10 @@
 Kardi\MenuBundle\Entity\Menu:
   type: entity
   repositoryClass: Kardi\MenuBundle\Repository\MenuRepository
+  gedmo:
+    translation:
+      locale: localeField
+      entity: Kardi\MenuBundle\Entity\MenuTranslation
   table: menu_menu
   id:
     id:
@@ -11,6 +15,8 @@ Kardi\MenuBundle\Entity\Menu:
     title:
       type: string
       length: 255
+      gedmo:
+        - translatable
   oneToMany:
     items:
       targetEntity: MenuItem

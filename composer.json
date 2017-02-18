@@ -6,6 +6,9 @@
         "psr-4": {
             "": "src/"
         },
+        "psr-0": {
+            "Acme": "src/"
+        },
         "classmap": [
             "app/AppKernel.php",
             "app/AppCache.php"

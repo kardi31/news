@@ -6,6 +6,9 @@ Kardi\MenuBundle\Entity\MenuItem:
   gedmo:
     tree:
       type: nested
+    translation:
+      locale: localeField
+#      entity: Kardi\MenuBundle\Entity\MenuItemTranslation
   id:
     id:
       type: integer
@@ -14,10 +17,14 @@ Kardi\MenuBundle\Entity\MenuItem:
     title:
       type: string
       length: 255
+      gedmo:
+        - translatable
     slug:
       type: string
       length: 255
       nullable: true
+      gedmo:
+        - translatable
     custom_url:
       type: string
       length: 255
