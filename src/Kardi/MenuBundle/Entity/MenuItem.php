@@ -2,10 +2,12 @@
 
 namespace Kardi\MenuBundle\Entity;
 
+use Kardi\FrameworkBundle\Entity\Translation;
+
 /**
  * MenuItem
  */
-class MenuItem
+class MenuItem extends Translation
 {
     /**
      * @var integer
@@ -15,12 +17,7 @@ class MenuItem
     /**
      * @var string
      */
-    private $title;
-
-    /**
-     * @var string
-     */
-    private $slug;
+    protected $translations;
 
     /**
      * @var string
@@ -73,6 +70,7 @@ class MenuItem
     public function __construct()
     {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -85,54 +83,13 @@ class MenuItem
         return $this->id;
     }
 
-    /**
-     * Set title
-     *
-     * @param string $title
-     *
-     * @return MenuItem
-     */
-    public function setTitle($title)
+    public function setLink($link)
     {
-        $this->title = $title;
+        $this->link = $customUrl;
 
         return $this;
     }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     *
-     * @return MenuItem
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
+    
     /**
      * Set customUrl
      *
@@ -358,7 +315,43 @@ class MenuItem
     {
         return $this->menu;
     }
+    
+    /**
+     * 
+     * @param \Kardi\MenuBundle\Entity\MenuItemTranslation $itemTranslation
+     * @return \Kardi\MenuBundle\Entity\MenuItem
+     */
+    public function addTranslation(\Kardi\MenuBundle\Entity\MenuItemTranslation $itemTranslation)
+    {
+        $this->translations[] = $itemTranslation;
 
+        $this->setTranslations($this->translations);
+        
+        return $this;
+    }
+
+    /**
+     * Remove item translation
+     *
+     * @param \Kardi\MenuBundle\Entity\MenuItem $itemTranslation
+     */
+    public function removeItemTranslation(\Kardi\MenuBundle\Entity\MenuItemTranslation $itemTranslation)
+    {
+        $this->translations->removeElement($itemTranslation);
+        
+        $this->setTranslations($this->translations);
+    }
+
+    /**
+     * Get all item translations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+    
     public function getLink()
     {
         $children = $this->getChildren();
@@ -367,6 +360,11 @@ class MenuItem
             return 'javascript:void(0)';
         }
 
-        return $this->getSlug();
+        return $this->trans('slug'); //''; //$this->getSlug();
+    }
+    
+    public function getTitle()
+    {
+        return $this->trans('title');
     }
 }

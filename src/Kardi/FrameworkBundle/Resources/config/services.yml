@@ -1,0 +1,4 @@
+services:
+#    kardi_framework.example:
+#        class: Kardi\FrameworkBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

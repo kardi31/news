@@ -1,0 +1,25 @@
+Kardi\MenuBundle\Entity\MenuItemTranslation:
+  type: entity
+  table: menu_menuitem_translation
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    item_id:
+      type: integer
+      length: 11
+    title:
+      type: string
+      length: 255
+    slug:
+      type: string
+      length: 255
+      nullable: true
+  manyToOne:
+      menu_item:
+        targetEntity: Translation
+        inversedBy: menu_menuitem_translation
+        joinColumn:
+          name: item_id
+          referencedColumnName: id
