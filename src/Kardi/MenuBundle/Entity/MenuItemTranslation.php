@@ -132,5 +132,38 @@ class MenuItemTranslation
     {
         return $this->menu_item;
     }
-}
+    /**
+     * @var string
+     */
+    private $lang;
 
+    /**
+     * @var \Kardi\MenuBundle\Entity\Translation
+     */
+    private $menu_item;
+
+
+    /**
+     * Set lang
+     *
+     * @param string $lang
+     *
+     * @return MenuItemTranslation
+     */
+    public function setLang($lang)
+    {
+        $this->lang = $lang;
+
+        return $this;
+    }
+
+    /**
+     * Get lang
+     *
+     * @return string
+     */
+    public function getLang()
+    {
+        return $this->lang;
+    }
+}

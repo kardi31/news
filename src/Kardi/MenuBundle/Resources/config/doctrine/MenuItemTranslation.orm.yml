@@ -9,6 +9,9 @@ Kardi\MenuBundle\Entity\MenuItemTranslation:
     item_id:
       type: integer
       length: 11
+    lang:
+      type: string
+      length: 255
     title:
       type: string
       length: 255

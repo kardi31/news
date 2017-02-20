@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "644de88d3da8fed00d96f06d528bae04",
+    "content-hash": "38c29aadbc5ca90861bf213b463ac272",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -45,6 +45,80 @@
                 "transliterator"
             ],
             "time": "2015-09-28T16:26:35+00:00"
+        },
+        {
+            "name": "besimple/i18n-routing-bundle",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BeSimple/BeSimpleI18nRoutingBundle.git",
+                "reference": "dbca4a9fa9912782cbad64a5c33886e5fc26bdfa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BeSimple/BeSimpleI18nRoutingBundle/zipball/dbca4a9fa9912782cbad64a5c33886e5fc26bdfa",
+                "reference": "dbca4a9fa9912782cbad64a5c33886e5fc26bdfa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/config": "~2.3 || ~3.0",
+                "symfony/routing": "~2.3 || ~3.0"
+            },
+            "require-dev": {
+                "doctrine/dbal": "~2.2",
+                "matthiasnoback/symfony-config-test": "^1.4",
+                "matthiasnoback/symfony-dependency-injection-test": "^0.7",
+                "phpunit/phpunit": "~4.7@stable",
+                "symfony/dependency-injection": "~2.3 || ~3.0",
+                "symfony/http-kernel": "~2.3 || ~3.0",
+                "symfony/translation": "~2.3 || ~3.0"
+            },
+            "suggest": {
+                "doctrine/dbal": "~2.2"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BeSimple\\I18nRoutingBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Christophe Coevoet",
+                    "email": "stof@notk.org"
+                },
+                {
+                    "name": "BeSimple Community",
+                    "homepage": "https://github.com/BeSimple/BeSimpleI18nRoutingBundle/contributors"
+                },
+                {
+                    "name": "Francis Besset",
+                    "email": "francis.besset@gmail.com"
+                }
+            ],
+            "description": "Full routing internationalized on your Symfony2 project ",
+            "homepage": "https://github.com/BeSimple/BeSimpleI18nRoutingBundle",
+            "keywords": [
+                "BeSimpleI18nRoutingBundle",
+                "Symfony2",
+                "internationalisation",
+                "routing"
+            ],
+            "time": "2016-07-12T06:33:52+00:00"
         },
         {
             "name": "doctrine/annotations",
