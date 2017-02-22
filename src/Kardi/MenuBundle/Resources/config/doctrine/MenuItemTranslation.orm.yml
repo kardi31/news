@@ -18,10 +18,9 @@ Kardi\MenuBundle\Entity\MenuItemTranslation:
     slug:
       type: string
       length: 255
-      nullable: true
   manyToOne:
-      menu_item:
-        targetEntity: Translation
+      menuItem:
+        targetEntity: MenuItem
         inversedBy: menu_menuitem_translation
         joinColumn:
           name: item_id

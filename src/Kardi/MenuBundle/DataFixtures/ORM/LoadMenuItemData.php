@@ -1,26 +1,42 @@
 <?php
-// src/Kardi/MenuBundle/DataFixtures/ORM/LoadMenuItemData.php
 namespace Kardi\MenuBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 use Kardi\MenuBundle\Entity\MenuItem;
+use Kardi\MenuBundle\Entity\MenuItemTranslation;
 
 class LoadMenuItemData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $em)
     {
         $contact = new MenuItem();
-        $contact->setTitle('Kontakt');
-        $contact->setSlug('kontakt');
         $contact->setMenu($em->merge($this->getReference('menu-glowne')));
-        $contact->setLft(1);
-        $contact->setRgt(2);
-        $contact->setLvl(1);
+
+        $treeRepository = $em->getRepository('KardiMenuBundle:MenuItem');
+        $treeRepository->persistAsFirstChild($contact);
+
+//        $em->persist($contact);
+//
+        $this->addReference('contact', $contact);
+//
+        $contactTranslation = new MenuItemTranslation();
+        $contactTranslation->setTitle('Kontakt');
+        $contactTranslation->setSlug('kontakt');
+        $contactTranslation->setLang('pl');
+        $contactTranslation->setMenuItem($em->merge($this->getReference('contact')));
 
 
-        $em->persist($contact);
+        $contactTranslationEn = new MenuItemTranslation();
+        $contactTranslationEn->setTitle('Contact');
+        $contactTranslationEn->setSlug('contact');
+        $contactTranslationEn->setLang('en');
+        $contactTranslationEn->setMenuItem($em->merge($this->getReference('contact')));
+
+        $em->persist($contactTranslation);
+        $em->persist($contactTranslationEn);
 
         $em->flush();
     }

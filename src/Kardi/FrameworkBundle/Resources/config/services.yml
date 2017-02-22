@@ -1,4 +1,6 @@
 services:
-    test:
-        class:        Kardi\FrameworkBundle\Entity\Translation
-        arguments:    ["@service_container"]
+    kardi.framework.locale_listener:
+            class: Kardi\FrameworkBundle\EventListener\LocaleListener
+            arguments: ['%kernel.default_locale%']
+            tags:
+                - { name: kernel.event_subscriber }

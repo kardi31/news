@@ -1,6 +1,7 @@
 # src/Kardi/MenuBundle/Resources/config/doctrine/MenuItem.orm.yml
 Kardi\MenuBundle\Entity\MenuItem:
   type: entity
+  repositoryClass: Gedmo\Tree\Entity\Repository\NestedTreeRepository
   table: menu_menuitem
   gedmo:
     tree:
@@ -60,3 +61,6 @@ Kardi\MenuBundle\Entity\MenuItem:
       mappedBy: parent
       orderBy:
         lft: ASC
+    translations:
+      targetEntity: MenuItemTranslation
+      mappedBy: menuItem

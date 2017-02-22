@@ -1,0 +1,13 @@
+<div class="secondary-menu">
+    <div class="wrapper">
+        <ul>
+            {% for item in menu.items %}
+                <li>
+                    <a href="{{ item.getLink }}">
+                        {{ item.trans('title') }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
