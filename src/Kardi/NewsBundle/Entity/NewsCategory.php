@@ -2,10 +2,12 @@
 
 namespace Kardi\NewsBundle\Entity;
 
+use Kardi\FrameworkBundle\Entity\Translation;
+
 /**
  * NewsCategory
  */
-class NewsCategory
+class NewsCategory extends Translation
 {
     /**
      * @var integer
@@ -107,6 +109,22 @@ class NewsCategory
     public function getTranslations()
     {
         return $this->translations;
+    }
+
+    /**
+     * @param $field
+     * @return string
+     */
+    public function trans($field)
+    {
+        // keep it to make sure translations are set
+        if (!$this->translations) {
+            $this->getTranslations();
+        }
+
+        $this->setTranslations($this->translations);
+
+        return parent::trans($field);
     }
 }
 

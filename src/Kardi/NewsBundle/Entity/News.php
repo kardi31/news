@@ -168,10 +168,5 @@ class News extends Translation
 
         return parent::trans($field);
     }
-
-    public function getUrl()
-    {
-        return '#';
-    }
 }
 

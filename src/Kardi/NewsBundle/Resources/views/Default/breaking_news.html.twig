@@ -4,7 +4,7 @@
         <ul>
             {% for news in breakingNews %}
                 <li>
-                    <a href="{{ news.url }}">
+                    <a href="{{ generate_news_url(news) }}">
                         {{ news.trans('title') }}
                     </a>
                 </li>

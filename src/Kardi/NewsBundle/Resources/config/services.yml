@@ -1,4 +1,6 @@
 services:
-#    kardi_news.example:
-#        class: Kardi\NewsBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    kardi_news.news_url_extension:
+        class: Kardi\NewsBundle\Twig\UrlExtension
+        arguments: ['@router']
+        tags:
+            - { name: twig.extension }

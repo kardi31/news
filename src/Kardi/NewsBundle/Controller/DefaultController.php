@@ -14,4 +14,9 @@ class DefaultController extends Controller
 
         return $this->render('KardiNewsBundle:Default:breaking_news.html.twig', ['breakingNews' => $breakingNews]);
     }
+
+    public function showNewsAction()
+    {
+        dump('shownews');exit;
+    }
 }
