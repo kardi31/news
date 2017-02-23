@@ -1,0 +1,14 @@
+{% if breakingNews | length > 0 %}
+    <div class="breaking-news">
+        <span class="the-title">Breaking News</span>
+        <ul>
+            {% for news in breakingNews %}
+                <li>
+                    <a href="{{ news.url }}">
+                        {{ news.trans('title') }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

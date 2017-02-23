@@ -2,17 +2,8 @@
 
 {% block content %}
 
-        <div class="breaking-news">
-            <span class="the-title">Breaking News</span>
-            <ul>
-                <li><a href="post.html">Suscipit partiendo comprehensam</a></li>
-                <li><a href="post.html">Ancillae antiopam consectetuer</a></li>
-                <li><a href="post.html">Nam omnis maiestatis</a></li>
-                <li><a href="post.html">Eum at alii dico sensibus</a></li>
-                <li><a href="post.html">Homero omnesque reformidans</a></li>
-                <li><a href="post.html">Cu sonet</a></li>
-            </ul>
-        </div>
+
+        {{ render(controller('KardiNewsBundle:Default:breakingNews')) }}
 
         <div class="main-content">
 

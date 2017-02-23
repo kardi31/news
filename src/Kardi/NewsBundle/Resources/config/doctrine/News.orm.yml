@@ -1,0 +1,27 @@
+Kardi\NewsBundle\Entity\News:
+  type: entity
+  repositoryClass: Kardi\NewsBundle\Repository\NewsRepository
+  table: news_news
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    category_id:
+      type: integer
+      length: 11
+    breaking_news:
+      type: boolean
+      options:
+          default: 0
+  oneToMany:
+    translations:
+      targetEntity: NewsTranslation
+      mappedBy: news
+  manyToOne:
+      category:
+        targetEntity: NewsCategory
+        inversedBy: news_news
+        joinColumn:
+          name: category_id
+          referencedColumnName: id

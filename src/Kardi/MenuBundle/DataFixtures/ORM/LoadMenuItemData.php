@@ -18,10 +18,8 @@ class LoadMenuItemData extends AbstractFixture implements OrderedFixtureInterfac
         $treeRepository = $em->getRepository('KardiMenuBundle:MenuItem');
         $treeRepository->persistAsFirstChild($contact);
 
-//        $em->persist($contact);
-//
         $this->addReference('contact', $contact);
-//
+
         $contactTranslation = new MenuItemTranslation();
         $contactTranslation->setTitle('Kontakt');
         $contactTranslation->setSlug('kontakt');

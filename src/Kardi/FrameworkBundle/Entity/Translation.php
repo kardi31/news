@@ -16,12 +16,14 @@ abstract class Translation {
 
     public function trans($field) {
 //        $locale = $GLOBALS['locale'] ?: 'pl';
-        $locale = 'pl';
+    $locale = 'pl';
+
 
         if (isset($this->translationsArray[$locale])) {
             return call_user_func_array(array($this->translationsArray[$locale],'get'.ucwords($field)),[]);
         }
 
+        dump($this->translationsArray);
         throw new Exception('Missing translation for field '.$field);
     }
 

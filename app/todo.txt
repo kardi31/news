@@ -1,5 +1,7 @@
 Create breaking news action in news bundle
-Create submenu
+check if news url can be generated in entity
+set default translations for breaking news headling
+
 Keep exporting part of layout into bundles
 Try to add translations to menu
 Create command to cut the template, it will replace parts of custom layout with renders/includes etc

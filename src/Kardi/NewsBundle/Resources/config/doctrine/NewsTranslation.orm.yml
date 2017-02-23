@@ -1,0 +1,29 @@
+Kardi\NewsBundle\Entity\NewsTranslation:
+  type: entity
+  table: news_news_translation
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    news_id:
+      type: integer
+      length: 11
+    lang:
+      type: string
+      length: 255
+    title:
+      type: string
+      length: 255
+    slug:
+      type: string
+      length: 255
+    content:
+      type: text
+  manyToOne:
+      news:
+        targetEntity: News
+        inversedBy: news_news_translation
+        joinColumn:
+          name: news_id
+          referencedColumnName: id

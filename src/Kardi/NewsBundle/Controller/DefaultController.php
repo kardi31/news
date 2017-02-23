@@ -6,8 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function breakingNewsAction()
     {
-        return $this->render('KardiNewsBundle:Default:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $breakingNews = $em->getRepository('KardiNewsBundle:News')
+            ->getBreakingNews();
+
+        return $this->render('KardiNewsBundle:Default:breaking_news.html.twig', ['breakingNews' => $breakingNews]);
     }
 }

@@ -41,15 +41,8 @@ class LoadSecondaryMenuItemData extends AbstractFixture implements OrderedFixtur
         $zeswiata = new MenuItem();
         $zeswiata->setMenu($em->merge($this->getReference('podmenu')));
 
-//        $zeswiata->setParent($zkraju);
-//
-//        $zkraju->setParent($zeswiata);
-
 
         $treeRepository->persistAsFirstChild($zeswiata);
-
-//        $em->persist($zkraju);
-//        $em->persist($zeswiata);
 //
         $this->addReference('ze-swiata', $zeswiata);
 
