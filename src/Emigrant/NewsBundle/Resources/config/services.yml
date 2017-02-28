@@ -1,0 +1,4 @@
+services:
+#    emigrant_news.example:
+#        class: Emigrant\NewsBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

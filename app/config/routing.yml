@@ -1,7 +1,12 @@
-kardi_news:
-    resource: "@KardiNewsBundle/Resources/config/routing.yml"
+emigrant_news:
+    resource: "@EmigrantNewsBundle/Resources/config/routing.yml"
     type: be_simple_i18n
-    prefix: /
+    prefix:   /
+
+#kardi_news:
+#    resource: "@KardiNewsBundle/Resources/config/routing.yml"
+#    type: be_simple_i18n
+#    prefix: /
 
 kardi_page:
     resource: "@KardiPageBundle/Resources/config/routing.yml"
