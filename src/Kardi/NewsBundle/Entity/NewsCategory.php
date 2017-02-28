@@ -127,4 +127,3 @@ class NewsCategory extends Translation
         return parent::trans($field);
     }
 }
-

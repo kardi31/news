@@ -17,4 +17,25 @@ class NewsRepository extends \Doctrine\ORM\EntityRepository
 
         return $query->getResult();
     }
+
+    public function getLatestNews() {
+        $qb = $this->createQueryBuilder('n');
+        $qb->orderBy('n.id','DESC');
+        $qb->setMaxResults(1);
+
+        $query = $qb->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
+
+    public function getLastNewsList($offset, $limit) {
+        $qb = $this->createQueryBuilder('n');
+        $qb->orderBy('n.id','DESC');
+        $qb->setFirstResult($offset);
+        $qb->setMaxResults($limit);
+
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+    }
 }

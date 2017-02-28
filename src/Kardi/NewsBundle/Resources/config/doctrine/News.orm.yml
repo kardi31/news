@@ -10,10 +10,22 @@ Kardi\NewsBundle\Entity\News:
     category_id:
       type: integer
       length: 11
+    photo:
+      type: string
+      length: 255
+      nullable: TRUE
+    publish_date:
+      type: datetime
+    active:
+      type: boolean
+      options:
+          default: 0
     breaking_news:
       type: boolean
       options:
           default: 0
+  lifecycleCallbacks:
+      prePersist: [setCreatedAt, setUpdatedAt]
   oneToMany:
     translations:
       targetEntity: NewsTranslation

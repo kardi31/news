@@ -1,6 +1,6 @@
 {% if breakingNews | length > 0 %}
     <div class="breaking-news">
-        <span class="the-title">Breaking News</span>
+        <span class="the-title">{% trans %}Breaking News{% endtrans %}</span>
         <ul>
             {% for news in breakingNews %}
                 <li>

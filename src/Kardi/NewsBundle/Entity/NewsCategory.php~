@@ -2,10 +2,12 @@
 
 namespace Kardi\NewsBundle\Entity;
 
+use Kardi\FrameworkBundle\Entity\Translation;
+
 /**
  * NewsCategory
  */
-class NewsCategory
+class NewsCategory extends Translation
 {
     /**
      * @var integer
@@ -15,7 +17,7 @@ class NewsCategory
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $newses;
+    private $news;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -27,7 +29,7 @@ class NewsCategory
      */
     public function __construct()
     {
-        $this->newses = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->news = new \Doctrine\Common\Collections\ArrayCollection();
         $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -42,37 +44,37 @@ class NewsCategory
     }
 
     /**
-     * Add newse
+     * Add news
      *
-     * @param \Kardi\NewsBundle\Entity\News $newse
+     * @param \Kardi\NewsBundle\Entity\News $news
      *
      * @return NewsCategory
      */
-    public function addNewse(\Kardi\NewsBundle\Entity\News $newse)
+    public function addNews(\Kardi\NewsBundle\Entity\News $news)
     {
-        $this->newses[] = $newse;
+        $this->news[] = $news;
 
         return $this;
     }
 
     /**
-     * Remove newse
+     * Remove news
      *
-     * @param \Kardi\NewsBundle\Entity\News $newse
+     * @param \Kardi\NewsBundle\Entity\News $news
      */
-    public function removeNewse(\Kardi\NewsBundle\Entity\News $newse)
+    public function removeNews(\Kardi\NewsBundle\Entity\News $news)
     {
-        $this->newses->removeElement($newse);
+        $this->news->removeElement($news);
     }
 
     /**
-     * Get newses
+     * Get news
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getNewses()
+    public function getNews()
     {
-        return $this->newses;
+        return $this->news;
     }
 
     /**
@@ -115,6 +117,11 @@ class NewsCategory
      */
     public function trans($field)
     {
+        // keep it to make sure translations are set
+        if (!$this->translations) {
+            $this->getTranslations();
+        }
+
         $this->setTranslations($this->translations);
 
         return parent::trans($field);

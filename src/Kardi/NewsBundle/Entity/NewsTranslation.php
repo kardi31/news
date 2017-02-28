@@ -197,4 +197,3 @@ class NewsTranslation
         return $this->news;
     }
 }
-

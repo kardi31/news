@@ -2,10 +2,12 @@
 
 namespace Kardi\NewsBundle\Entity;
 
+use Kardi\FrameworkBundle\Entity\Translation;
+
 /**
  * News
  */
-class News
+class News extends Translation
 {
     /**
      * @var integer
@@ -31,6 +33,21 @@ class News
      * @var \Kardi\NewsBundle\Entity\NewsCategory
      */
     private $category;
+
+    /**
+     * @var \DateTime
+     */
+    protected $createdAt;
+
+    /**
+     * @var \DateTime
+     */
+    protected $updatedAt;
+
+    /**
+     * @var boolean
+     */
+    private $active = 0;
 
     /**
      * Constructor
@@ -166,4 +183,113 @@ class News
 
         return parent::trans($field);
     }
+
+    /**
+     * @var string
+     */
+    private $photo;
+
+    /**
+     * @var \DateTime
+     */
+    private $publish_date;
+
+
+    /**
+     * Set photo
+     *
+     * @param string $photo
+     *
+     * @return News
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return string
+     */
+    public function getPhoto($size = false)
+    {
+        if (!$size) {
+            return 'http://placehold.it/800x600';
+        }
+
+        return 'http://placehold.it/'.$size;
+//        return $this->photo;
+    }
+
+    /**
+     * Set publishDate
+     *
+     * @param \DateTime $publishDate
+     *
+     * @return News
+     */
+    public function setPublishDate($publishDate = false)
+    {
+        if (!$publishDate) {
+            $publishDate = $this->getCreatedAt();
+        }
+        $this->publish_date = $publishDate;
+
+        return $this;
+    }
+
+    /**
+     * Get publishDate
+     *
+     * @return \DateTime
+     */
+    public function getPublishDate()
+    {
+        return $this->publish_date;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @ORM\PrePersist
+     */
+    public function setCreatedAt()
+    {
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAt()
+    {
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
 }

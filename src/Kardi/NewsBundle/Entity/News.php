@@ -35,6 +35,21 @@ class News extends Translation
     private $category;
 
     /**
+     * @var \DateTime
+     */
+    protected $createdAt;
+
+    /**
+     * @var \DateTime
+     */
+    protected $updatedAt;
+
+    /**
+     * @var boolean
+     */
+    private $active = 0;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -168,5 +183,143 @@ class News extends Translation
 
         return parent::trans($field);
     }
-}
 
+    /**
+     * @var string
+     */
+    private $photo;
+
+    /**
+     * @var \DateTime
+     */
+    private $publish_date;
+
+
+    /**
+     * Set photo
+     *
+     * @param string $photo
+     *
+     * @return News
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return string
+     */
+    public function getPhoto($size = false)
+    {
+        if (!$size) {
+            return 'http://lorempixel.com/800/600/fashion';
+        }
+        $size = str_replace('x', '/', $size);
+
+        return 'http://lorempixel.com/'.$size.'/fashion';
+//        return $this->photo;
+    }
+
+    /**
+     * Set publishDate
+     *
+     * @param \DateTime $publishDate
+     *
+     * @return News
+     */
+    public function setPublishDate($publishDate = false)
+    {
+        if (!$publishDate) {
+            $publishDate = $this->getCreatedAt();
+        }
+        $this->publish_date = $publishDate;
+
+        return $this;
+    }
+
+    /**
+     * @param bool $object
+     * @param string $format
+     * @return \DateTime|string
+     */
+    public function getPublishDate($object = true, $format = 'Y-m-d H:i')
+    {
+        if ($object) {
+            return $this->publish_date;
+        }
+
+        return $this->publish_date->format($format);
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @ORM\PrePersist
+     */
+    public function setCreatedAt()
+    {
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+        $this->setPublishDate();
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAt()
+    {
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     *
+     * @return News
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+}

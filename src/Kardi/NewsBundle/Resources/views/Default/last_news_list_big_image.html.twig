@@ -1,0 +1,28 @@
+<div class="block">
+    <div class="block-title">
+        <a href="blog.html" class="right">{% trans %} See all articles {% endtrans %}</a>
+        <h2>{% trans %} Latest news {% endtrans %}</h2>
+    </div>
+    <div class="block-content">
+        <ul class="article-block-big">
+            {% for news in newsList %}
+            <li>
+                <div class="article-photo">
+                    <a href="{{ generate_news_url(news) }}" class="hover-effect"><img src="{{ asset(news.photo('190x130')) }}" alt="{{ news.trans('title') }}"/></a>
+                </div>
+                <div class="article-content">
+                    <h4>
+                        <a href="{{ generate_news_url(news) }}">{{ news.trans('title') }}</a>
+                        {% if comments_active() %}
+                            <a href="{{ generate_news_url(news) }}#comments" class="h-comment">201</a>
+                        {% endif %}
+                    </h4>
+                    <span class="meta">
+                        <a href="{{ generate_news_url(news) }}"><span class="icon-text">&#128340;</span>{{ news.publishDate(false) }}</a>
+                    </span>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

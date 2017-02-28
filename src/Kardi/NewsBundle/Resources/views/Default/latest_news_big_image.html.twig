@@ -1,0 +1,20 @@
+{% if latestNews %}
+    <div class="block">
+        <div class="featured-block">
+            <div class="article-content">
+                <h2>
+                    <a href="{{ generate_news_url(news) }}">{{ latestNews.trans('title') }}</a>
+                    {% if comments_active() %}
+                        <a href="{{ generate_news_url(news) }}#comments" class="h-comment">43</a>
+                    {% endif %}
+                </h2>
+                <span class="meta">
+                <a href="{{ generate_news_url(news) }}"><span class="icon-text">&#128340; </span>{{ latestNews.publishDate(false) }}</a>
+            </span>
+            </div>
+            <div class="article-photo">
+                <a href="{{ generate_news_url(news) }}" class="hover-effect"><img src="{{ asset(latestNews.photo('630x250')) }}" alt=""/></a>
+            </div>
+        </div>
+    </div>
+{% endif %}

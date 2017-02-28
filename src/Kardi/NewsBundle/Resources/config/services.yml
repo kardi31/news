@@ -4,3 +4,8 @@ services:
         arguments: ['@router']
         tags:
             - { name: twig.extension }
+    kardi_news.comment_extension:
+        class: Kardi\NewsBundle\Twig\CommentExtension
+        arguments: ['@service_container']
+        tags:
+            - { name: twig.extension }
