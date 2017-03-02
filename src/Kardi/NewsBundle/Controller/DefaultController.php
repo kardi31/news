@@ -18,10 +18,7 @@ class DefaultController extends Controller
         $breakingNews = $em->getRepository('KardiNewsBundle:News')
             ->getBreakingNews();
 
-        return $this->render(
-            'KardiNewsBundle:Default:breaking_news.html.twig',
-            ['breakingNews' => $breakingNews]
-        );
+        return $this->render('KardiNewsBundle:Default:breaking_news.html.twig', ['breakingNews' => $breakingNews]);
     }
 
     public function showNewsAction($slug, $id)
@@ -39,7 +36,7 @@ class DefaultController extends Controller
         $latestNews = $em->getRepository('KardiNewsBundle:News')
             ->getLatestNews();
 
-        return $this->render('KardiNewsBundle:Default:latest_news_big_image.html.twig', ['latestNews' => $latestNews]);
+        return $this->render('KardiNewsBundle:Default:latest_news_big_image.html.twig', ['news' => $latestNews]);
     }
 
     public function lastNewsListBigImageAction($numberOfNews = 6)
@@ -49,5 +46,18 @@ class DefaultController extends Controller
             ->getLastNewsList($this->alreadyOnHomepage, $numberOfNews);
 
         return $this->render('KardiNewsBundle:Default:last_news_list_big_image.html.twig', ['newsList' => $newsList]);
+    }
+
+    public function lastCategoryNewsAction($categorySlug,$numberOfNews = 5)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $category = $em->getRepository('KardiNewsBundle:NewsCategory')
+            ->getCategoryBySlug($categorySlug);
+
+        $newsList = $em->getRepository('KardiNewsBundle:News')
+            ->getLastCategoryNewsList($category->getId(), $numberOfNews);
+
+        return $this->render('KardiNewsBundle:Default:last_category_news.html.twig', ['newsList' => $newsList, 'category' => $category]);
     }
 }

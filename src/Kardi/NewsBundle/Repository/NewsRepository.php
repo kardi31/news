@@ -38,4 +38,16 @@ class NewsRepository extends \Doctrine\ORM\EntityRepository
 
         return $query->getResult();
     }
+
+    public function getLastCategoryNewsList($categoryId, $limit) {
+        $qb = $this->createQueryBuilder('n');
+        $qb->andWhere('n.category_id = :category_id');
+        $qb->setParameter('category_id', $categoryId);
+        $qb->orderBy('n.id','DESC');
+        $qb->setMaxResults($limit);
+
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+    }
 }

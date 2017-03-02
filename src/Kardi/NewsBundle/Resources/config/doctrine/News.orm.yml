@@ -30,6 +30,9 @@ Kardi\NewsBundle\Entity\News:
     translations:
       targetEntity: NewsTranslation
       mappedBy: news
+    comments:
+      targetEntity: Comment
+      mappedBy: news
   manyToOne:
       category:
         targetEntity: NewsCategory

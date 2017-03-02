@@ -1,5 +1,7 @@
-Zrobic komentarze, wykorzystac licznik komentarzy w widokach
-Dodac url aktualnosci w stworzonych juz widokach
+
+Zrobic reklamy
+Zrobic widok pojedynczego newsa
+Zrobic komentarze, wyswietlanie komentarzy z podzialem na drzewo, wykorzystac licznik komentarzy w widokach
 
 Keep exporting part of layout into bundles
 

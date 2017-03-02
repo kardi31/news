@@ -322,4 +322,51 @@ class News extends Translation
     {
         return $this->active;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $comments;
+
+
+    /**
+     * Add comment
+     *
+     * @param \Kardi\NewsBundle\Entity\Comment $comment
+     *
+     * @return News
+     */
+    public function addComment(\Kardi\NewsBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \Kardi\NewsBundle\Entity\Comment $comment
+     */
+    public function removeComment(\Kardi\NewsBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @return int
+     */
+    public function countComments()
+    {
+        return count($this->getComments());
+    }
 }

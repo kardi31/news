@@ -1,0 +1,92 @@
+<div class="block">
+    <div class="block-title">
+        <a href="category.html" class="right">{% trans %} See all articles {% endtrans %}</a>
+        <h2>{{ category.trans('title') }}</h2>
+    </div>
+    <div class="block-content">
+        {% set news = newsList[0] %}
+        <div class="wide-article">
+            <div class="article-photo">
+                <a href="{{ generate_news_url(news) }}" class="hover-effect"><img
+                            src="{{ asset(news.photo('160x117')) }}" alt="{{ news.trans('title') }}"/></a>
+            </div>
+            <div class="article-content">
+                <h2>
+                    <a href="{{ generate_news_url(news) }}">{{ news.trans('title') }}</a>
+                    {% if comments_active() %}
+                        <a href="{{ generate_news_url(news) }}#comments" class="h-comment">{{ news.countComments }}</a>
+                    {% endif %}
+                </h2>
+                <span class="meta">
+                    <a href="{{ generate_news_url(news) }}">
+                        <span class="icon-text">&#128340;</span>{{ news.publishDate(false) }}
+                    </a>
+                </span>
+                <p>{{ news.trans('content')|striptags|slice(0,50) }}</p>
+            </div>
+        </div>
+
+        <div class="paragraph-row">
+
+            <!-- BEGIN .column6 -->
+            <div class="column6">
+                <ul class="article-block">
+                    {% for news in newsList|slice(1) %}
+                        {% if loop.index0 is even %}
+                            <li>
+                                <div class="article-photo">
+                                    <a href="{{ generate_news_url(news) }}" class="hover-effect"><img src="{{ asset(news.photo('59x42')) }}" alt="{{ news.trans('title') }}"/></a>
+                                </div>
+                                <div class="article-content">
+                                    <h4>
+                                        <a href="{{ generate_news_url(news) }}">{{ news.trans('title') }}</a>
+                                        {% if comments_active() %}
+                                            <a href="{{ generate_news_url(news) }}#comments" class="h-comment">{{ news.countComments }}</a>
+                                        {% endif %}
+                                    </h4>
+                                    <span class="meta">
+                                        <a href="{{ generate_news_url(news) }}">
+                                            <span class="icon-text">&#128340;</span>{{ news.publishDate(false) }}
+                                        </a>
+                                    </span>
+                                </div>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                <!-- END .column6 -->
+            </div>
+
+            <!-- BEGIN .column6 -->
+            <div class="column6">
+                <ul class="article-block">
+                    {% for news in newsList|slice(1) %}
+                        {% if loop.index0 is odd %}
+                            <li>
+                                <div class="article-photo">
+                                    <a href="{{ generate_news_url(news) }}" class="hover-effect"><img src="{{ asset(news.photo('59x42')) }}" alt="{{ news.trans('title') }}"/></a>
+                                </div>
+                                <div class="article-content">
+                                    <h4>
+                                        <a href="{{ generate_news_url(news) }}">{{ news.trans('title') }}</a>
+                                        {% if comments_active() %}
+                                            <a href="{{ generate_news_url(news) }}#comments" class="h-comment">{{ news.countComments }}</a>
+                                        {% endif %}
+                                    </h4>
+                                    <span class="meta">
+                                        <a href="{{ generate_news_url(news) }}">
+                                            <span class="icon-text">&#128340;</span>{{ news.publishDate(false) }}
+                                        </a>
+                                    </span>
+                                </div>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                <!-- END .column6 -->
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,75 @@
+Kardi\NewsBundle\Entity\Comment:
+  type: entity
+  repositoryClass: Kardi\NewsBundle\Repository\CommentRepository
+  table: news_comment
+  gedmo:
+    tree:
+      type: nested
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    content:
+      type: text
+    author:
+      type: string
+      length: 255
+    news_id:
+      type: integer
+      length: 11
+    ip:
+      type: string
+      length: 255
+    hostname:
+      type: string
+      length: 255
+    active:
+      type: boolean
+      options:
+          default: 0
+    lft:
+      type: integer
+      nullable: false
+      options:
+          unsigned: false
+      gedmo:
+        - treeLeft
+    rgt:
+      type: integer
+      gedmo:
+        - treeRight
+    lvl:
+      type: integer
+      gedmo:
+        - treeLevel
+  lifecycleCallbacks:
+      prePersist: [setCreatedAt, setUpdatedAt]
+  manyToOne:
+      root:
+        targetEntity: Comment
+        joinColumn:
+          referencedColumnName: id
+          onDelete: CASCADE
+        gedmo:
+          - treeRoot
+      parent:
+        targetEntity: Comment
+        inversedBy: children
+        joinColumn:
+          referencedColumnName: id
+          onDelete: CASCADE
+        gedmo:
+          - treeParent
+      news:
+        targetEntity: News
+        inversedBy: news_comment
+        joinColumn:
+          name: news_id
+          referencedColumnName: id
+  oneToMany:
+    children:
+      targetEntity: News
+      mappedBy: parent
+      orderBy:
+        lft: ASC

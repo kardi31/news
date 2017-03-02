@@ -1,5 +1,6 @@
 Kardi\NewsBundle\Entity\NewsCategory:
   type: entity
+  repositoryClass: Kardi\NewsBundle\Repository\NewsCategoryRepository
   table: news_news_category
   id:
     id:

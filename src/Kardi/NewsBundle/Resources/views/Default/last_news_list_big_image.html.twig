@@ -14,7 +14,7 @@
                     <h4>
                         <a href="{{ generate_news_url(news) }}">{{ news.trans('title') }}</a>
                         {% if comments_active() %}
-                            <a href="{{ generate_news_url(news) }}#comments" class="h-comment">201</a>
+                            <a href="{{ generate_news_url(news) }}#comments" class="h-comment">{{ news.countComments }}</a>
                         {% endif %}
                     </h4>
                     <span class="meta">
