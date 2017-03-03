@@ -3,19 +3,19 @@
     <div class="widget-social">
         <div class="social-bar">
             {% if settings.hasFacebook %}
-                <a href="{{ settings.getTwitter }}" class="social-icon"><i class="number">1.2m</i><span class="facebook">Facebook</span></a>
+                <a href="{{ settings.getTwitter }}" class="social-icon"><img src="{{ asset('social/icon-twitter.png') }}" alt="Twitter" /></a>
             {% endif %}
 
             {% if settings.hasFacebook %}
-                <a href="{{ settings.getFacebook }}" class="social-icon"><i class="number">2.6k</i><span class="twitter">Twitter</span></a>
+                <a href="{{ settings.getFacebook }}" class="social-icon"><img src="{{ asset('social/icon-facebook.png') }}" alt="Facebook" /></a>
             {% endif %}
 
             {% if settings.hasGooglePlus %}
-                <a href="{{ settings.getGooglePlus }}" class="social-icon"><i class="number">1.4k</i><span class="google">Google+</span></a>
+                <a href="{{ settings.getGooglePlus }}" class="social-icon"><img src="{{ asset('social/icon-googleplus.png') }}" alt="Google+" /></a>
             {% endif %}
 
             {% if settings.hasLinkedin %}
-                <a href="{{ settings.getLinkedin }}" class="social-icon"><i class="number">823</i><span class="linkedin">Linkedin</span></a>
+                <a href="{{ settings.getLinkedin }}" class="social-icon"><img src="{{ asset('social/icon-linkedin.png') }}" alt="LinkedIn" /></a>
             {% endif %}
         </div>
     </div>
