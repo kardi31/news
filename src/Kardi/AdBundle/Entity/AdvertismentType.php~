@@ -127,3 +127,4 @@ class AdvertismentType
         return $this->advertisments;
     }
 }
+

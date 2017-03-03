@@ -10,4 +10,16 @@ namespace Kardi\AdBundle\Repository;
  */
 class AdvertismentRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getOneAdvertismentBySize($size) {
+        $qb = $this->createQueryBuilder('a');
+        $qb->join('a.type','t');
+        $qb->andWhere('t.size like :size');
+        $qb->setParameter('size', $size);
+        $qb->orderBy('a.id','DESC');
+        $qb->setMaxResults(1);
+
+        $query = $qb->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
 }

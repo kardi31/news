@@ -1,0 +1,23 @@
+<div class="widget">
+    <h3>Socialize</h3>
+    <div class="widget-social">
+        <div class="social-bar">
+            {% if settings.hasFacebook %}
+                <a href="{{ settings.getTwitter }}" class="social-icon"><i class="number">1.2m</i><span class="facebook">Facebook</span></a>
+            {% endif %}
+
+            {% if settings.hasFacebook %}
+                <a href="{{ settings.getFacebook }}" class="social-icon"><i class="number">2.6k</i><span class="twitter">Twitter</span></a>
+            {% endif %}
+
+            {% if settings.hasGooglePlus %}
+                <a href="{{ setting.getGooglePlus }}" class="social-icon"><i class="number">1.4k</i><span class="google">Google+</span></a>
+            {% endif %}
+
+            {% if settings.hasLinkedin %}
+                <a href="{{ settings.getLinkedin }}" class="social-icon"><i class="number">823</i><span class="linkedin">Linkedin</span></a>
+            {% endif %}
+        </div>
+    </div>
+    <!-- END .widget -->
+</div>

@@ -19,6 +19,7 @@ Kardi\AdBundle\Entity\Advertisment:
     image:
       type: string
       length: 255
+      nullable: TRUE
     active:
       type: boolean
       options:

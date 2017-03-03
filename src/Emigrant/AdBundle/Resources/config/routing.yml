@@ -1,0 +1,3 @@
+emigrant_ad_homepage:
+    path:     /
+    defaults: { _controller: EmigrantAdBundle:Default:index }

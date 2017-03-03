@@ -1,5 +1,5 @@
 
-Zrobic reklamy
+Pobrac liczbe obserwatorow social media
 Zrobic widok pojedynczego newsa
 Zrobic komentarze, wyswietlanie komentarzy z podzialem na drzewo, wykorzystac licznik komentarzy w widokach
 

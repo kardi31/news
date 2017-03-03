@@ -1,0 +1,11 @@
+<?php
+
+namespace Kardi\FrameworkBundle\Entity;
+
+/**
+ * Settings
+ */
+class Settings
+{
+
+}

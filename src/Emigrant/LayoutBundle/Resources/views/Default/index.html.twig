@@ -24,12 +24,7 @@
 
                         {{ render(controller('KardiNewsBundle:Default:lastCategoryNews',{'categorySlug': 'wiadomosci-z-kraju'})) }}
 
-                        <div class="block">
-                            <div class="banner">
-                                <a href="#" target="_blank"><img src="{{ asset('bundles/emigrantlayout/images/no-banner-468x60.jpg') }}" alt="" /></a>
-                                <a href="comments.html" class="ad-link"><span class="icon-text">&#9652;</span>Advertisement<span class="icon-text">&#9652;</span></a>
-                            </div>
-                        </div>
+                        {{ render(controller('KardiAdBundle:Default:displayAd',{'size': '468x60'})) }}
 
                         <div class="block">
                             <div class="block-title" style="background: #dd8229;">
@@ -211,26 +206,10 @@
             <div class="main-sidebar right">
 
                 <!-- BEGIN .widget -->
-                <div class="widget">
-                    <a href="#" target="_blank"><img src="{{ asset('bundles/emigrantlayout/images/no-banner-300x250.jpg') }}" alt="" /></a>
-                    <a href="contact-us.html" class="ad-link"><span class="icon-text">&#9652;</span>Advertisement<span class="icon-text">&#9652;</span></a>
-                    <!-- END .widget -->
-                </div>
+                {{ render(controller('KardiAdBundle:Default:displayAd',{'size': '300x250'})) }}
 
                 <!-- BEGIN .widget -->
-                <div class="widget">
-                    <h3>Socialize</h3>
-                    <div class="widget-social">
-                        <div class="social-bar">
-                            <a href="#" class="social-icon"><i class="number">1.2m</i><span class="facebook">Facebook</span></a>
-                            <a href="#" class="social-icon"><i class="number">2.6k</i><span class="twitter">Twitter</span></a>
-                            <a href="#" class="social-icon"><i class="number">1.4k</i><span class="google">Google+</span></a>
-                            <a href="#" class="social-icon"><i class="number">823</i><span class="linkedin">Linkedin</span></a>
-                        </div>
-                        <p>Suscipit partiendo comprehensam ne eos mel, nam omnis maiestatis no. Eum at reformidans ius, cu.</p>
-                    </div>
-                    <!-- END .widget -->
-                </div>
+                {{ render(controller('KardiFrameworkBundle:Default:socialNumbers')) }}
 
                 <!-- BEGIN .widget -->
                 <div class="widget">

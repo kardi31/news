@@ -1,0 +1,25 @@
+Kardi\FrameworkBundle\Entity\Settings:
+  type: entity
+  repositoryClass: Kardi\FrameworkBundle\Repository\Settings
+  table: settings
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    facebook:
+      type: string
+      length: 255
+      nullable: TRUE
+    linkedin:
+      type: string
+      length: 255
+      nullable: TRUE
+    google_plus:
+      type: string
+      length: 255
+      nullable: TRUE
+    twitter:
+      type: string
+      length: 255
+      nullable: TRUE

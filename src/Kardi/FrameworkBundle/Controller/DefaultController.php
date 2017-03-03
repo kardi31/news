@@ -6,8 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function socialNumbersAction()
     {
-        return $this->render('KardiFrameworkBundle:Default:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $settings = $em->getRepository('KardiFrameworkBundle:Settings');
+
+        return $this->render('KardiFrameworkBundle:Default:social-numbers.twig');
     }
 }

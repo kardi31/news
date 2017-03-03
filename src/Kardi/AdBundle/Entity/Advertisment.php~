@@ -122,11 +122,7 @@ class Advertisment
      */
     public function getWebsite()
     {
-        if(strpos($this->website, 'http://') !== 0) {
-            return 'http://' . $this->website;
-        } else {
-            return $this->website;
-        }
+        return $this->website;
     }
 
     /**
@@ -148,13 +144,9 @@ class Advertisment
      *
      * @return string
      */
-    public function getImage($size)
+    public function getImage()
     {
-        if (!$size) {
-            return 'http://placehold.it/800x600?text+ad+'.$size;
-        }
-
-        return 'http://placehold.it/'.$size.'?text+ad+'.$size;
+        return $this->image;
     }
 
     /**
@@ -205,43 +197,19 @@ class Advertisment
         return $this->type;
     }
     /**
-     * Set createdAt
-     *
      * @ORM\PrePersist
      */
     public function setCreatedAt()
     {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
+        // Add your code here
     }
 
     /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @ORM\PreUpdate
+     * @ORM\PrePersist
      */
     public function setUpdatedAt()
     {
-        $this->updatedAt = new \DateTime();
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
+        // Add your code here
     }
 }
+

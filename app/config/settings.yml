@@ -1,2 +1,3 @@
 parameters:
+    application_name: Emigrant
     comments_active: true
