@@ -1,6 +1,8 @@
 services:
     kardi.framework.locale_listener:
-            class: Kardi\FrameworkBundle\EventListener\LocaleListener
-            arguments: ['%kernel.default_locale%']
-            tags:
-                - { name: kernel.event_subscriber }
+        class: Kardi\FrameworkBundle\EventListener\LocaleListener
+        arguments: ['%kernel.default_locale%']
+        tags:
+            - { name: kernel.event_subscriber }
+    kardi.framework.facebook_service:
+        class: Kardi\FrameworkBundle\Service\Facebook
