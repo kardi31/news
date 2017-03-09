@@ -1,13 +1,15 @@
 <div class="secondary-menu">
     <div class="wrapper">
         <ul>
-            {% for item in menu.items %}
-                <li>
-                    <a href="{{ item.getLink }}">
-                        {{ item.trans('title') }}
-                    </a>
-                </li>
-            {% endfor %}
+            {% if menu.items is defined %}
+                {% for item in menu.items %}
+                    <li>
+                        <a href="{{ item.getLink }}">
+                            {{ item.trans('title') }}
+                        </a>
+                    </li>
+                {% endfor %}
+            {% endif %}
         </ul>
     </div>
 </div>

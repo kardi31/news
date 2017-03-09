@@ -1,0 +1,22 @@
+<div class="widget">
+    <h3>{% trans %}Recent Comments {% endtrans %}</h3>
+    <div class="widget-comments">
+        <ul>
+            {% for comment in comments %}
+            <li>
+                <div class="comment-photo">
+                    <span class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/avatar-1.jpg') }}" alt="{{ comment.author }}" /></span>
+                </div>
+                <div class="comment-content">
+                    <h3>{{ comment.author }}</h3>
+                    <p>{{ comment.content | slice(0, 70) }}...</p>
+                    <span class="meta">
+                        <a href="{{ generate_news_url(comment.news) }}#comments"><span class="icon-text">&#59212;</span>{% trans %}View Article {% endtrans %}</a>
+                    </span>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <!-- END .widget -->
+</div>

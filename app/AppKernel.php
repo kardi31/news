@@ -19,7 +19,6 @@ class AppKernel extends Kernel
             new Kardi\LayoutBundle\KardiLayoutBundle(),
             new Kardi\MenuBundle\KardiMenuBundle(),
             new Emigrant\LayoutBundle\EmigrantLayoutBundle(),
-            new Ens\JobeetBundle\EnsJobeetBundle(),
             new Kardi\PageBundle\KardiPageBundle(),
             new Kardi\AdBundle\KardiAdBundle(),
             new Kardi\NewsBundle\KardiNewsBundle(),
@@ -27,6 +26,7 @@ class AppKernel extends Kernel
             new BeSimple\I18nRoutingBundle\BeSimpleI18nRoutingBundle(),
             new Emigrant\NewsBundle\EmigrantNewsBundle(),
             new Emigrant\AdBundle\EmigrantAdBundle(),
+            new Kardi\NewsletterBundle\KardiNewsletterBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

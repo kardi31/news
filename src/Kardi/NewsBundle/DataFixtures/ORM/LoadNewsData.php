@@ -5,57 +5,57 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Kardi\NewsBundle\Entity\News;
-use Kardi\NewsBundle\Entity\NewsCategory;
-use Kardi\NewsBundle\Entity\NewsCategoryTranslation;
+use Kardi\NewsBundle\Entity\Category;
+use Kardi\NewsBundle\Entity\CategoryTranslation;
 use Kardi\NewsBundle\Entity\NewsTranslation;
 
 class LoadNewsData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $em)
     {
-        $zeswiata = new NewsCategory();
+        $zeswiata = new Category();
 
         $em->persist($zeswiata);
 
         $this->addReference('zeswiata-news-cool', $zeswiata);
 
-        $zeswiataTranslation = new NewsCategoryTranslation();
+        $zeswiataTranslation = new CategoryTranslation();
         $zeswiataTranslation->setTitle('Wiadomosci ze swiata');
         $zeswiataTranslation->setSlug('wiadomosci-ze-swiata');
         $zeswiataTranslation->setLang('pl');
         $zeswiataTranslation->setContent('To jest testowa tresc dla wiadomosci ze swiata');
-        $zeswiataTranslation->setNewsCategory($em->merge($this->getReference('zeswiata-news-cool')));
+        $zeswiataTranslation->setCategory($em->merge($this->getReference('zeswiata-news-cool')));
 
-        $zeswiataTranslationEn = new NewsCategoryTranslation();
+        $zeswiataTranslationEn = new CategoryTranslation();
         $zeswiataTranslationEn->setTitle('Global news');
         $zeswiataTranslationEn->setSlug('global-news');
         $zeswiataTranslationEn->setLang('en');
         $zeswiataTranslationEn->setContent('This is a test content for global news');
-        $zeswiataTranslationEn->setNewsCategory($em->merge($this->getReference('zeswiata-news-cool')));
+        $zeswiataTranslationEn->setCategory($em->merge($this->getReference('zeswiata-news-cool')));
 
         $em->persist($zeswiataTranslation);
         $em->persist($zeswiataTranslationEn);
 
 
-        $zkraju = new NewsCategory();
+        $zkraju = new Category();
 
         $em->persist($zkraju);
 
         $this->addReference('zkraju-news-cool', $zkraju);
 
-        $zkrajuTranslation = new NewsCategoryTranslation();
+        $zkrajuTranslation = new CategoryTranslation();
         $zkrajuTranslation->setTitle('Wiadomosci z kraju');
         $zkrajuTranslation->setSlug('wiadomosci-z-kraju');
         $zkrajuTranslation->setLang('pl');
         $zkrajuTranslation->setContent('To jest testowa tresc dla wiadomosci z kraju');
-        $zkrajuTranslation->setNewsCategory($em->merge($this->getReference('zkraju-news-cool')));
+        $zkrajuTranslation->setCategory($em->merge($this->getReference('zkraju-news-cool')));
 
-        $zkrajuTranslationEn = new NewsCategoryTranslation();
+        $zkrajuTranslationEn = new CategoryTranslation();
         $zkrajuTranslationEn->setTitle('Local news');
         $zkrajuTranslationEn->setSlug('local-news');
         $zkrajuTranslationEn->setLang('en');
         $zkrajuTranslationEn->setContent('This is a test content for local news');
-        $zkrajuTranslationEn->setNewsCategory($em->merge($this->getReference('zkraju-news-cool')));
+        $zkrajuTranslationEn->setCategory($em->merge($this->getReference('zkraju-news-cool')));
 
         $em->persist($zkrajuTranslation);
         $em->persist($zkrajuTranslationEn);

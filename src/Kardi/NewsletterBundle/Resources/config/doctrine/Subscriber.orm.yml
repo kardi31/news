@@ -1,0 +1,35 @@
+Kardi\NewsletterBundle\Entity\Subscriber:
+  type: entity
+  repositoryClass: Kardi\NewsletterBundle\Repository\Subscriber
+  table: newsletter_subscriber
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    email:
+      type: string
+      length: 255
+    firstname:
+      type: string
+      length: 255
+      nullable: TRUE
+    lastname:
+      type: string
+      length: 255
+      nullable: TRUE
+    unsubscribed:
+      type: boolean
+      default: 0
+    locale:
+      type: string
+      length: 255
+    deletedAt:
+      type: date
+      nullable: true
+  lifecycleCallbacks:
+      prePersist: [setCreatedAt, setUpdatedAt]
+  oneToMany:
+    subscriber:
+      targetEntity: Subscriber
+      mappedBy: messageSubscriber

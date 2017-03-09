@@ -30,7 +30,7 @@ class News extends Translation
     private $translations;
 
     /**
-     * @var \Kardi\NewsBundle\Entity\NewsCategory
+     * @var \Kardi\NewsBundle\Entity\News
      */
     private $category;
 
@@ -152,11 +152,11 @@ class News extends Translation
     /**
      * Set category
      *
-     * @param \Kardi\NewsBundle\Entity\NewsCategory $category
+     * @param \Kardi\NewsBundle\Entity\Category $category
      *
      * @return News
      */
-    public function setCategory(\Kardi\NewsBundle\Entity\NewsCategory $category = null)
+    public function setCategory(\Kardi\NewsBundle\Entity\Category $category = null)
     {
         $this->category = $category;
 
@@ -166,7 +166,7 @@ class News extends Translation
     /**
      * Get category
      *
-     * @return \Kardi\NewsBundle\Entity\NewsCategory
+     * @return \Kardi\NewsBundle\Entity\Category
      */
     public function getCategory()
     {

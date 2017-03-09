@@ -1,0 +1,23 @@
+Kardi\NewsBundle\Entity\Tag:
+  type: entity
+  repositoryClass: Kardi\NewsBundle\Repository\TagRepository
+  table: news_tag
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  manyToMany:
+    news:
+      targetEntity: News
+      joinTable:
+        name: news_tags
+        joinColumns:
+          tag_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          news_id:
+            referencedColumnName: id
+  oneToMany:
+    translations:
+      targetEntity: TagTranslation
+      mappedBy: tag

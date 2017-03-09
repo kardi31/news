@@ -1,0 +1,15 @@
+Kardi\NewsBundle\Entity\Category:
+  type: entity
+  repositoryClass: Kardi\NewsBundle\Repository\CategoryRepository
+  table: news_category
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  oneToMany:
+    news:
+      targetEntity: News
+      mappedBy: category
+    translations:
+      targetEntity: CategoryTranslation
+      mappedBy: category

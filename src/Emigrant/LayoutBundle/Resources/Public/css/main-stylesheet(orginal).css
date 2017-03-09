@@ -1961,7 +1961,7 @@ p .required {
 	width: 230px;
 }
 
-.widget .subscribe-block input[type=text] {
+.widget .subscribe-block input[type=text], .widget .subscribe-block input[type="email"] {
 	width: 100%;
 }
 

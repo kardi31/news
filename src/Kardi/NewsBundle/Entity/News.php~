@@ -152,11 +152,11 @@ class News extends Translation
     /**
      * Set category
      *
-     * @param \Kardi\NewsBundle\Entity\NewsCategory $category
+     * @param \Kardi\NewsBundle\Entity\Category $category
      *
      * @return News
      */
-    public function setCategory(\Kardi\NewsBundle\Entity\NewsCategory $category = null)
+    public function setCategory(\Kardi\NewsBundle\Entity\Category $category = null)
     {
         $this->category = $category;
 
@@ -166,7 +166,7 @@ class News extends Translation
     /**
      * Get category
      *
-     * @return \Kardi\NewsBundle\Entity\NewsCategory
+     * @return \Kardi\NewsBundle\Entity\Category
      */
     public function getCategory()
     {
@@ -217,10 +217,11 @@ class News extends Translation
     public function getPhoto($size = false)
     {
         if (!$size) {
-            return 'http://placehold.it/800x600';
+            return 'http://lorempixel.com/800/600/fashion';
         }
+        $size = str_replace('x', '/', $size);
 
-        return 'http://placehold.it/'.$size;
+        return 'http://lorempixel.com/'.$size.'/fashion';
 //        return $this->photo;
     }
 
@@ -242,13 +243,17 @@ class News extends Translation
     }
 
     /**
-     * Get publishDate
-     *
-     * @return \DateTime
+     * @param bool $object
+     * @param string $format
+     * @return \DateTime|string
      */
-    public function getPublishDate()
+    public function getPublishDate($object = true, $format = 'Y-m-d H:i')
     {
-        return $this->publish_date;
+        if ($object) {
+            return $this->publish_date;
+        }
+
+        return $this->publish_date->format($format);
     }
 
     /**
@@ -260,6 +265,7 @@ class News extends Translation
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+        $this->setPublishDate();
     }
 
     /**
@@ -292,4 +298,75 @@ class News extends Translation
         return $this->updatedAt;
     }
 
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     *
+     * @return News
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $comments;
+
+
+    /**
+     * Add comment
+     *
+     * @param \Kardi\NewsBundle\Entity\Comment $comment
+     *
+     * @return News
+     */
+    public function addComment(\Kardi\NewsBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \Kardi\NewsBundle\Entity\Comment $comment
+     */
+    public function removeComment(\Kardi\NewsBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @return int
+     */
+    public function countComments()
+    {
+        return count($this->getComments());
+    }
 }

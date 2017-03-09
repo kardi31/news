@@ -35,7 +35,7 @@ Kardi\NewsBundle\Entity\News:
       mappedBy: news
   manyToOne:
       category:
-        targetEntity: NewsCategory
+        targetEntity: Category
         inversedBy: news_news
         joinColumn:
           name: category_id

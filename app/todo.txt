@@ -1,5 +1,7 @@
+Lista newsow wg tagow.
 
-Pobrac liczbe obserwatorow social media
+Zrobic formularz zapisu do newslettera. Przy zapisywaniu musi byc pobierane locale.
+
 Zrobic widok pojedynczego newsa
 Zrobic komentarze, wyswietlanie komentarzy z podzialem na drzewo, wykorzystac licznik komentarzy w widokach
 

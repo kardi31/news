@@ -1,0 +1,32 @@
+Kardi\NewsletterBundle\Entity\MessageSubscriber:
+  type: entity
+  table: newsletter_message_subscriber
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    message_id:
+      type: integer
+      length: 11
+    subscriber_id:
+      type: integer
+      length: 11
+    sent:
+      type: boolean
+      length: 0
+    sent_date:
+      type: datetime
+  manyToOne:
+      message:
+        targetEntity: Message
+        inversedBy: newsletter_message_subscriber
+        joinColumn:
+          name: message_id
+          referencedColumnName: id
+      subscriber:
+        targetEntity: Subscriber
+        inversedBy: newsletter_message_subscriber
+        joinColumn:
+          name: subscriber_id
+          referencedColumnName: id

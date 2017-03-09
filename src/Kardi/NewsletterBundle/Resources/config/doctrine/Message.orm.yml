@@ -1,0 +1,28 @@
+Kardi\NewsletterBundle\Entity\Message:
+  type: entity
+  repositoryClass: Kardi\NewsletterBundle\Repository\Message
+  table: newsletter_message
+  gedmo:
+    soft_deleteable:
+      field_name: deletedAt
+      time_aware: false
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title:
+      type: string
+      length: 255
+    content:
+      type: text
+    sent:
+      type: boolean
+      default: 0
+    deletedAt:
+      type: date
+      nullable: true
+  oneToMany:
+    message:
+      targetEntity: Message
+      mappedBy: messageSubscriber

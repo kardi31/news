@@ -3,6 +3,7 @@
 namespace Kardi\NewsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -52,12 +53,34 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $category = $em->getRepository('KardiNewsBundle:NewsCategory')
+        $category = $em->getRepository('KardiNewsBundle:Category')
             ->getCategoryBySlug($categorySlug);
+
+        if(!$category)
+        {
+            return new Response();
+        }
 
         $newsList = $em->getRepository('KardiNewsBundle:News')
             ->getLastCategoryNewsList($category->getId(), $numberOfNews);
 
         return $this->render('KardiNewsBundle:Default:last_category_news.html.twig', ['newsList' => $newsList, 'category' => $category]);
+    }
+
+    public function latestCommentsAction($numberOfComments = 3)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $latestComments = $em->getRepository('KardiNewsBundle:Comment')
+            ->getLatestComments($numberOfComments);
+        return $this->render('KardiNewsBundle:Default:last_comments.html.twig', ['comments' => $latestComments]);
+    }
+    
+    public function popularTagsAction($limit = 10)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $tags = $em->getRepository('KardiNewsBundle:Tag')
+            ->getPopularTags($limit);
+
+        return $this->render('KardiNewsBundle:Default:popular_tags.html.twig', ['tags' => $tags]);
     }
 }

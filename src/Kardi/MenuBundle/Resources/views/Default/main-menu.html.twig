@@ -1,23 +1,25 @@
 <div class="main-menu sticky">
     <div class="wrapper">
         <ul class="the-menu">
-            {% for item in menu.items %}
-                <li>
-                    <a href="{{ item.getLink }}">
-                        {{ item.trans('title') }}
-                    </a>
+            {% if menu.items is defined %}
+                {% for item in menu.items %}
+                    <li>
+                        <a href="{{ item.getLink }}">
+                            {{ item.trans('title') }}
+                        </a>
 
-                    {% if item.hasChildren %}
-                        <ul>
-                            <li>
-                                <a href="{{ item.getLink }}">
-                                    {{ item.trans('title') }}
-                                </a>
-                            </li>
-                        </ul>
-                    {% endif %}
-                </li>
-            {% endfor %}
+                        {% if item.hasChildren %}
+                            <ul>
+                                <li>
+                                    <a href="{{ item.getLink }}">
+                                        {{ item.trans('title') }}
+                                    </a>
+                                </li>
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            {% endif %}
         </ul>
     </div>
 </div>

@@ -1,0 +1,3 @@
+kardi_newsletter_subscribe:
+    locales:  { en: "/subscribe", pl: "/subskrybuj" }
+    defaults: { _controller: KardiNewsletterBundle:Default:subscribe }

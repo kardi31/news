@@ -1,0 +1,10 @@
+<div class="widget">
+    <h3>{% trans %}Popular Tags{% endtrans %}</h3>
+    <div class="tag-cloud">
+        {% for tag in tags %}
+            {% set tag = tag[0] %}
+            <a href="{{ tag.trans('slug') }}">{{ tag.trans('title') }}</a>
+        {% endfor %}
+    </div>
+    <!-- END .widget -->
+</div>

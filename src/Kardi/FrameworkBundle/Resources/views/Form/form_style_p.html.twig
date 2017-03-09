@@ -1,0 +1,37 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{%- block form_row -%}
+    <p>
+        {{- form_label(form) -}}
+        {{- form_errors(form) -}}
+        {{- form_widget(form) -}}
+    </p>
+{%- endblock form_row -%}
+
+
+{%- block submit_widget -%}
+    {#{%- set type = type|default('submit') -%}#}
+    <p>
+        {{ block('input_submit') }}
+    </p>
+{%- endblock submit_widget -%}
+
+
+
+{%- block button_row -%}
+    {{- form_widget(form) -}}
+{%- endblock button_row -%}
+
+{%- block input_submit -%}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+            '%name%': name,
+            '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <input type="{{ type|default('submit') }}" {{ block('button_attributes') }} value="{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}" />
+{%- endblock input_submit -%}
