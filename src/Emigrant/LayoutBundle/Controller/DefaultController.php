@@ -3,11 +3,13 @@
 namespace Emigrant\LayoutBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        dump($request);
         return $this->render('EmigrantLayoutBundle:Default:index.html.twig');
     }
 }

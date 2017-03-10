@@ -2,6 +2,7 @@
 
 namespace Kardi\NewsletterBundle\Form\Type;
 
+use Kardi\NewsletterBundle\Entity\Subscriber;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,18 +18,13 @@ class Subscribe extends AbstractType
         $builder->add('subscribe', SubmitType::class, ['attr' => ['class' => 'button' ], 'label' => 'subscribe.submit']);
     }
 
-//    public function configureOptions(OptionsResolver $resolver)
-//    {
-//        $resolver->setDefaults(array(
-//            'row_attr' => array()
-//        ));
-////        $resolver->setDefaults([
-////            'data_class' => 'Phoenix\Bundle\SubscriptionsBundle\Entity\EmailSubscription',
-////        ]);
-//    }
-
-//    public function getName()
-//    {
-//        return 'subscribe';
-//    }
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => Subscriber::class
+        ));
+    }
 }

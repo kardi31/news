@@ -1,0 +1,29 @@
+Kardi\GalleryBundle\Entity\CategoryTranslation:
+  type: entity
+  table: gallery_category_translation
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    category_id:
+      type: integer
+      length: 11
+    lang:
+      type: string
+      length: 255
+    title:
+      type: string
+      length: 255
+    slug:
+      type: string
+      length: 255
+    content:
+      type: text
+  manyToOne:
+      category:
+        targetEntity: Category
+        inversedBy: gallery_category_translation
+        joinColumn:
+          name: category_id
+          referencedColumnName: id

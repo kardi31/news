@@ -2,6 +2,7 @@
 
 namespace Kardi\NewsBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Kardi\FrameworkBundle\Entity\Translation;
 
 /**

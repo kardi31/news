@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Subscriber</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ subscriber.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ subscriber.email }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ subscriber.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ subscriber.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Unsubscribed</th>
+                <td>{% if subscriber.unsubscribed %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Locale</th>
+                <td>{{ subscriber.locale }}</td>
+            </tr>
+            <tr>
+                <th>Deletedat</th>
+                <td>{% if subscriber.deletedAt %}{{ subscriber.deletedAt|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('subscriber_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('subscriber_edit', { 'id': subscriber.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

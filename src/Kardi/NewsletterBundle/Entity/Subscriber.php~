@@ -2,6 +2,8 @@
 
 namespace Kardi\NewsletterBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Subscriber
  */
@@ -40,7 +42,12 @@ class Subscriber
     /**
      * @var \DateTime
      */
-    private $deletedAt;
+    private $updatedAt;
+    /**
+     * @var \DateTime
+     */
+    private $createdAt;
+
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -186,30 +193,6 @@ class Subscriber
     }
 
     /**
-     * Set deletedAt
-     *
-     * @param \DateTime $deletedAt
-     *
-     * @return Subscriber
-     */
-    public function setDeletedAt($deletedAt)
-    {
-        $this->deletedAt = $deletedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get deletedAt
-     *
-     * @return \DateTime
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
      * Add subscriber
      *
      * @param \Kardi\NewsletterBundle\Entity\Subscriber $subscriber
@@ -242,20 +225,46 @@ class Subscriber
     {
         return $this->subscriber;
     }
+
     /**
+     * Set createdAt
+     *
      * @ORM\PrePersist
      */
     public function setCreatedAt()
     {
-        // Add your code here
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     /**
-     * @ORM\PrePersist
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @ORM\PreUpdate
      */
     public function setUpdatedAt()
     {
-        // Add your code here
+        $this->updatedAt = new \DateTime();
     }
-}
 
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+}

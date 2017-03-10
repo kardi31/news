@@ -1,0 +1,24 @@
+subscriber_index:
+    path:     /
+    defaults: { _controller: "KardiNewsletterBundle:Subscriber:index" }
+    methods:  GET
+
+subscriber_show:
+    path:     /{id}/show
+    defaults: { _controller: "KardiNewsletterBundle:Subscriber:show" }
+    methods:  GET
+
+subscriber_new:
+    path:     /new
+    defaults: { _controller: "KardiNewsletterBundle:Subscriber:new" }
+    methods:  [GET, POST]
+
+subscriber_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "KardiNewsletterBundle:Subscriber:edit" }
+    methods:  [GET, POST]
+
+subscriber_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "KardiNewsletterBundle:Subscriber:delete" }
+    methods:  DELETE

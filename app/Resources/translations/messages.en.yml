@@ -3,4 +3,7 @@ subscribe.name: Name
 subscribe.submit: Subscribe
 subscribe.success: You have successfully subscribed to our newsletter
 subscribe.success.title: Success
+subscribe.error.title: Error
 subscribe.info.message: Stay up-to-date with our latest news. Your information will not be shared with anyone.
+subscribe.invalid.data: Your email address is invalid
+subscribe.exists: Your email is already subscribed to our newsletter

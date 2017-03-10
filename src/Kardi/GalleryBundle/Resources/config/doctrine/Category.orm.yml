@@ -1,0 +1,15 @@
+Kardi\GalleryBundle\Entity\Category:
+  type: entity
+  repositoryClass: Kardi\GalleryBundle\Repository\CategoryRepository
+  table: gallery_gallery_category
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  oneToMany:
+    gallery:
+      targetEntity: Gallery
+      mappedBy: category
+    translations:
+      targetEntity: GalleryTranslation
+      mappedBy: category

@@ -20,12 +20,17 @@ Kardi\NewsletterBundle\Entity\Subscriber:
       nullable: TRUE
     unsubscribed:
       type: boolean
-      default: 0
+      nullable: TRUE
+      options:
+        default: false
     locale:
       type: string
       length: 255
-    deletedAt:
-      type: date
+    createdAt:
+      type: datetime
+      nullable: true
+    updatedAt:
+      type: datetime
       nullable: true
   lifecycleCallbacks:
       prePersist: [setCreatedAt, setUpdatedAt]

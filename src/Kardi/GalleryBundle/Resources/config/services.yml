@@ -1,0 +1,4 @@
+services:
+#    kardi_gallery.example:
+#        class: Kardi\GalleryBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

@@ -2,14 +2,14 @@
 
 namespace Kardi\NewsletterBundle\Controller;
 
+use Kardi\NewsletterBundle\Entity\Subscriber;
 use Kardi\NewsletterBundle\Form\Type\Subscribe;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    public function subscribeBoxAction()
+    public function subscribeBoxAction(Request $request)
     {
         $form = $this->createForm(Subscribe::class);
 
@@ -20,17 +20,45 @@ class DefaultController extends Controller
     {
         $form = $this->createForm(Subscribe::class);
         $form->handleRequest($request);
-        $form->get('email')->addError(new FormError('error message'));
+
         if ($form->isSubmitted() && $form->isValid()) {
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
-            $task = $form->getData();
+            $subscriber = $form->getData();
 
-            // ... perform some action, such as saving the task to the database
-            // for example, if Task is a Doctrine entity, save it!
-            // $em = $this->getDoctrine()->getManager();
-            // $em->persist($task);
-            // $em->flush();
+            $em = $this->getDoctrine()->getManager();
+            $subscriberExists = $em->getRepository(Subscriber::class)->findOneBy(
+                [
+                    'email' => $subscriber->getEmail(),
+                ]
+            );
+
+            if ($subscriberExists) {
+                if ($subscriberExists->getUnsubscribed()) {
+                    $subscriberExists->setUnsubscribed(0);
+                    $em->persist($subscriberExists);
+                    $em->flush();
+
+                    $this->addFlash(
+                        'newsletter',
+                        'subscribe.success'
+                    );
+                }
+                else{
+                    $this->addFlash(
+                        'newsletter.error',
+                        'subscribe.exists'
+                    );
+                }
+
+                return $this->redirect('/');
+            }
+
+            $locale = $request->getLocale();
+            $subscriber->setLocale($locale);
+
+            $em->persist($subscriber);
+            $em->flush();
 
             $this->addFlash(
                 'newsletter',
@@ -41,9 +69,10 @@ class DefaultController extends Controller
         }
 
         $this->addFlash(
-            'newsletter',
-            'Error!'
+            'newsletter.error',
+            'subscribe.invalid.data'
         );
+
         return $this->redirect('/');
 
     }

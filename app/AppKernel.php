@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new Emigrant\NewsBundle\EmigrantNewsBundle(),
             new Emigrant\AdBundle\EmigrantAdBundle(),
             new Kardi\NewsletterBundle\KardiNewsletterBundle(),
+            new Kardi\GalleryBundle\KardiGalleryBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -12,4 +12,7 @@ subscribe.email: Twój email
 subscribe.name: Twoje imię
 subscribe.success: Zostałeś pomyślnie zapisany do newslettera
 subscribe.success.title: Udało się
+subscribe.error.title: Błąd
 subscribe.info.message: Bądź na bieżąco z naszymi informacjami. Twoje dane nie zostaną nigdzie udostępnione.
+subscribe.invalid.data: Podaj poprawny adres email
+subscribe.exists: Twój adres email jest już zapisany do naszego newslettera

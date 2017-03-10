@@ -1,6 +1,7 @@
 Lista newsow wg tagow.
 
-Zrobic formularz zapisu do newslettera. Przy zapisywaniu musi byc pobierane locale.
+Zrobic widok galerii na stronie glownej
+Zrobic data fixtures dla neslettera ?
 
 Zrobic widok pojedynczego newsa
 Zrobic komentarze, wyswietlanie komentarzy z podzialem na drzewo, wykorzystac licznik komentarzy w widokach

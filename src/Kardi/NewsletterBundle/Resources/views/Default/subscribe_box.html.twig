@@ -3,16 +3,14 @@
     <div class="mailing-list">
         <p>{{ 'subscribe.info.message' | trans() }}</p>
         <hr/>
-        <!-- <div class="info-message fail">
-            <span class="icon-text">&#9888;</span>
-            <b>Whooooops !</b>
-            <p>You made a little error here !</p>
-        </div> -->
-        <!-- <div class="info-message">
-            <span class="icon-text">&#10227;</span>
-            <b>Loading!</b>
-            <p>This may take a few seconds !</p>
-        </div> -->
+
+        {% for flash_message in app.session.flashBag.get('newsletter.error') %}
+            <div class="info-message fail">
+                <span class="icon-text">&#9888;</span>
+                <b>{{ 'subscribe.error.title' | trans({}) }}</b>
+                <p>{{ flash_message | trans() }}</p>
+            </div>
+        {% endfor %}
 
         {% for flash_message in app.session.flashBag.get('newsletter') %}
             <div class="info-message success">

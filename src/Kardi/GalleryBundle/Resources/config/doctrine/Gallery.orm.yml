@@ -1,7 +1,7 @@
-Kardi\NewsBundle\Entity\News:
+Kardi\GalleryBundle\Entity\Gallery:
   type: entity
-  repositoryClass: Kardi\NewsBundle\Repository\NewsRepository
-  table: news_news
+  repositoryClass: Kardi\GalleryBundle\Repository\GalleryRepository
+  table: gallery_gallery
   id:
     id:
       type: integer
@@ -20,7 +20,7 @@ Kardi\NewsBundle\Entity\News:
       type: boolean
       options:
           default: 0
-    breaking_news:
+    featured:
       type: boolean
       options:
           default: 0
@@ -34,15 +34,12 @@ Kardi\NewsBundle\Entity\News:
       prePersist: [setCreatedAt, setUpdatedAt]
   oneToMany:
     translations:
-      targetEntity: NewsTranslation
-      mappedBy: news
-    comments:
-      targetEntity: Comment
-      mappedBy: news
+      targetEntity: GalleryTranslation
+      mappedBy: gallery
   manyToOne:
       category:
         targetEntity: Category
-        inversedBy: news_news
+        inversedBy: gallery_gallery
         joinColumn:
           name: category_id
           referencedColumnName: id
