@@ -43,7 +43,7 @@ class LoadTagData extends AbstractFixture implements OrderedFixtureInterface
 
     public function getOrder()
     {
-        return 9; // the order in which fixtures will be loaded
+        return 14; // the order in which fixtures will be loaded
     }
 }
 

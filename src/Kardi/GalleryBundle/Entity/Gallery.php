@@ -48,6 +48,7 @@ class Gallery extends Translation
      */
     protected $updatedAt;
 
+    protected $photo_root_id;
 
     /**
      * Constructor
@@ -67,29 +68,35 @@ class Gallery extends Translation
         return $this->id;
     }
 
-    /**
-     * Set photo
-     *
-     * @param string $photo
-     *
-     * @return Gallery
-     */
-    public function setPhoto($photo)
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
-    /**
-     * Get photo
-     *
-     * @return string
-     */
-    public function getPhoto()
-    {
-        return $this->photo;
-    }
+//    /**
+//     * Set photo
+//     *
+//     * @param string $photo
+//     *
+//     * @return Gallery
+//     */
+//    public function setPhoto($photo)
+//    {
+//        $this->photo = $photo;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get photo
+//     *
+//     * @return string
+//     */
+//    public function getPhoto($size = false)
+//    {
+//        if (!$size) {
+//            return 'http://lorempixel.com/800/600/fashion';
+//        }
+//        $size = str_replace('x', '/', $size);
+//
+//        return 'http://lorempixel.com/'.$size.'/fashion';
+////        return $this->photo;
+//    }
 
     /**
      * Set publishDate
@@ -206,6 +213,7 @@ class Gallery extends Translation
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+        $this->setPublishDate(new \DateTime());
     }
 
     /**
@@ -294,5 +302,64 @@ class Gallery extends Translation
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * @param $field
+     * @return string
+     */
+    public function trans($field)
+    {
+        $this->setTranslations($this->translations);
+
+        return parent::trans($field);
+    }
+
+    /**
+     * Set photoRootId
+     *
+     * @param integer $photoRootId
+     *
+     * @return Gallery
+     */
+    public function setPhotoRootId($photoRootId)
+    {
+        $this->photo_root_id = $photoRootId;
+
+        return $this;
+    }
+
+    /**
+     * Get photoRootId
+     *
+     * @return integer
+     */
+    public function getPhotoRootId()
+    {
+        return $this->photo_root_id;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param \Kardi\MediaBundle\Entity\Photo $photo
+     *
+     * @return Gallery
+     */
+    public function setPhoto(\Kardi\MediaBundle\Entity\Photo $photo = null)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return \Kardi\MediaBundle\Entity\Photo
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
     }
 }

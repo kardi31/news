@@ -1,0 +1,26 @@
+<div class="block">
+    <h2 class="list-title">{% trans %} Latest advertisements{% endtrans %}</h2>
+    <ul class="article-block">
+        {% for ad in ads %}
+        <li>
+            <div class="article-photo">
+                <a href="post.html" class="hover-effect">
+                    <img src="{{ ad.photo.mainPhoto.show('59x41') }}" alt="{{ ad.title }}"/></a>
+            </div>
+            <div class="article-content">
+                <h4>
+                    <a href="post.html">{{ ad.title }}</a>
+                    {% if ad.price %}
+                    <a href="post.html#comments" class="h-price">{{ ad.price | localizedcurrency(ad.currency) }}</a>
+                    {% endif %}
+                </h4>
+                <span class="meta">
+                    <a href="blog.html"><span class="icon-text">&#128340;</span>{{ ad.publishDate | date('d/m H:i')}}</a>
+                </span>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="blog.html" class="more">Read More</a>
+</div>
+

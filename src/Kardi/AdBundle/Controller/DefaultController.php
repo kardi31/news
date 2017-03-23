@@ -3,20 +3,18 @@
 namespace Kardi\AdBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    public function topAdsAction()
+    public function latestAdsAction(Request $request, $limit = 6)
     {
-        return $this->render('KardiAdBundle:Default:top-ads.html.twig');
-    }
+        $locale = $request->getLocale();
 
-    public function displayAdAction($size)
-    {
         $em = $this->getDoctrine()->getManager();
-        $ad = $em->getRepository('KardiAdBundle:Advertisment')
-            ->getOneAdvertismentBySize($size);
+        $latestAds = $em->getRepository('KardiAdBundle:Ad')
+            ->getLatestAds($locale, $limit);
 
-        return $this->render('KardiAdBundle:Default:display-ad.html.twig', ['ad' => $ad, 'size' => $size]);
+        return $this->render('KardiAdBundle:Default:latest_ads.html.twig', ['ads' => $latestAds]);
     }
 }

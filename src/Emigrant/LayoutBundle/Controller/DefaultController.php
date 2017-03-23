@@ -9,7 +9,6 @@ class DefaultController extends Controller
 {
     public function indexAction(Request $request)
     {
-        dump($request);
         return $this->render('EmigrantLayoutBundle:Default:index.html.twig');
     }
 }

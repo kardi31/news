@@ -1,0 +1,15 @@
+Kardi\AdBundle\Entity\Category:
+  type: entity
+  repositoryClass: Kardi\AdBundle\Repository\CategoryRepository
+  table: ad_category
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  oneToMany:
+    ad:
+      targetEntity: Ad
+      mappedBy: category
+    translations:
+      targetEntity: CategoryTranslation
+      mappedBy: category

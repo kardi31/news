@@ -1,0 +1,57 @@
+Kardi\MediaBundle\Entity\Photo:
+  type: entity
+  repositoryClass: Gedmo\Tree\Entity\Repository\NestedTreeRepository
+  table: media_photo
+  gedmo:
+    tree:
+      type: nested
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    photo:
+      type: string
+      length: 255
+      nullable: true
+    folder:
+      type: string
+      length: 255
+      nullable: true
+    lft:
+      type: integer
+      nullable: false
+      options:
+          unsigned: false
+      gedmo:
+        - treeLeft
+    rgt:
+      type: integer
+      gedmo:
+        - treeRight
+    lvl:
+      type: integer
+      gedmo:
+        - treeLevel
+  manyToOne:
+      root:
+        targetEntity: Photo
+        joinColumn:
+          referencedColumnName: id
+          onDelete: CASCADE
+        gedmo:
+          - treeRoot
+      parent:
+        targetEntity: Photo
+        inversedBy: children
+        joinColumn:
+          referencedColumnName: id
+          onDelete: CASCADE
+        gedmo:
+          - treeParent
+  oneToMany:
+    children:
+      targetEntity: Photo
+      mappedBy: parent
+      orderBy:
+        lft: ASC

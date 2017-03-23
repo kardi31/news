@@ -10,10 +10,9 @@ Kardi\NewsBundle\Entity\News:
     category_id:
       type: integer
       length: 11
-    photo:
-      type: string
-      length: 255
-      nullable: TRUE
+    photo_root_id:
+      type: integer
+      length: 11
     publish_date:
       type: datetime
     active:
@@ -45,4 +44,10 @@ Kardi\NewsBundle\Entity\News:
         inversedBy: news_news
         joinColumn:
           name: category_id
+          referencedColumnName: id
+      photo:
+        targetEntity: Kardi\MediaBundle\Entity\Photo
+        inversedBy: news_news
+        joinColumn:
+          name: photo_root_id
           referencedColumnName: id

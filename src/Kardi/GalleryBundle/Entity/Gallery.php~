@@ -48,7 +48,7 @@ class Gallery extends Translation
      */
     protected $updatedAt;
 
-    protected $gallery;
+    protected $photo_root_id;
 
     /**
      * Constructor
@@ -68,29 +68,35 @@ class Gallery extends Translation
         return $this->id;
     }
 
-    /**
-     * Set photo
-     *
-     * @param string $photo
-     *
-     * @return Gallery
-     */
-    public function setPhoto($photo)
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
-    /**
-     * Get photo
-     *
-     * @return string
-     */
-    public function getPhoto()
-    {
-        return $this->photo;
-    }
+//    /**
+//     * Set photo
+//     *
+//     * @param string $photo
+//     *
+//     * @return Gallery
+//     */
+//    public function setPhoto($photo)
+//    {
+//        $this->photo = $photo;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get photo
+//     *
+//     * @return string
+//     */
+//    public function getPhoto($size = false)
+//    {
+//        if (!$size) {
+//            return 'http://lorempixel.com/800/600/fashion';
+//        }
+//        $size = str_replace('x', '/', $size);
+//
+//        return 'http://lorempixel.com/'.$size.'/fashion';
+////        return $this->photo;
+//    }
 
     /**
      * Set publishDate
@@ -207,6 +213,7 @@ class Gallery extends Translation
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+        $this->setPublishDate(new \DateTime());
     }
 
     /**
@@ -266,5 +273,69 @@ class Gallery extends Translation
     public function getCategoryId()
     {
         return $this->category_id;
+    }
+    /**
+     * @var \Kardi\GalleryBundle\Entity\Category
+     */
+    private $category;
+
+
+    /**
+     * Set category
+     *
+     * @param \Kardi\GalleryBundle\Entity\Category $category
+     *
+     * @return Gallery
+     */
+    public function setCategory(\Kardi\GalleryBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Kardi\GalleryBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param $field
+     * @return string
+     */
+    public function trans($field)
+    {
+        $this->setTranslations($this->translations);
+
+        return parent::trans($field);
+    }
+
+    /**
+     * Set photoRootId
+     *
+     * @param integer $photoRootId
+     *
+     * @return Gallery
+     */
+    public function setPhotoRootId($photoRootId)
+    {
+        $this->photo_root_id = $photoRootId;
+
+        return $this;
+    }
+
+    /**
+     * Get photoRootId
+     *
+     * @return integer
+     */
+    public function getPhotoRootId()
+    {
+        return $this->photo_root_id;
     }
 }

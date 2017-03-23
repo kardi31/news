@@ -69,26 +69,33 @@ class LoadGalleryData extends AbstractFixture implements OrderedFixtureInterface
             // random if featured or not
             $gallery->setFeatured(rand(0, 1) == 1);
 
+            $gallery->setActive(1);
+
             $categories = [$zeswiata, $zkraju];
             $randCat = array_rand($categories);
             $gallery->setCategory($categories[$randCat]);
 
-            $em->persist($gallery);
+            $randGallery = rand(0,10);
+
+            $gallery->setPhoto($em->merge($this->getReference('main-photo'.$randGallery)));
 
             $this->addReference('gallery'.$j, $gallery);
+            
+            $em->persist($gallery);
+
 
             $galleryTranslation = new GalleryTranslation();
             $galleryTranslation->setTitle('Testowy gallery '.$j);
             $galleryTranslation->setSlug('testowy-gallery-'.$j);
             $galleryTranslation->setLang('pl');
-            $galleryTranslation->setgallery($em->merge($this->getReference('gallery'.$j)));
+            $galleryTranslation->setGallery($em->merge($this->getReference('gallery'.$j)));
 
 
             $galleryTranslationEn = new GalleryTranslation();
             $galleryTranslationEn->setTitle('En test gallery '.$j);
             $galleryTranslationEn->setSlug('en-test-gallery-'.$j);
             $galleryTranslationEn->setLang('en');
-            $galleryTranslationEn->setgallery($em->merge($this->getReference('gallery'.$j)));
+            $galleryTranslationEn->setGallery($em->merge($this->getReference('gallery'.$j)));
 
             $plContent = '';
             $enContent = '';
@@ -109,7 +116,7 @@ class LoadGalleryData extends AbstractFixture implements OrderedFixtureInterface
 
     public function getOrder()
     {
-        return 10; // the order in which fixtures will be loaded
+        return 11; // the order in which fixtures will be loaded
     }
 }
 

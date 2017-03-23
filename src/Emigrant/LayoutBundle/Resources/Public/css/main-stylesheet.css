@@ -120,7 +120,7 @@ a:focus {
 	font-family: 'Entypo', sans-serif!important;
 }
 
-.h-comment {
+.h-comment, .h-price {
 	display: inline-block;
 	padding-left: 8px;
 	position: relative;

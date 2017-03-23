@@ -50,6 +50,7 @@ class News extends Translation
      */
     private $active = 0;
 
+    private $photo_root_id;
     /**
      * Constructor
      */
@@ -196,35 +197,35 @@ class News extends Translation
     private $publish_date;
 
 
-    /**
-     * Set photo
-     *
-     * @param string $photo
-     *
-     * @return News
-     */
-    public function setPhoto($photo)
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
-    /**
-     * Get photo
-     *
-     * @return string
-     */
-    public function getPhoto($size = false)
-    {
-        if (!$size) {
-            return 'http://lorempixel.com/800/600/fashion';
-        }
-        $size = str_replace('x', '/', $size);
-
-        return 'http://lorempixel.com/'.$size.'/fashion';
-//        return $this->photo;
-    }
+//    /**
+//     * Set photo
+//     *
+//     * @param string $photo
+//     *
+//     * @return News
+//     */
+//    public function setPhoto($photo)
+//    {
+//        $this->photo = $photo;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get photo
+//     *
+//     * @return string
+//     */
+//    public function getPhoto($size = false)
+//    {
+//        if (!$size) {
+//            return 'http://lorempixel.com/800/600/fashion';
+//        }
+//        $size = str_replace('x', '/', $size);
+//
+//        return 'http://lorempixel.com/'.$size.'/fashion';
+////        return $this->photo;
+//    }
 
     /**
      * Set publishDate
@@ -369,5 +370,54 @@ class News extends Translation
     public function countComments()
     {
         return count($this->getComments());
+    }
+
+
+    /**
+     * Set photoRootId
+     *
+     * @param integer $photoRootId
+     *
+     * @return News
+     */
+    public function setPhotoRootId($photoRootId)
+    {
+        $this->photo_root_id = $photoRootId;
+
+        return $this;
+    }
+
+    /**
+     * Get photoRootId
+     *
+     * @return integer
+     */
+    public function getPhotoRootId()
+    {
+        return $this->photo_root_id;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param \Kardi\MediaBundle\Entity\Photo $photo
+     *
+     * @return News
+     */
+    public function setPhoto(\Kardi\MediaBundle\Entity\Photo $photo = null)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return \Kardi\MediaBundle\Entity\Photo
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
     }
 }

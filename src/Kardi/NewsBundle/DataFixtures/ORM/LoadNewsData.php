@@ -1,5 +1,5 @@
 <?php
-namespace Kardi\MenuBundle\DataFixtures\ORM;
+namespace Kardi\NewsBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
@@ -77,6 +77,10 @@ class LoadNewsData extends AbstractFixture implements OrderedFixtureInterface
 
             $this->addReference('news'.$j, $news);
 
+
+            $news->setPhoto($em->merge($this->getReference('main-photo'.($j+10))));
+
+
             $newsTranslation = new NewsTranslation();
             $newsTranslation->setTitle('Testowy news '.$j);
             $newsTranslation->setSlug('testowy-news-'.$j);
@@ -109,7 +113,7 @@ class LoadNewsData extends AbstractFixture implements OrderedFixtureInterface
 
     public function getOrder()
     {
-        return 6; // the order in which fixtures will be loaded
+        return 12; // the order in which fixtures will be loaded
     }
 }
 

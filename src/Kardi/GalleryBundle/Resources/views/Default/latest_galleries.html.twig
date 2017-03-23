@@ -1,0 +1,33 @@
+<div class="widget">
+    <h3>{% trans %}Latest Galleries {% endtrans %}</h3>
+    <div class="latest-galleries">
+        {% for gallery in latestGalleries %}
+            <div class="gallery-widget">
+                <div class="gallery-photo" rel="hover-parent">
+                    <a href="#" class="slide-left icon-text">&#59229;</a>
+                    <a href="#" class="slide-right icon-text">&#59230;</a>
+                    <ul>
+                        {% for photo in gallery.photo.children(3) %}
+                            <li>
+                                <a href="{{ photo.show('800x600') }}" class="hover-effect">
+                                    <img src="{{ photo.show('300x190') }}" alt=""/>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="gallery-content">
+                    <h4><a href="photo-gallery-single.html">{{ gallery.trans('title') }}</a></h4>
+                    <span class="meta">
+                        <span class="right"><span class="icon-text">&#127748;</span> {{ gallery.photo.children|length }}</span>
+                        <a href="photo-gallery-single.html">
+                            <span class="icon-text">&#59212;</span>{% trans %}View all photos {% endtrans %}
+                        </a>
+                    </span>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+    <!-- END .widget -->
+</div>

@@ -50,6 +50,7 @@ class News extends Translation
      */
     private $active = 0;
 
+    private $photo_root_id;
     /**
      * Constructor
      */
@@ -196,35 +197,35 @@ class News extends Translation
     private $publish_date;
 
 
-    /**
-     * Set photo
-     *
-     * @param string $photo
-     *
-     * @return News
-     */
-    public function setPhoto($photo)
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
-    /**
-     * Get photo
-     *
-     * @return string
-     */
-    public function getPhoto($size = false)
-    {
-        if (!$size) {
-            return 'http://lorempixel.com/800/600/fashion';
-        }
-        $size = str_replace('x', '/', $size);
-
-        return 'http://lorempixel.com/'.$size.'/fashion';
-//        return $this->photo;
-    }
+//    /**
+//     * Set photo
+//     *
+//     * @param string $photo
+//     *
+//     * @return News
+//     */
+//    public function setPhoto($photo)
+//    {
+//        $this->photo = $photo;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get photo
+//     *
+//     * @return string
+//     */
+//    public function getPhoto($size = false)
+//    {
+//        if (!$size) {
+//            return 'http://lorempixel.com/800/600/fashion';
+//        }
+//        $size = str_replace('x', '/', $size);
+//
+//        return 'http://lorempixel.com/'.$size.'/fashion';
+////        return $this->photo;
+//    }
 
     /**
      * Set publishDate
@@ -370,4 +371,5 @@ class News extends Translation
     {
         return count($this->getComments());
     }
+
 }

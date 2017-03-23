@@ -8,7 +8,7 @@
         <div class="wide-article">
             <div class="article-photo">
                 <a href="{{ generate_news_url(news) }}" class="hover-effect"><img
-                            src="{{ asset(news.photo('160x117')) }}" alt="{{ news.trans('title') }}"/></a>
+                            src="{{ asset(news.photo.mainPhoto.show('160x117')) }}" alt="{{ news.trans('title') }}"/></a>
             </div>
             <div class="article-content">
                 <h2>
@@ -35,7 +35,7 @@
                         {% if loop.index0 is even %}
                             <li>
                                 <div class="article-photo">
-                                    <a href="{{ generate_news_url(news) }}" class="hover-effect"><img src="{{ asset(news.photo('59x42')) }}" alt="{{ news.trans('title') }}"/></a>
+                                    <a href="{{ generate_news_url(news) }}" class="hover-effect"><img src="{{ asset(news.photo.mainPhoto.show('59x42')) }}" alt="{{ news.trans('title') }}"/></a>
                                 </div>
                                 <div class="article-content">
                                     <h4>
@@ -64,7 +64,7 @@
                         {% if loop.index0 is odd %}
                             <li>
                                 <div class="article-photo">
-                                    <a href="{{ generate_news_url(news) }}" class="hover-effect"><img src="{{ asset(news.photo('59x42')) }}" alt="{{ news.trans('title') }}"/></a>
+                                    <a href="{{ generate_news_url(news) }}" class="hover-effect"><img src="{{ asset(news.photo.mainPhoto.show('59x42')) }}" alt="{{ news.trans('title') }}"/></a>
                                 </div>
                                 <div class="article-content">
                                     <h4>

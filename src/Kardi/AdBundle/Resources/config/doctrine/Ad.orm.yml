@@ -1,0 +1,80 @@
+Kardi\AdBundle\Entity\Ad:
+  type: entity
+  repositoryClass: Kardi\AdBundle\Repository\AdRepository
+  table: ad_ad
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    category_id:
+      type: integer
+      length: 11
+    photo_root_id:
+      type: integer
+      length: 11
+    publish_date:
+      type: datetime
+    active:
+      type: boolean
+      options:
+          default: 0
+    featured:
+      type: boolean
+      options:
+          default: 0
+    title:
+      type: string
+      length: 255
+    lang:
+      type: string
+      length: 255
+    content:
+      type: text
+      length: 255
+    email:
+      type: string
+      length: 255
+      nullable: TRUE
+    phone:
+      type: string
+      length: 255
+      nullable: TRUE
+    price:
+      type: string
+      length: 255
+      nullable: TRUE
+    currency:
+      type: string
+      length: 255
+      nullable: TRUE
+    town:
+      type: string
+      length: 255
+    county:
+      type: string
+      length: 255
+    createdAt:
+      type: datetime
+      nullable: true
+    updatedAt:
+      type: datetime
+      nullable: true
+    expiredAt:
+      type: datetime
+      nullable: true
+  lifecycleCallbacks:
+      prePersist: [setCreatedAt, setUpdatedAt]
+  manyToOne:
+      category:
+        targetEntity: Category
+        inversedBy: ad_ad
+        joinColumn:
+          name: category_id
+          referencedColumnName: id
+      photo:
+        targetEntity: Kardi\MediaBundle\Entity\Photo
+        inversedBy: ad_ad
+        joinColumn:
+          name: photo_root_id
+          referencedColumnName: id

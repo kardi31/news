@@ -13,7 +13,7 @@
             </span>
             </div>
             <div class="article-photo">
-                <a href="{{ generate_news_url(news) }}" class="hover-effect"><img src="{{ asset(news.photo('630x250')) }}" alt=""/></a>
+                <a href="{{ generate_news_url(news) }}" class="hover-effect"><img src="{{ asset(news.photo.mainPhoto.show('630x250')) }}" alt=""/></a>
             </div>
         </div>
     </div>

@@ -20,14 +20,16 @@ class AppKernel extends Kernel
             new Kardi\MenuBundle\KardiMenuBundle(),
             new Emigrant\LayoutBundle\EmigrantLayoutBundle(),
             new Kardi\PageBundle\KardiPageBundle(),
-            new Kardi\AdBundle\KardiAdBundle(),
+            new Kardi\BannerBundle\KardiBannerBundle(),
             new Kardi\NewsBundle\KardiNewsBundle(),
             new Kardi\FrameworkBundle\KardiFrameworkBundle(),
             new BeSimple\I18nRoutingBundle\BeSimpleI18nRoutingBundle(),
             new Emigrant\NewsBundle\EmigrantNewsBundle(),
-            new Emigrant\AdBundle\EmigrantAdBundle(),
+            new Emigrant\BannerBundle\EmigrantBannerBundle(),
             new Kardi\NewsletterBundle\KardiNewsletterBundle(),
             new Kardi\GalleryBundle\KardiGalleryBundle(),
+            new Kardi\MediaBundle\KardiMediaBundle(),
+            new Kardi\AdBundle\KardiAdBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

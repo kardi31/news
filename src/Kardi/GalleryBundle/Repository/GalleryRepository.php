@@ -10,4 +10,13 @@ namespace Kardi\GalleryBundle\Repository;
  */
 class GalleryRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getLatestGalleries($limit) {
+        $qb = $this->createQueryBuilder('g');
+        $qb->orderBy('g.id','DESC');
+        $qb->setMaxResults($limit);
+
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+    }
 }

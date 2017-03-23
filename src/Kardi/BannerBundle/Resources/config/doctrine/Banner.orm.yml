@@ -1,0 +1,35 @@
+Kardi\BannerBundle\Entity\Banner:
+  type: entity
+  repositoryClass: Kardi\BannerBundle\Repository\BannerRepository
+  table: banner_banner
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title:
+      type: string
+      length: 255
+    type_id:
+      type: integer
+      length: 11
+    website:
+      type: string
+      length: 255
+    image:
+      type: string
+      length: 255
+      nullable: TRUE
+    active:
+      type: boolean
+      options:
+          default: 0
+  lifecycleCallbacks:
+      prePersist: [setCreatedAt, setUpdatedAt]
+  manyToOne:
+      type:
+        targetEntity: BannerType
+        inversedBy: banner_banner_type
+        joinColumn:
+          name: type_id
+          referencedColumnName: id

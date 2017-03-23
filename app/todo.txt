@@ -1,7 +1,10 @@
 Lista newsow wg tagow.
 
-Zrobic widok galerii na stronie glownej
-Zrobic data fixtures dla neslettera ?
+
+wyswietlanie pojedynczego ogloszenia i newsa, dodac cos po lewej stronie na dole
+
+Zrobic ogloszenia
+
 
 Zrobic widok pojedynczego newsa
 Zrobic komentarze, wyswietlanie komentarzy z podzialem na drzewo, wykorzystac licznik komentarzy w widokach

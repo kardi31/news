@@ -1,5 +1,4 @@
 <?php
-// src/Kardi/MenuBundle/DataFixtures/ORM/LoadMenuData.php
 namespace Kardi\MenuBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;

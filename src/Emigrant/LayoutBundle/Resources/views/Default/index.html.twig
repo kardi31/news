@@ -24,7 +24,7 @@
 
                         {{ render(controller('KardiNewsBundle:Default:lastCategoryNews',{'categorySlug': 'wiadomosci-z-kraju'})) }}
 
-                        {{ render(controller('KardiAdBundle:Default:displayAd',{'size': '468x60'})) }}
+                        {{ render(controller('KardiBannerBundle:Default:displayBanner',{'size': '468x60'})) }}
 
                         <div class="block">
                             <div class="block-title" style="background: #dd8229;">
@@ -110,8 +110,13 @@
                     <!-- BEGIN .content-block -->
                     <div class="content-block left">
 
+
+                        {{ render(controller('KardiAdBundle:Default:latestAds')) }}
+
+                        {{ render(controller('KardiBannerBundle:Default:displayBanner',{'size': '200x200'})) }}
+
                         <div class="block">
-                            <h2 class="list-title">U.S. Government Shutdown</h2>
+                            <h2 class="list-title">{% trans %}Latest advertisements {% endtrans %}</h2>
                             <ul class="article-list">
                                 <li><a href="post.html">Solet percipit euod tractatos percipit euod tractatos</a><a href="post.html#comments" class="h-comment">32</a><span class="meta-date">7.Oct</span></li>
                                 <li><a href="post.html">Ei sonet atomorum meiquo singulis invenire nesit</a><a href="post.html#comments" class="h-comment">84</a><span class="meta-date">7.Oct</span></li>
@@ -123,75 +128,6 @@
                             <a href="blog.html" class="more">Read More</a>
                         </div>
 
-
-                        <div class="block">
-                            <div class="banner">
-                                <a href="#" target="_blank"><img src="{{ asset('bundles/emigrantlayout/images/no-banner-200x200.jpg') }}" alt="" /></a>
-                                <a href="contact-us.html" class="ad-link"><span class="icon-text">&#9652;</span>Advertisement<span class="icon-text">&#9652;</span></a>
-                            </div>
-                        </div>
-
-                        <div class="block">
-                            <h2 class="list-title" style="color: #dd8229;border-bottom: 2px solid #dd8229;">Travel News</h2>
-                            <ul class="article-block">
-                                <li>
-                                    <div class="article-photo">
-                                        <a href="post.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-1.jpg') }}" alt="" /></a>
-                                    </div>
-                                    <div class="article-content">
-                                        <h4><a href="post.html">Debitis minimum vituperata mei no adipiscing</a><a href="post.html#comments" class="h-comment">201</a></h4>
-                                        <span class="meta">
-														<a href="blog.html"><span class="icon-text">&#128340;</span>11:20, 7.Oct 2013</a>
-													</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="article-photo">
-                                        <a href="post.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-2.jpg') }}" alt="" /></a>
-                                    </div>
-                                    <div class="article-content">
-                                        <h4><a href="post.html">Nec option veritus ullamcorper quaestio</a><a href="post.html#comments" class="h-comment">74</a></h4>
-                                        <span class="meta">
-														<a href="blog.html"><span class="icon-text">&#128340;</span>11:20, 7.Oct 2013</a>
-													</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="article-photo">
-                                        <a href="post.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-3.jpg') }}" alt="" /></a>
-                                    </div>
-                                    <div class="article-content">
-                                        <h4><a href="post.html">Ea fugit appareat quaestio delectus pericula</a><a href="post.html#comments" class="h-comment">39</a></h4>
-                                        <span class="meta">
-														<a href="blog.html"><span class="icon-text">&#128340;</span>11:20, 7.Oct 2013</a>
-													</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="article-photo">
-                                        <a href="post.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-4.jpg') }}" alt="" /></a>
-                                    </div>
-                                    <div class="article-content">
-                                        <h4><a href="post.html">Ex cibo ullum nostrum per quo cu utamur fabulas</a><a href="post.html#comments" class="h-comment">99</a></h4>
-                                        <span class="meta">
-														<a href="blog.html"><span class="icon-text">&#128340;</span>11:20, 7.Oct 2013</a>
-													</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="article-photo">
-                                        <a href="post.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-5.jpg') }}" alt="" /></a>
-                                    </div>
-                                    <div class="article-content">
-                                        <h4><a href="post.html">Debitis minimum vituperata mei no intellegam</a><a href="post.html#comments" class="h-comment">201</a></h4>
-                                        <span class="meta">
-														<a href="blog.html"><span class="icon-text">&#128340;</span>11:20, 7.Oct 2013</a>
-													</span>
-                                    </div>
-                                </li>
-                            </ul>
-                            <a href="blog.html" class="more">Read More</a>
-                        </div>
 
                         <!-- END .content-block -->
                     </div>
@@ -206,7 +142,7 @@
             <div class="main-sidebar right">
 
                 <!-- BEGIN .widget -->
-                {{ render(controller('KardiAdBundle:Default:displayAd',{'size': '300x250'})) }}
+                {{ render(controller('KardiBannerBundle:Default:displayBanner',{'size': '300x250'})) }}
 
                 <!-- BEGIN .widget -->
                 {{ render(controller('KardiFrameworkBundle:Default:socialNumbers')) }}
@@ -221,49 +157,7 @@
                 {{ render(controller('KardiNewsletterBundle:Default:subscribeBox')) }}
 
                 <!-- BEGIN .widget -->
-                <div class="widget">
-                    <h3>Latest Photo Galleries</h3>
-                    <div class="latest-galleries">
-
-                        <div class="gallery-widget">
-                            <div class="gallery-photo" rel="hover-parent">
-                                <a href="#" class="slide-left icon-text">&#59229;</a>
-                                <a href="#" class="slide-right icon-text">&#59230;</a>
-                                <ul>
-                                    <li><a href="photo-gallery-single.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-6.jpg') }}" alt="" /></a></li>
-                                    <li><a href="photo-gallery-single.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-7.jpg') }}" alt="" /></a></li>
-                                </ul>
-                            </div>
-                            <div class="gallery-content">
-                                <h4><a href="photo-gallery-single.html">Quot clita etiam qualisque urbanitas brute</a></h4>
-                                <span class="meta">
-												<span class="right">23 photos</span>
-												<a href="photo-gallery-single.html"><span class="icon-text">&#59212;</span>View all photos</a>
-											</span>
-                            </div>
-                        </div>
-
-                        <div class="gallery-widget">
-                            <div class="gallery-photo" rel="hover-parent">
-                                <a href="#" class="slide-left icon-text">&#59229;</a>
-                                <a href="#" class="slide-right icon-text">&#59230;</a>
-                                <ul>
-                                    <li><a href="photo-gallery-single.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-7.jpg') }}" alt="" /></a></li>
-                                    <li><a href="photo-gallery-single.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-6.jpg') }}" alt="" /></a></li>
-                                </ul>
-                            </div>
-                            <div class="gallery-content">
-                                <h4><a href="photo-gallery-single.html">Ad vel ludus omnes clita aperiam accusam inimicus expetendis</a></h4>
-                                <span class="meta">
-												<span class="right">35 photos</span>
-												<a href="photo-gallery-single.html"><span class="icon-text">&#59212;</span>View all photos</a>
-											</span>
-                            </div>
-                        </div>
-
-                    </div>
-                    <!-- END .widget -->
-                </div>
+                {{ render(controller('KardiGalleryBundle:Default:latestGalleries')) }}
 
                 <!-- END .main-sidebar -->
             </div>
