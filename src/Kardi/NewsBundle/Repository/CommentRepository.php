@@ -14,6 +14,20 @@ class CommentRepository extends NestedTreeRepository
         $qb = $this->createQueryBuilder('c');
         $qb->orderBy('c.id','DESC');
         $qb->setMaxResults($limit);
+        $qb->where('c.active = 1');
+        
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getNewsMainComments($newsId) {
+        $qb = $this->createQueryBuilder('c');
+        $qb->orderBy('c.id','DESC');
+        $qb->where('c.active = 1');
+        $qb->andWhere('c.news_id = :news_id');
+        $qb->andWhere('c.lvl = 0');
+        $qb->setParameter('news_id', $newsId);
 
         $query = $qb->getQuery();
 

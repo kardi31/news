@@ -23,7 +23,6 @@ abstract class Translation {
             return call_user_func_array(array($this->translationsArray[$locale],'get'.ucwords($field)),[]);
         }
 
-        dump($this->translationsArray);
         throw new Exception('Missing translation for field '.$field);
     }
 

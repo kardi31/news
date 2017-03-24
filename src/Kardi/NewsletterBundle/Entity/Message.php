@@ -182,4 +182,43 @@ class Message
     {
         return $this->message;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $messageSubscriber;
+
+
+    /**
+     * Add messageSubscriber
+     *
+     * @param \Kardi\NewsletterBundle\Entity\Message $messageSubscriber
+     *
+     * @return Message
+     */
+    public function addMessageSubscriber(\Kardi\NewsletterBundle\Entity\Message $messageSubscriber)
+    {
+        $this->messageSubscriber[] = $messageSubscriber;
+
+        return $this;
+    }
+
+    /**
+     * Remove messageSubscriber
+     *
+     * @param \Kardi\NewsletterBundle\Entity\Message $messageSubscriber
+     */
+    public function removeMessageSubscriber(\Kardi\NewsletterBundle\Entity\Message $messageSubscriber)
+    {
+        $this->messageSubscriber->removeElement($messageSubscriber);
+    }
+
+    /**
+     * Get messageSubscriber
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMessageSubscriber()
+    {
+        return $this->messageSubscriber;
+    }
 }

@@ -15,6 +15,9 @@ Kardi\NewsBundle\Entity\News:
       length: 11
     publish_date:
       type: datetime
+    author:
+      type: string
+      length: 255
     active:
       type: boolean
       options:
@@ -41,13 +44,16 @@ Kardi\NewsBundle\Entity\News:
   manyToOne:
       category:
         targetEntity: Category
-        inversedBy: news_news
+        inversedBy: news
         joinColumn:
           name: category_id
           referencedColumnName: id
       photo:
         targetEntity: Kardi\MediaBundle\Entity\Photo
-        inversedBy: news_news
         joinColumn:
           name: photo_root_id
           referencedColumnName: id
+  manyToMany:
+    tags:
+      targetEntity: Kardi\NewsBundle\Entity\Tag
+      mappedBy: news

@@ -20,13 +20,13 @@ Kardi\NewsletterBundle\Entity\MessageSubscriber:
   manyToOne:
       message:
         targetEntity: Message
-        inversedBy: newsletter_message_subscriber
+        inversedBy: messageSubscriber
         joinColumn:
           name: message_id
           referencedColumnName: id
       subscriber:
         targetEntity: Subscriber
-        inversedBy: newsletter_message_subscriber
+        inversedBy: messageSubscriber
         joinColumn:
           name: subscriber_id
           referencedColumnName: id

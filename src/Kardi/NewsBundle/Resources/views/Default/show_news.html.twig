@@ -1,9 +1,174 @@
-{% extends 'KardiLayoutBundle::layout.html.twig' %}
+{% extends 'EmigrantLayoutBundle:Default:index.html.twig' %}
 {% block title %}
     {{ news.trans('title') }}
 {% endblock %}
 
 {% block description %}
     {{ news.trans('content') }}
+{% endblock %}
+
+
+{% block display_author %}
+    <div class="author">
+        <span class="hover-effect left delegate"><span class="cover" style="font-size:20px;"><i></i><img src="{{ asset('bundles/emigrantlayout/images/photos/avatar-1.jpg') }}" alt="{{ news.author }}"></span></span>
+        <div class="a-content">
+            <span>{% trans %}Author{% endtrans %} <b>{{ news.author }}</b></span>
+            <span class="meta">{{ news.publishDate | date('d/m/Y H:i') }}
+                {#<span class="tag">{{ news.category.trans('title') }}</span>#}
+            </span>
+        </div>
+    </div>
+{% endblock %}
+
+{% block contentBlock %}
+
+
+    <!-- BEGIN .single-block -->
+    <div class="single-block">
+        <!-- BEGIN .content-block -->
+        <div class="content-block main left">
+
+            <div class="article-title">
+
+
+                <h1>{{ news.trans('title') }}</h1>
+                {{ block('display_author') }}
+            </div>
+            <div class="block">
+                <div class="block-content">
+
+                    <p>
+                        <span class="hover-effect">
+                            <img src="{{ news.photo.mainPhoto.show('856x380')}}" alt="{{ news.trans('title') }}" />
+                        </span>
+                    </p>
+
+                    <div class="shortcode-content">
+
+                        <div class="paragraph-row">
+                            <div class="column3">
+                                <h3 class="highlight-title">{% trans %}Related Articles {% endtrans %}</h3>
+                                <ul>
+                                    {% for article in relatedArticles %}
+                                    <li>
+                                        <a href="{{ generate_news_url(news) }}">{{ article.trans('title') }}</a>
+                                        <a href="{{ generate_news_url(news) }}#comments" class="h-comment">{{ article.comments|length }}</a>
+                                        <span class="meta-date">{{ article.publishDate | date('d/m') }}</span>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="column9">
+                               {{ news.trans('content') }}
+                            </div>
+                        </div>
+
+                        <div class="article-title">
+                            <div class="share-block right">
+                                <div>
+                                    <div class="share-article left">
+                                        <span>Social media</span>
+                                        <strong>Share this article</strong>
+                                    </div>
+                                    <div class="left">
+                                        <a href="#" class="custom-soc icon-text">&#62217;</a>
+                                        <a href="#" class="custom-soc icon-text">&#62220;</a>
+                                        <a href="#" class="custom-soc icon-text">&#62223;</a>
+                                        <a href="#" class="custom-soc icon-text">&#62226;</a>
+                                        <a href="#" class="custom-soc icon-text">&#62232;</a>
+                                    </div>
+                                    <div class="clear-float"></div>
+                                </div>
+                                <div>
+                                    <a href="#" class="small-button"><span class="icon-text">&#59158;</span>&nbsp;&nbsp;Print this article</a>
+                                    <a href="#" class="small-button"><span class="icon-text">&#9993;</span>&nbsp;&nbsp;Send e-mail</a>
+                                </div>
+                            </div>
+
+                            {{ block('display_author') }}
+
+                            <div class="article-tags tag-cloud">
+                                <strong>{% trans %}TAGS {% endtrans %}:</strong>
+                                {% for tag in news.getTags %}
+                                    <a href="#">{{ tag.trans('title') }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="block-title">
+                    <a href="#writecomment" class="right">Write a comment</a>
+                    <h2>4 Comments</h2>
+                </div>
+                <div class="block-content">
+
+                    <div class="comment-block">
+
+                        <ol class="comments">
+
+                            {% for comment in comments %}
+
+                                {{ include('KardiNewsBundle:Default:show_comment.html.twig',{'comment': comment, 'newsId': news.id}) }}
+
+                            {% endfor %}
+                        </ol>
+
+                    </div>
+
+                </div>
+
+                <div class="block-title">
+                    <a href="#writecomment" class="right">View all comments</a>
+                    <h2>Write a comment</h2>
+                </div>
+                <div class="block-content">
+                    <div id="writecomment">
+
+                        <form action="#" method="get">
+
+                            <div class="coloralert" style="background: #a12717;">
+                                <p>Error Occurred!</p>
+                                <a href="#close-alert" class="icon-text">&#10006;</a>
+                            </div>
+                            <!-- <div class="coloralert" style="background: #68a117;">
+                                <p>Success!</p>
+                                <a href="#close-alert" class="icon-text">&#10006;</a>
+                            </div> -->
+
+                            <p>Your e-mail address will not be published.<br/>Required fields are marked<span class="required">*</span></p>
+
+                            <p class="contact-form-user">
+                                <label for="c_name">Nickname<span class="required">*</span></label>
+                                <input type="text" class="error" placeholder="Nickname" name="c_name" id="c_name" />
+                                <span class="error-msg"><span class="icon-text">&#9888;</span>&nbsp;&nbsp;This is an error message</span>
+                            </p>
+                            <p class="contact-form-email">
+                                <label for="c_email">E-mail<span class="required">*</span></label>
+                                <input type="text" placeholder="E-mail" name="c_email" id="c_email" />
+                            </p>
+                            <p class="contact-form-webside">
+                                <label for="c_webside">Website</label>
+                                <input type="text" placeholder="Website" name="c_webside" id="c_webside" />
+                            </p>
+                            <p class="contact-form-message">
+                                <label for="c_message">Comment<span class="required">*</span></label>
+                                <textarea name="c_message" placeholder="Your message.." id="c_message"></textarea>
+                            </p>
+                            <p><input type="submit" class="styled-button" value="Post a Comment" /></p>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- END .content-block -->
+        </div>
+
+        <!-- END .single-block -->
+    </div>
 {% endblock %}
 

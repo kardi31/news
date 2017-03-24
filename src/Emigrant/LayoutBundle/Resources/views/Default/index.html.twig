@@ -7,11 +7,15 @@
 
         <div class="main-content">
 
+            {% block mainContent %}
+
             <!-- BEGIN .main-page -->
             <div class="main-page left">
 
+                {% block contentBlock %}
                 <!-- BEGIN .double-block -->
                 <div class="double-block">
+
 
                     <!-- BEGIN .content-block -->
                     <div class="content-block main right">
@@ -26,87 +30,87 @@
 
                         {{ render(controller('KardiBannerBundle:Default:displayBanner',{'size': '468x60'})) }}
 
-                        <div class="block">
-                            <div class="block-title" style="background: #dd8229;">
-                                <a href="category.html" class="right">View all travel news</a>
-                                <h2>This Years Travel Advices</h2>
-                            </div>
-                            <div class="block-content">
-                                <ul class="article-block-big">
-                                    <li>
-                                        <div class="article-photo">
-                                            <a href="post.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-10.jpg') }}" alt="" /></a>
-                                        </div>
-                                        <div class="article-content">
-                                            <h4><a href="post.html">Debitis minimum vituperata mei no adipiscing</a><a href="post.html#comments" class="h-comment">201</a></h4>
-                                            <span class="meta">
-															<a href="blog.html"><span class="icon-text">&#128340;</span>11:20, 7.Oct 2013</a>
-														</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="article-photo">
-                                            <a href="post.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-11.jpg') }}" alt="" /></a>
-                                        </div>
-                                        <div class="article-content">
-                                            <h4><a href="post.html">Nec option veritus ullamcorper quaestio</a><a href="post.html#comments" class="h-comment">74</a></h4>
-                                            <span class="meta">
-															<a href="blog.html"><span class="icon-text">&#128340;</span>11:20, 7.Oct 2013</a>
-															<span class="tag" style="background: #2a8ece;">Custom Tag</span>
-														</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="article-photo">
-                                            <a href="post.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-12.jpg') }}" alt="" /></a>
-                                        </div>
-                                        <div class="article-content">
-                                            <h4><a href="post.html">Ea fugit appareat quaestio delectus pericula</a><a href="post.html#comments" class="h-comment">39</a></h4>
-                                            <span class="meta">
-															<a href="blog.html"><span class="icon-text">&#128340;</span>11:20, 7.Oct 2013</a>
-														</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="article-photo">
-                                            <a href="post.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-13.jpg') }}" alt="" /></a>
-                                        </div>
-                                        <div class="article-content">
-                                            <h4><a href="post.html">Ex cibo ullum nostrum per quo cu utamur fabulas</a><a href="post.html#comments" class="h-comment">99</a></h4>
-                                            <span class="meta">
-															<a href="blog.html"><span class="icon-text">&#128340;</span>11:20, 7.Oct 2013</a>
-														</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="article-photo">
-                                            <a href="post.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-14.jpg') }}" alt="" /></a>
-                                        </div>
-                                        <div class="article-content">
-                                            <h4><a href="post.html">Debitis minimum vituperata mei no intellegam</a><a href="post.html#comments" class="h-comment">201</a></h4>
-                                            <span class="meta">
-															<a href="blog.html"><span class="icon-text">&#128340;</span>11:20, 7.Oct 2013</a>
-														</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="article-photo">
-                                            <a href="post.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-15.jpg') }}" alt="" /></a>
-                                        </div>
-                                        <div class="article-content">
-                                            <h4><a href="post.html">Debitis minimum vituperata mei no intellegam</a><a href="post.html#comments" class="h-comment">201</a></h4>
-                                            <span class="meta">
-															<a href="blog.html"><span class="icon-text">&#128340;</span>11:20, 7.Oct 2013</a>
-														</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        {#<div class="block">#}
+                            {#<div class="block-title" style="background: #dd8229;">#}
+                                {#<a href="category.html" class="right">View all travel news</a>#}
+                                {#<h2>This Years Travel Advices</h2>#}
+                            {#</div>#}
+                            {#<div class="block-content">#}
+                                {#<ul class="article-block-big">#}
+                                    {#<li>#}
+                                        {#<div class="article-photo">#}
+                                            {#<a href="post.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-10.jpg') }}" alt="" /></a>#}
+                                        {#</div>#}
+                                        {#<div class="article-content">#}
+                                            {#<h4><a href="post.html">Debitis minimum vituperata mei no adipiscing</a><a href="post.html#comments" class="h-comment">201</a></h4>#}
+                                            {#<span class="meta">#}
+															{#<a href="blog.html"><span class="icon-text">&#128340;</span>11:20, 7.Oct 2013</a>#}
+														{#</span>#}
+                                        {#</div>#}
+                                    {#</li>#}
+                                    {#<li>#}
+                                        {#<div class="article-photo">#}
+                                            {#<a href="post.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-11.jpg') }}" alt="" /></a>#}
+                                        {#</div>#}
+                                        {#<div class="article-content">#}
+                                            {#<h4><a href="post.html">Nec option veritus ullamcorper quaestio</a><a href="post.html#comments" class="h-comment">74</a></h4>#}
+                                            {#<span class="meta">#}
+															{#<a href="blog.html"><span class="icon-text">&#128340;</span>11:20, 7.Oct 2013</a>#}
+															{#<span class="tag" style="background: #2a8ece;">Custom Tag</span>#}
+														{#</span>#}
+                                        {#</div>#}
+                                    {#</li>#}
+                                    {#<li>#}
+                                        {#<div class="article-photo">#}
+                                            {#<a href="post.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-12.jpg') }}" alt="" /></a>#}
+                                        {#</div>#}
+                                        {#<div class="article-content">#}
+                                            {#<h4><a href="post.html">Ea fugit appareat quaestio delectus pericula</a><a href="post.html#comments" class="h-comment">39</a></h4>#}
+                                            {#<span class="meta">#}
+															{#<a href="blog.html"><span class="icon-text">&#128340;</span>11:20, 7.Oct 2013</a>#}
+														{#</span>#}
+                                        {#</div>#}
+                                    {#</li>#}
+                                    {#<li>#}
+                                        {#<div class="article-photo">#}
+                                            {#<a href="post.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-13.jpg') }}" alt="" /></a>#}
+                                        {#</div>#}
+                                        {#<div class="article-content">#}
+                                            {#<h4><a href="post.html">Ex cibo ullum nostrum per quo cu utamur fabulas</a><a href="post.html#comments" class="h-comment">99</a></h4>#}
+                                            {#<span class="meta">#}
+															{#<a href="blog.html"><span class="icon-text">&#128340;</span>11:20, 7.Oct 2013</a>#}
+														{#</span>#}
+                                        {#</div>#}
+                                    {#</li>#}
+                                    {#<li>#}
+                                        {#<div class="article-photo">#}
+                                            {#<a href="post.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-14.jpg') }}" alt="" /></a>#}
+                                        {#</div>#}
+                                        {#<div class="article-content">#}
+                                            {#<h4><a href="post.html">Debitis minimum vituperata mei no intellegam</a><a href="post.html#comments" class="h-comment">201</a></h4>#}
+                                            {#<span class="meta">#}
+															{#<a href="blog.html"><span class="icon-text">&#128340;</span>11:20, 7.Oct 2013</a>#}
+														{#</span>#}
+                                        {#</div>#}
+                                    {#</li>#}
+                                    {#<li>#}
+                                        {#<div class="article-photo">#}
+                                            {#<a href="post.html" class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/image-15.jpg') }}" alt="" /></a>#}
+                                        {#</div>#}
+                                        {#<div class="article-content">#}
+                                            {#<h4><a href="post.html">Debitis minimum vituperata mei no intellegam</a><a href="post.html#comments" class="h-comment">201</a></h4>#}
+                                            {#<span class="meta">#}
+															{#<a href="blog.html"><span class="icon-text">&#128340;</span>11:20, 7.Oct 2013</a>#}
+														{#</span>#}
+                                        {#</div>#}
+                                    {#</li>#}
+                                {#</ul>#}
+                            {#</div>#}
+                        {#</div>#}
 
                         <!-- END .content-block -->
                     </div>
-
+                    {% block leftSidebar %}
                     <!-- BEGIN .content-block -->
                     <div class="content-block left">
 
@@ -115,29 +119,34 @@
 
                         {{ render(controller('KardiBannerBundle:Default:displayBanner',{'size': '200x200'})) }}
 
-                        <div class="block">
-                            <h2 class="list-title">{% trans %}Latest advertisements {% endtrans %}</h2>
-                            <ul class="article-list">
-                                <li><a href="post.html">Solet percipit euod tractatos percipit euod tractatos</a><a href="post.html#comments" class="h-comment">32</a><span class="meta-date">7.Oct</span></li>
-                                <li><a href="post.html">Ei sonet atomorum meiquo singulis invenire nesit</a><a href="post.html#comments" class="h-comment">84</a><span class="meta-date">7.Oct</span></li>
-                                <li><a href="post.html">Lus eleifend hom pertinacia hom pertinacia</a><a href="post.html#comments" class="h-comment">72</a><span class="meta-date">6.Oct</span></li>
-                                <li><a href="post.html">Pri viderer recteque exp inimicusis verear minimum vim</a><a href="post.html#comments" class="h-comment">136</a><span class="meta-date">6.Oct</span></li>
-                                <li><a href="post.html">Ocurr comprehensam recteq comprehensam recteq</a><a href="post.html#comments" class="h-comment">8</a><span class="meta-date">6.Oct</span></li>
-                                <li><a href="post.html">Ut oratio viderer evertim</a><a href="post.html#comments" class="h-comment">92</a><span class="meta-date">5.Oct</span></li>
-                            </ul>
-                            <a href="blog.html" class="more">Read More</a>
-                        </div>
+                        {#<div class="block">#}
+                            {#<h2 class="list-title">{% trans %}Latest advertisements {% endtrans %}</h2>#}
+                            {#<ul class="article-list">#}
+                                {#<li><a href="post.html">Solet percipit euod tractatos percipit euod tractatos</a><a href="post.html#comments" class="h-comment">32</a><span class="meta-date">7.Oct</span></li>#}
+                                {#<li><a href="post.html">Ei sonet atomorum meiquo singulis invenire nesit</a><a href="post.html#comments" class="h-comment">84</a><span class="meta-date">7.Oct</span></li>#}
+                                {#<li><a href="post.html">Lus eleifend hom pertinacia hom pertinacia</a><a href="post.html#comments" class="h-comment">72</a><span class="meta-date">6.Oct</span></li>#}
+                                {#<li><a href="post.html">Pri viderer recteque exp inimicusis verear minimum vim</a><a href="post.html#comments" class="h-comment">136</a><span class="meta-date">6.Oct</span></li>#}
+                                {#<li><a href="post.html">Ocurr comprehensam recteq comprehensam recteq</a><a href="post.html#comments" class="h-comment">8</a><span class="meta-date">6.Oct</span></li>#}
+                                {#<li><a href="post.html">Ut oratio viderer evertim</a><a href="post.html#comments" class="h-comment">92</a><span class="meta-date">5.Oct</span></li>#}
+                            {#</ul>#}
+                            {#<a href="blog.html" class="more">Read More</a>#}
+                        {#</div>#}
 
 
                         <!-- END .content-block -->
                     </div>
-
+                    {% endblock %}
                     <!-- END .double-block -->
+
                 </div>
+                {% endblock contentBlock %}
 
                 <!-- END .main-page -->
             </div>
 
+            {% endblock mainContent %}
+
+            {% block rightSidebar %}
             <!-- BEGIN .main-sidebar -->
             <div class="main-sidebar right">
 
@@ -161,8 +170,8 @@
 
                 <!-- END .main-sidebar -->
             </div>
-
+            {% endblock rightSidebar %}
             <div class="clear-float"></div>
 
         </div>
-{% endblock %}
+{% endblock content %}

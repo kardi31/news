@@ -267,4 +267,43 @@ class Subscriber
         return $this->updatedAt;
     }
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $messageSubscriber;
+
+
+    /**
+     * Add messageSubscriber
+     *
+     * @param \Kardi\NewsletterBundle\Entity\Subscriber $messageSubscriber
+     *
+     * @return Subscriber
+     */
+    public function addMessageSubscriber(\Kardi\NewsletterBundle\Entity\Subscriber $messageSubscriber)
+    {
+        $this->messageSubscriber[] = $messageSubscriber;
+
+        return $this;
+    }
+
+    /**
+     * Remove messageSubscriber
+     *
+     * @param \Kardi\NewsletterBundle\Entity\Subscriber $messageSubscriber
+     */
+    public function removeMessageSubscriber(\Kardi\NewsletterBundle\Entity\Subscriber $messageSubscriber)
+    {
+        $this->messageSubscriber->removeElement($messageSubscriber);
+    }
+
+    /**
+     * Get messageSubscriber
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMessageSubscriber()
+    {
+        return $this->messageSubscriber;
+    }
 }

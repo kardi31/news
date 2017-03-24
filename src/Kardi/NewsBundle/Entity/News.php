@@ -420,4 +420,72 @@ class News extends Translation
     {
         return $this->photo;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $tags;
+
+
+    /**
+     * Add tag
+     *
+     * @param \Kardi\NewsBundle\Entity\Tag $tag
+     *
+     * @return News
+     */
+    public function addTag(\Kardi\NewsBundle\Entity\Tag $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \Kardi\NewsBundle\Entity\Tag $tag
+     */
+    public function removeTag(\Kardi\NewsBundle\Entity\Tag $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+    /**
+     * @var string
+     */
+    private $author;
+
+
+    /**
+     * Set author
+     *
+     * @param string $author
+     *
+     * @return News
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return string
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
 }

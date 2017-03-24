@@ -14,7 +14,7 @@ class LoadTagData extends AbstractFixture implements OrderedFixtureInterface
         for ($j = 0; $j <= 20; $j++) {
             $tag = new Tag();
 
-            $newsArray = range(1,10);
+            $newsArray = range(0,10);
             $rand = array_rand($newsArray,2);
             $tag->addNews($em->merge($this->getReference('news'.$rand[0])));
             $tag->addNews($em->merge($this->getReference('news'.$rand[1])));

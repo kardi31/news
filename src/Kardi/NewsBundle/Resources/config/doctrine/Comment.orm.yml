@@ -28,6 +28,12 @@ Kardi\NewsBundle\Entity\Comment:
       type: boolean
       options:
           default: 0
+    createdAt:
+      type: datetime
+      nullable: true
+    updatedAt:
+      type: datetime
+      nullable: true
     lft:
       type: integer
       nullable: false
@@ -63,13 +69,13 @@ Kardi\NewsBundle\Entity\Comment:
           - treeParent
       news:
         targetEntity: News
-        inversedBy: news_comment
+        inversedBy: comments
         joinColumn:
           name: news_id
           referencedColumnName: id
   oneToMany:
     children:
-      targetEntity: News
+      targetEntity: Comment
       mappedBy: parent
       orderBy:
         lft: ASC

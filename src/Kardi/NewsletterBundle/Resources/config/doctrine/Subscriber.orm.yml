@@ -35,6 +35,6 @@ Kardi\NewsletterBundle\Entity\Subscriber:
   lifecycleCallbacks:
       prePersist: [setCreatedAt, setUpdatedAt]
   oneToMany:
-    subscriber:
-      targetEntity: Subscriber
-      mappedBy: messageSubscriber
+    messageSubscriber:
+      targetEntity: MessageSubscriber
+      mappedBy: subscriber

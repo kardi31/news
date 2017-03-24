@@ -1,0 +1,30 @@
+<li>
+    <div class="commment-content">
+        <div class="user-avatar">
+            <span class="hover-effect"><img src="{{ asset('bundles/emigrantlayout/images/photos/avatar-7.jpg') }}"
+                                            class="setborder" alt="" title=""/></span>
+        </div>
+        <strong class="user-nick">{{ comment.author }}</strong>
+        <span class="time-stamp">{{ comment.createdAt|date('d/m/Y H:i') }}</span>
+        <div class="comment-text">
+            <p>{{ comment.content }}</p>
+        </div>
+        {% if comment.lvl == 0 %}
+            <a href="#" class="icon-link"><span class="icon-text">&#59154;</span><span>{% trans %}
+                    Reply to this comment{% endtrans %}</span></a>
+        {% endif %}
+    </div>
+
+    {% if(comment.lvl == 0) %}
+        {{ render(controller('KardiNewsBundle:Default:AddComment', { 'parentId' : comment.id, 'newsId' : newsId })) }}
+    {% endif %}
+    
+    {% if comment.children | length > 0 %}
+        <ul>
+            {% for child in comment.children %}
+                {{ include('KardiNewsBundle:Default:show_comment.html.twig',{'comment': child}) }}
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+</li>

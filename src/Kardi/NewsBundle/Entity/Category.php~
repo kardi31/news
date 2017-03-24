@@ -119,4 +119,5 @@ class Category extends Translation
 
         return parent::trans($field);
     }
+
 }

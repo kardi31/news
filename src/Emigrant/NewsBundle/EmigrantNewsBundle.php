@@ -8,6 +8,6 @@ class EmigrantNewsBundle extends Bundle
 {
     public function getParent()
     {
-        return 'KardiNewsBundle';
+//        return 'KardiNewsBundle';
     }
 }

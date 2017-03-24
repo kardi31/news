@@ -72,6 +72,7 @@ class LoadNewsData extends AbstractFixture implements OrderedFixtureInterface
             $categories = [$zeswiata, $zkraju];
             $randCat = array_rand($categories);
             $news->setCategory($categories[$randCat]);
+            $news->setAuthor('John Doe '.$j);
 
             $em->persist($news);
 

@@ -68,13 +68,12 @@ Kardi\AdBundle\Entity\Ad:
   manyToOne:
       category:
         targetEntity: Category
-        inversedBy: ad_ad
+        inversedBy: ad
         joinColumn:
           name: category_id
           referencedColumnName: id
       photo:
         targetEntity: Kardi\MediaBundle\Entity\Photo
-        inversedBy: ad_ad
         joinColumn:
           name: photo_root_id
           referencedColumnName: id

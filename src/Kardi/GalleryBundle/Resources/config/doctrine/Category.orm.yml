@@ -11,5 +11,5 @@ Kardi\GalleryBundle\Entity\Category:
       targetEntity: Gallery
       mappedBy: category
     translations:
-      targetEntity: GalleryTranslation
+      targetEntity: CategoryTranslation
       mappedBy: category

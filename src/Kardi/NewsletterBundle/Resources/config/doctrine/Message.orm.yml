@@ -23,6 +23,6 @@ Kardi\NewsletterBundle\Entity\Message:
       type: date
       nullable: true
   oneToMany:
-    message:
-      targetEntity: Message
-      mappedBy: messageSubscriber
+    messageSubscriber:
+      targetEntity: MessageSubscriber
+      mappedBy: message

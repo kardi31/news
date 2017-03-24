@@ -1,6 +1,6 @@
 Lista newsow wg tagow.
 
-
+dalej robic wyswietlanie pojedynczego newsa.
 wyswietlanie pojedynczego ogloszenia i newsa, dodac cos po lewej stronie na dole
 
 Zrobic ogloszenia

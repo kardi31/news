@@ -41,7 +41,7 @@ class LoadCommentData extends AbstractFixture implements OrderedFixtureInterface
             $comment2->setIp('11:11:222:333');
             $comment2->setHostname('sky.net');
             $comment2->setActive(1);
-            $comment2->setContent(str_repeat('This is a test comment '.$j.' ', 5));
+            $comment2->setContent(str_repeat('This is a test comment '.$j.' - '.$i.' ', 5));
 
             $comment2->setNews($em->merge($this->getReference('news'.$lastNewsId)));
 

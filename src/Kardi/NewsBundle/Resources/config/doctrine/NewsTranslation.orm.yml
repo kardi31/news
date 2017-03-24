@@ -23,7 +23,7 @@ Kardi\NewsBundle\Entity\NewsTranslation:
   manyToOne:
       news:
         targetEntity: News
-        inversedBy: news_news_translation
+        inversedBy: translations
         joinColumn:
           name: news_id
           referencedColumnName: id

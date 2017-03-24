@@ -23,7 +23,7 @@ Kardi\GalleryBundle\Entity\GalleryTranslation:
   manyToOne:
       gallery:
         targetEntity: Gallery
-        inversedBy: gallery_gallery_translation
+        inversedBy: translations
         joinColumn:
           name: gallery_id
           referencedColumnName: id

@@ -38,13 +38,12 @@ Kardi\GalleryBundle\Entity\Gallery:
   manyToOne:
       category:
         targetEntity: Category
-        inversedBy: gallery_gallery
+        inversedBy: gallery
         joinColumn:
           name: category_id
           referencedColumnName: id
       photo:
         targetEntity: Kardi\MediaBundle\Entity\Photo
-        inversedBy: gallery_gallery
         joinColumn:
           name: photo_root_id
           referencedColumnName: id

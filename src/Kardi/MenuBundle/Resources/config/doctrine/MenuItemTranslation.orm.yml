@@ -21,7 +21,7 @@ Kardi\MenuBundle\Entity\MenuItemTranslation:
   manyToOne:
       menuItem:
         targetEntity: MenuItem
-        inversedBy: menu_menuitem_translation
+        inversedBy: translations
         joinColumn:
           name: item_id
           referencedColumnName: id

@@ -29,7 +29,7 @@ Kardi\BannerBundle\Entity\Banner:
   manyToOne:
       type:
         targetEntity: BannerType
-        inversedBy: banner_banner_type
+        inversedBy: banners
         joinColumn:
           name: type_id
           referencedColumnName: id

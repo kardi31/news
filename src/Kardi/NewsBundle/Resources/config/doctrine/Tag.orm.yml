@@ -9,6 +9,7 @@ Kardi\NewsBundle\Entity\Tag:
   manyToMany:
     news:
       targetEntity: News
+      inversedBy: tags
       joinTable:
         name: news_tags
         joinColumns:

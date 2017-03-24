@@ -1,7 +1,7 @@
 <?php
 
 namespace Kardi\NewsBundle\Entity;
-
+use Doctrine\ORM\Mapping as ORM;
 /**
  * Comment
  */
@@ -78,6 +78,8 @@ class Comment
      */
     private $news;
 
+    private $createdAt;
+    private $updatedAt;
     /**
      * Constructor
      */

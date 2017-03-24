@@ -15,4 +15,4 @@ Kardi\BannerBundle\Entity\BannerType:
   oneToMany:
     banners:
       targetEntity: Banner
-      mappedBy: id
+      mappedBy: type
