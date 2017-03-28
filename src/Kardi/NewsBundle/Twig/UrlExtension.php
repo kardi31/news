@@ -2,22 +2,24 @@
 
 namespace Kardi\NewsBundle\Twig;
 
-use BeSimple\I18nRoutingBundle\Routing\Router;
+
+use Kardi\NewsBundle\Entity\News;
+use Kardi\NewsBundle\Router\NewsRouter;
 
 class UrlExtension extends \Twig_Extension
 {
     /**
-     * @var Router
+     * @var NewsRouter
      */
-    private $_router;
+    private $_newsRouter;
 
     /**
      * UrlExtension constructor.
-     * @param Router $router
+     * @param NewsRouter $newsRouter
      */
-    public function __construct(Router $router)
+    public function __construct(NewsRouter $newsRouter)
     {
-        $this->_router = $router;
+        $this->_newsRouter = $newsRouter;
     }
 
     public function getFunctions()
@@ -30,12 +32,13 @@ class UrlExtension extends \Twig_Extension
         ];
     }
 
-    public function generateNewsUrl($news)
+    /**
+     * @param News $news
+     * @return string
+     */
+    public function generateNewsUrl(News $news)
     {
-        $category = $news->getCategory();
-        $route = $this->_router->generate('kardi_news_show',['categoryslug' => $category->trans('slug'), 'id' => $news->getId(), 'slug' => $news->trans('slug')]);
-
-        return $route;
+        return $this->_newsRouter->generateNewsUrl($news);
     }
 
 }

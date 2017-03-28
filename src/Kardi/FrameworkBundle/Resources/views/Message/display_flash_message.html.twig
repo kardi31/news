@@ -1,0 +1,18 @@
+{% macro display_flash_message(namespace) %}
+    Wyswietlil sie flash
+    {% for flash_message in app.session.flashBag.get(namespace~'.error') %}
+        <div class="info-message fail">
+            <span class="icon-text">&#9888;</span>
+            <b>{{ namespace~'.error.title' | trans({}) }}</b>
+            <p>{{ flash_message | trans() }}</p>
+        </div>
+    {% endfor %}
+
+    {% for flash_message in app.session.flashBag.get(namespace~'.success') %}
+        <div class="info-message success">
+            <span class="icon-text">&#128077;</span>
+            <b>{{ namespace~'.success.title' | trans({}) }}</b>
+            <p>{{ flash_message | trans() }}</p>
+        </div>
+    {% endfor %}
+{% endmacro %}

@@ -15,12 +15,12 @@ class Comment extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', null, ['mapped' => false, 'attr' => ['placeholder' => 'comment.placeholder.name'], 'label' => 'comment.name']);
+        $builder->add('author', null, ['attr' => ['placeholder' => 'comment.placeholder.name'], 'label' => 'comment.name']);
         $builder->add('email', EmailType::class, ['attr' => ['placeholder' => 'comment.placeholder.email'], 'compound' => false, 'label' => 'comment.email']);
-        $builder->add('comment', TextareaType::class, ['attr' => ['placeholder' => 'comment.comment'], 'compound' => false, 'label' => false]);
-        $builder->add('parent_id', HiddenType::class, ['attr' => ['placeholder' => 'subscribe.email'], 'compound' => false, 'label' => false]);
-        $builder->add('news_id', HiddenType::class, ['attr' => ['placeholder' => 'subscribe.email'], 'compound' => false, 'label' => false]);
-        $builder->add('submit_comment', SubmitType::class, ['attr' => ['class' => 'button' ], 'label' => 'subscribe.submit']);
+        $builder->add('content', TextareaType::class, ['attr' => ['placeholder' => 'comment.comment'], 'compound' => false, 'label' => false]);
+        $builder->add('parent_id', HiddenType::class, [ 'compound' => false, 'label' => false]);
+        $builder->add('news_id', HiddenType::class, ['compound' => false, 'label' => false]);
+        $builder->add('submit_comment', SubmitType::class, ['attr' => ['class' => 'button' ], 'label' => 'comment.submit']);
     }
 
     /**

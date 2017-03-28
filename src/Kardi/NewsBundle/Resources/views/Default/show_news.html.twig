@@ -1,4 +1,7 @@
 {% extends 'EmigrantLayoutBundle:Default:index.html.twig' %}
+
+{% import 'KardiFrameworkBundle:Message:display_flash_message.html.twig' as flash_macro %}
+
 {% block title %}
     {{ news.trans('title') }}
 {% endblock %}
@@ -105,6 +108,7 @@
                 </div>
                 <div class="block-content">
 
+                    {{ flash_macro.display_flash_message('comment') }}
                     <div class="comment-block">
 
                         <ol class="comments">

@@ -15,6 +15,9 @@ Kardi\NewsBundle\Entity\Comment:
     author:
       type: string
       length: 255
+    email:
+      type: string
+      length: 255
     news_id:
       type: integer
       length: 11

@@ -10,3 +10,8 @@ subscribe.exists: Your email is already subscribed to our newsletter
 comment.email: Your email
 comment.name: Your name
 comment.comment: Type in your comment here
+comment.placeholder.name: e.g. John
+comment.placeholder.email: e.g. johndoe@mymail.com
+comment.submit: Add comment
+comment.success: Your comment has been added
+comment.error: Something went wrong

@@ -40,13 +40,13 @@ class DefaultController extends Controller
                     $em->flush();
 
                     $this->addFlash(
-                        'newsletter',
+                        'subscribe.success',
                         'subscribe.success'
                     );
                 }
                 else{
                     $this->addFlash(
-                        'newsletter.error',
+                        'subscribe.error',
                         'subscribe.exists'
                     );
                 }

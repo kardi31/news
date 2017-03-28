@@ -78,6 +78,9 @@ class Comment
      */
     private $news;
 
+    private $parent_id;
+
+
     private $createdAt;
     private $updatedAt;
     /**
@@ -459,5 +462,50 @@ class Comment
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+    /**
+     * @var string
+     */
+    private $email;
+
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return Comment
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getParentId()
+    {
+        return $this->parent_id;
+    }
+
+    /**
+     * @param int|null $parent_id
+     */
+    public function setParentId($parent_id)
+    {
+        $this->parent_id = $parent_id;
     }
 }

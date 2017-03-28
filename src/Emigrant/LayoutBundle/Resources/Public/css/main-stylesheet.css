@@ -1467,20 +1467,22 @@ a.custom-soc:hover {
 	right: 15px;
 }
 
-#writecomment {
+.writecomment {
 	display: block;
 	width: 100%;
 	max-width: 360px;
 	margin: 20px auto;
 }
 
-#writecomment p {
+.writecomment p {
 	display: block;
 	position: relative;
 }
 
-#writecomment p textarea,
-#writecomment p input[type=text] {
+.writecomment p textarea,
+.writecomment p input[type=text],
+.writecomment p input[type=email]
+{
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -1495,17 +1497,17 @@ a.custom-soc:hover {
 	-moz-border-radius: 2px;
 }
 
-#writecomment p textarea:focus,
-#writecomment p input[type=text]:focus {
+.writecomment p textarea:focus,
+.writecomment p input[type=text]:focus {
 	border: 1px solid #bababa;
 	box-shadow: 0px 0px 10px rgba(0,0,0,0.05);
 }
 
-#writecomment p textarea {
+.writecomment p textarea {
 	height: 100px;
 }
 
-#writecomment p label {
+.writecomment p label {
 	display: block;
 	position: absolute;
 	left: -120px;
@@ -1519,14 +1521,16 @@ a.custom-soc:hover {
 
 p .required {
 	display: inline-block;
-	font-weight: bold;
-	font-size: 18px;
-	color: #cf680d;
-	margin-left: 5px;
-	margin-top: 2px;
 }
 
-#writecomment p .error-msg {
+p .required:after{
+	display:inline-block;
+	content:" *";
+	color: #ff0000;
+	margin-left:5px;
+}
+
+.writecomment p .error-msg {
 	display: block;
 	background: #a12717;
 	color: #fff;
@@ -1535,8 +1539,8 @@ p .required {
 	-moz-border-radius: 0px 0px 2px 2px;
 }
 
-#writecomment p textarea.error,
-#writecomment p input[type=text].error {
+.writecomment p textarea.error,
+.writecomment p input[type=text].error {
 	border: 1px solid #a12717;
 	border-radius: 2px 2px 0px 0px;
 	-moz-border-radius: 2px 2px 0px 0px;

@@ -119,6 +119,12 @@
 
                         {{ render(controller('KardiBannerBundle:Default:displayBanner',{'size': '200x200'})) }}
 
+                        <!-- BEGIN .widget -->
+                        {{ render(controller('KardiNewsBundle:Default:popularTags')) }}
+
+                        <!-- BEGIN .widget -->
+                        {{ render(controller('KardiNewsletterBundle:Default:subscribeBox')) }}
+
                         {#<div class="block">#}
                             {#<h2 class="list-title">{% trans %}Latest advertisements {% endtrans %}</h2>#}
                             {#<ul class="article-list">#}
@@ -158,12 +164,6 @@
 
                 <!-- BEGIN .widget -->
                 {{ render(controller('KardiNewsBundle:Default:latestComments')) }}
-
-                <!-- BEGIN .widget -->
-                {{ render(controller('KardiNewsBundle:Default:popularTags')) }}
-
-                <!-- BEGIN .widget -->
-                {{ render(controller('KardiNewsletterBundle:Default:subscribeBox')) }}
 
                 <!-- BEGIN .widget -->
                 {{ render(controller('KardiGalleryBundle:Default:latestGalleries')) }}

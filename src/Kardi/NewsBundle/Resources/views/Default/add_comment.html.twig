@@ -1,6 +1,7 @@
-<div id="writecomment">
+<div class="writecomment">
 
-    {{ form_start(commentForm, {'action': path('kardi_newsletter_subscribe'), 'method': 'POST'}) }}
+    {% form_theme commentForm with ['KardiFrameworkBundle:Form:form_style_p.html.twig', _self] %}
+    {{ form_start(commentForm, {'action': path('kardi_news_comment_add', {'newsId': newsId, 'parentId': parentId}), 'method': 'POST'}) }}
     {{ form_widget(commentForm) }}
     {{ form_end(commentForm) }}
 

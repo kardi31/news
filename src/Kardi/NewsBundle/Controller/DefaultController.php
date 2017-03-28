@@ -101,6 +101,54 @@ class DefaultController extends Controller
         $commentForm->get('parent_id')->setData($parentId);
         $commentForm->get('news_id')->setData($newsId);
 
-        return $this->render('KardiNewsBundle:Default:add_comment.html.twig', ['commentForm' => $commentForm->createView()]);
+        $commentForm->handleRequest($request);
+
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $comment = $commentForm->getData();
+            $comment->setIp($_SERVER['REMOTE_ADDR']);
+            $comment->setHostname(gethostbyaddr($_SERVER['REMOTE_ADDR']));
+
+            $moderateComments = $this->container->getParameter('comments_moderate');
+            $comment->setActive(!$moderateComments);
+
+            $em = $this->getDoctrine()->getManager();
+
+            if ($parentId) {
+                $repo = $em->getRepository('KardiNewsBundle:Comment');
+                $parent = $repo->find($parentId);
+                if ($parent) {
+                    $repo->persistAsLastChildOf($comment, $parent);
+                }
+                else{
+                    $repo->persistAsLastChild($comment);
+                }
+            }
+
+            $newsRepo = $em->getRepository('KardiNewsBundle:News');
+            $news = $newsRepo->find($newsId);
+
+            $comment->setNews($news);
+
+            $em->persist($comment);
+            $em->flush();
+
+            $this->addFlash(
+                'comment.success',
+                'comment.success'
+            );
+
+            $newsRouter = $this->container->get('kardi_news.router.news');
+
+            $newsRoute = $newsRouter->generateNewsUrl($news);
+            return $this->redirect($newsRoute);
+        }
+
+        return $this->render('KardiNewsBundle:Default:add_comment.html.twig', [
+            'commentForm' => $commentForm->createView(),
+            'newsId' => $newsId,
+            'parentId' => $parentId
+        ]);
     }
 }

@@ -29,3 +29,8 @@ Reply to this comment: Odpowiedz na ten komentarz
 comment.email: Twój email
 comment.name: Twoje imię
 comment.comment: Wpisz swój komentarz tutaj
+comment.placeholder.name: np. Jan
+comment.placeholder.email: np. jankowalski@poczta.pl
+comment.submit: Dodaj komentarz
+comment.success: Twój komentarz został dodany
+comment.error: Wystąpił błąd. Twój komentarz nie został dodany.

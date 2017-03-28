@@ -1,7 +1,7 @@
 services:
     kardi_news.news_url_extension:
         class: Kardi\NewsBundle\Twig\UrlExtension
-        arguments: ['@router']
+        arguments: ['@kardi_news.router.news']
         tags:
             - { name: twig.extension }
     kardi_news.comment_extension:
@@ -9,3 +9,6 @@ services:
         arguments: ['@service_container']
         tags:
             - { name: twig.extension }
+    kardi_news.router.news:
+        class: Kardi\NewsBundle\Router\NewsRouter
+        arguments: ['@router']

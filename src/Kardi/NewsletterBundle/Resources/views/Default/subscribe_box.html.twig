@@ -1,24 +1,12 @@
+{% import 'KardiFrameworkBundle:Message:display_flash_message.html.twig' as flash_macro %}
+
 <div class="widget">
     <h3>{% trans %}Subscribe to our newsletter {% endtrans %}</h3>
     <div class="mailing-list">
         <p>{{ 'subscribe.info.message' | trans() }}</p>
         <hr/>
 
-        {% for flash_message in app.session.flashBag.get('newsletter.error') %}
-            <div class="info-message fail">
-                <span class="icon-text">&#9888;</span>
-                <b>{{ 'subscribe.error.title' | trans({}) }}</b>
-                <p>{{ flash_message | trans() }}</p>
-            </div>
-        {% endfor %}
-
-        {% for flash_message in app.session.flashBag.get('newsletter') %}
-            <div class="info-message success">
-                <span class="icon-text">&#128077;</span>
-                <b>{{ 'subscribe.success.title' | trans({}) }}</b>
-                <p>{{ flash_message | trans() }}</p>
-            </div>
-        {% endfor %}
+        {{ flash_macro.display_flash_message('subscribe') }}
 
         <div class="subscribe-block">
             {% form_theme form with ['KardiFrameworkBundle:Form:form_style_p.html.twig', _self] %}
