@@ -34,3 +34,6 @@ comment.placeholder.email: np. jankowalski@poczta.pl
 comment.submit: Dodaj komentarz
 comment.success: Twój komentarz został dodany
 comment.error: Wystąpił błąd. Twój komentarz nie został dodany.
+comment.moderate.success: Dziękujemy za dodanie komentarza. Twój komentarz oczekuje na moderacje i pojawi się na stronie wkrótce.
+comment.number: '{0}Komentarzy|{1}Komentarz|]1,5[Komentarze|]5,Inf[Komentarzy'
+Write a comment: Dodaj komentarz

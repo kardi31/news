@@ -15,3 +15,5 @@ comment.placeholder.email: e.g. johndoe@mymail.com
 comment.submit: Add comment
 comment.success: Your comment has been added
 comment.error: Something went wrong
+comment.moderate.success: Thank you for adding a comment. Your comment is currently awaiting moderation and will appear on site soon.
+comment.number: '{0}Comments|{1}Comment|]5,Inf[Comments'

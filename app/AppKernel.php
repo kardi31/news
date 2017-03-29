@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Kardi\GalleryBundle\KardiGalleryBundle(),
             new Kardi\MediaBundle\KardiMediaBundle(),
             new Kardi\AdBundle\KardiAdBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

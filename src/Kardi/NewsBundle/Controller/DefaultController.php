@@ -36,10 +36,15 @@ class DefaultController extends Controller
         $comments = $em->getRepository('KardiNewsBundle:Comment')
             ->getNewsMainComments($news->getId());
 
+
+        $commentsTotal = $em->getRepository('KardiNewsBundle:Comment')
+            ->countAllNewsComments($news->getId());
+
         return $this->render('KardiNewsBundle:Default:show_news.html.twig', [
             'news' => $news,
             'relatedArticles' => $relatedArticles,
             'comments' => $comments,
+            'commentsTotal' => $commentsTotal
         ]);
     }
 
@@ -120,8 +125,7 @@ class DefaultController extends Controller
                 $parent = $repo->find($parentId);
                 if ($parent) {
                     $repo->persistAsLastChildOf($comment, $parent);
-                }
-                else{
+                } else {
                     $repo->persistAsLastChild($comment);
                 }
             }
@@ -134,9 +138,15 @@ class DefaultController extends Controller
             $em->persist($comment);
             $em->flush();
 
+            if ($moderateComments) {
+                $message = 'comment.moderate.success';
+            } else {
+                $message = 'comment.success';
+            }
+
             $this->addFlash(
                 'comment.success',
-                'comment.success'
+                $message
             );
 
             $newsRouter = $this->container->get('kardi_news.router.news');

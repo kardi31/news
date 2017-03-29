@@ -33,4 +33,17 @@ class CommentRepository extends NestedTreeRepository
 
         return $query->getResult();
     }
+
+    public function countAllNewsComments($newsId) {
+        $qb = $this->createQueryBuilder('c');
+        $qb->select('count(c) as cnt');
+        $qb->orderBy('c.id','DESC');
+        $qb->where('c.active = 1');
+        $qb->andWhere('c.news_id = :news_id');
+        $qb->setParameter('news_id', $newsId);
+
+        $query = $qb->getQuery();
+
+        return $query->getSingleScalarResult();
+    }
 }

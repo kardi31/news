@@ -1,5 +1,4 @@
 {% macro display_flash_message(namespace) %}
-    Wyswietlil sie flash
     {% for flash_message in app.session.flashBag.get(namespace~'.error') %}
         <div class="info-message fail">
             <span class="icon-text">&#9888;</span>

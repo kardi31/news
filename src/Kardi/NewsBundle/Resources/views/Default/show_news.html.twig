@@ -2,6 +2,16 @@
 
 {% import 'KardiFrameworkBundle:Message:display_flash_message.html.twig' as flash_macro %}
 
+
+{% block topscripts %}
+    {{ parent() }}
+    {% javascripts
+    '@EmigrantNewsBundle/Resources/Public/js/comment.js'
+    output='js/compiled/news.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
 {% block title %}
     {{ news.trans('title') }}
 {% endblock %}
@@ -103,8 +113,8 @@
                 </div>
 
                 <div class="block-title">
-                    <a href="#writecomment" class="right">Write a comment</a>
-                    <h2>4 Comments</h2>
+                    <a href="#writecomment" class="right">{% trans %}Write a comment {% endtrans %}</a>
+                    <h2>{{ commentsTotal }} {% transchoice commentsTotal %} comment.number{% endtranschoice %} </h2>
                 </div>
                 <div class="block-content">
 
@@ -114,57 +124,18 @@
                         <ol class="comments">
 
                             {% for comment in comments %}
-
                                 {{ include('KardiNewsBundle:Default:show_comment.html.twig',{'comment': comment, 'newsId': news.id}) }}
-
                             {% endfor %}
                         </ol>
-
+                        <hr />
                     </div>
-
                 </div>
 
                 <div class="block-title">
-                    <a href="#writecomment" class="right">View all comments</a>
-                    <h2>Write a comment</h2>
+                    <h2>{% trans %}Write a comment{% endtrans %}</h2>
                 </div>
-                <div class="block-content">
-                    <div id="writecomment">
-
-                        <form action="#" method="get">
-
-                            <div class="coloralert" style="background: #a12717;">
-                                <p>Error Occurred!</p>
-                                <a href="#close-alert" class="icon-text">&#10006;</a>
-                            </div>
-                            <!-- <div class="coloralert" style="background: #68a117;">
-                                <p>Success!</p>
-                                <a href="#close-alert" class="icon-text">&#10006;</a>
-                            </div> -->
-
-                            <p>Your e-mail address will not be published.<br/>Required fields are marked<span class="required">*</span></p>
-
-                            <p class="contact-form-user">
-                                <label for="c_name">Nickname<span class="required">*</span></label>
-                                <input type="text" class="error" placeholder="Nickname" name="c_name" id="c_name" />
-                                <span class="error-msg"><span class="icon-text">&#9888;</span>&nbsp;&nbsp;This is an error message</span>
-                            </p>
-                            <p class="contact-form-email">
-                                <label for="c_email">E-mail<span class="required">*</span></label>
-                                <input type="text" placeholder="E-mail" name="c_email" id="c_email" />
-                            </p>
-                            <p class="contact-form-webside">
-                                <label for="c_webside">Website</label>
-                                <input type="text" placeholder="Website" name="c_webside" id="c_webside" />
-                            </p>
-                            <p class="contact-form-message">
-                                <label for="c_message">Comment<span class="required">*</span></label>
-                                <textarea name="c_message" placeholder="Your message.." id="c_message"></textarea>
-                            </p>
-                            <p><input type="submit" class="styled-button" value="Post a Comment" /></p>
-                        </form>
-
-                    </div>
+                <div class="block-content" id="writecomment">
+                    {{ render(controller('KardiNewsBundle:Default:AddComment', { 'parentId': 'null', 'newsId' : news.id })) }}
                 </div>
 
             </div>

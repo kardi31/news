@@ -20,7 +20,18 @@
 
     <!-- Demo Only -->
     <link type="text/css" rel="stylesheet" href="{{ asset('bundles/emigrantlayout/css/demo-settings.css') }}"/>
+
+    {% stylesheets filter="scssphp" output="css/emigrant.css"
+    "@EmigrantLayoutBundle/Resources/Public/emigrant-theme.scss"
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    {% block topscripts %}
+        <script type="text/javascript" src="{{ asset('bundles/emigrantlayout/jscript/jquery-latest.min.js') }}"></script>
+    {% endblock topscripts %}
 {% endblock %}
+
 
 {% block body %}
 
@@ -52,7 +63,6 @@
 
 {% block footerscripts %}
     <!-- Scripts -->
-    <script type="text/javascript" src="{{ asset('bundles/emigrantlayout/jscript/jquery-latest.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/emigrantlayout/jscript/theme-scripts.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/emigrantlayout/jscript/lightbox.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/emigrantlayout/jscript/demo-settings.js') }}"></script>

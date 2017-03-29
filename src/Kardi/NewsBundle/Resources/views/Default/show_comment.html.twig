@@ -10,8 +10,7 @@
             <p>{{ comment.content }}</p>
         </div>
         {% if comment.lvl == 0 %}
-            <a href="#" class="icon-link"><span class="icon-text">&#59154;</span><span>{% trans %}
-                    Reply to this comment{% endtrans %}</span></a>
+            <a href="javascript:void(0)" data-id="{{ comment.id }}" class="icon-link reply-comment"><span class="icon-text">&#59154;</span><span>{% trans %} Reply to this comment{% endtrans %}</span></a>
         {% endif %}
     </div>
 

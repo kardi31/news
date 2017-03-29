@@ -1,4 +1,4 @@
-<div class="writecomment">
+<div class="writecomment" rel="{{ parentId }}">
 
     {% form_theme commentForm with ['KardiFrameworkBundle:Form:form_style_p.html.twig', _self] %}
     {{ form_start(commentForm, {'action': path('kardi_news_comment_add', {'newsId': newsId, 'parentId': parentId}), 'method': 'POST'}) }}
