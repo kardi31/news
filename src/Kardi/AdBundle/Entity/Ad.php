@@ -48,7 +48,7 @@ class Ad
     private $lang;
 
     /**
-     * @var type
+     * @var text
      */
     private $content;
 
@@ -565,5 +565,34 @@ class Ad
     public function getContent()
     {
         return $this->content;
+    }
+    /**
+     * @var string
+     */
+    private $slug;
+
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Ad
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

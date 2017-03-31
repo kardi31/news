@@ -1,18 +1,18 @@
 Lista newsow wg tagow.
 
-dalej robic wyswietlanie pojedynczego newsa.
 
-wiadomosc gdy komentarz idzie do moderacji
-przetlumaczyc write comment itp
-zrobic schowany formularz dodawania komentarza przy uzyciu js
+widok kategorii, lista tagow
 
-wyswietlanie pojedynczego ogloszenia i newsa, dodac cos po lewej stronie na dole
+wyswietlanie pojedynczego ogloszenia
+
+wyswietlanie galeri pod newsem
+
+
+dodac cos po lewej stronie na dole
 
 Zrobic ogloszenia
 
-
-Zrobic widok pojedynczego newsa
-Zrobic komentarze, wyswietlanie komentarzy z podzialem na drzewo, wykorzystac licznik komentarzy w widokach
+zrobic panel administracyjny
 
 Keep exporting part of layout into bundles
 

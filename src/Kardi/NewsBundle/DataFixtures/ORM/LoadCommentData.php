@@ -20,6 +20,7 @@ class LoadCommentData extends AbstractFixture implements OrderedFixtureInterface
             $comment->setHostname('sky.net');
             $comment->setActive(1);
             $comment->setContent(str_repeat('This is a test comment '.$j.' ', 5));
+            $comment->setEmail('email'.$j.'@email.pl');
 
             $randNews = rand(0, 10);
             $comment->setNews($em->merge($this->getReference('news'.$randNews)));
@@ -42,6 +43,7 @@ class LoadCommentData extends AbstractFixture implements OrderedFixtureInterface
             $comment2->setHostname('sky.net');
             $comment2->setActive(1);
             $comment2->setContent(str_repeat('This is a test comment '.$j.' - '.$i.' ', 5));
+            $comment2->setEmail('email'.$j.'-'.$i.'@email.pl');
 
             $comment2->setNews($em->merge($this->getReference('news'.$lastNewsId)));
 

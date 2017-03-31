@@ -1,3 +1,6 @@
+imports:
+    - { resource: helpers.yml }
+
 services:
     kardi.framework.locale_listener:
         class: Kardi\FrameworkBundle\EventListener\LocaleListener
@@ -6,3 +9,13 @@ services:
             - { name: kernel.event_subscriber }
     kardi.framework.facebook_service:
         class: Kardi\FrameworkBundle\Service\Facebook
+        arguments:
+            - '@kardi.helper.url'
+    kardi.framework.social_media_provider:
+        class: Kardi\FrameworkBundle\Provider\SocialMedia
+    kardi_news.social_media_extension:
+        class: Kardi\FrameworkBundle\Twig\SocialMediaExtension
+        arguments:
+            - '@kardi.framework.facebook_service'
+        tags:
+            - { name: twig.extension }

@@ -1,0 +1,110 @@
+{% extends 'EmigrantLayoutBundle:Default:index.html.twig' %}
+
+{% import 'KardiFrameworkBundle:Message:display_flash_message.html.twig' as flash_macro %}
+
+{% block title %}
+    {{ parent() }}
+    {{ ad.title }}
+{% endblock %}
+
+{% block description %}
+    {{ parent() }}
+    {{ ad.content }}
+{% endblock %}
+
+
+{% block display_author %}
+    {#<div class="author">#}
+        {#<span class="hover-effect left delegate"><span class="cover" style="font-size:20px;"><i></i><img src="{{ asset('bundles/emigrantlayout/images/photos/avatar-1.jpg') }}" alt="{{ ad.author }}"></span></span>#}
+        {#<div class="a-content">#}
+            {#<span>{% trans %}Author{% endtrans %} <b>{{ ad.author }}</b></span>#}
+            {#<span class="meta">{{ ad.publishDate | date('d/m/Y H:i') }}#}
+                {#<span class="tag">{{ ad.category.trans('title') }}</span>#}
+            {#</span>#}
+        {#</div>#}
+    {#</div>#}
+{% endblock %}
+
+{% block contentBlock %}
+
+
+    <!-- BEGIN .single-block -->
+    <div class="single-block">
+        <!-- BEGIN .content-block -->
+        <div class="content-block main left">
+
+            <div class="article-title">
+
+
+                <h1>{{ ad.title }}</h1>
+                {{ block('display_author') }}
+            </div>
+            <div class="block">
+                <div class="block-content">
+
+                    <p>
+                        <span class="hover-effect">
+                            <img src="{{ ad.photo.mainPhoto.show('856x380')}}" alt="{{ ad.title }}" />
+                        </span>
+                    </p>
+
+                    <div class="shortcode-content">
+
+                        <div class="paragraph-row">
+                            <div class="column3">
+                                <h3 class="highlight-title">{% trans %}Related Articles {% endtrans %}</h3>
+                                <ul>
+                                    {#{% for article in relatedArticles %}#}
+                                    {#<li>#}
+                                        {#<a href="{{ generate_ad_url(ad) }}">{{ article.trans('title') }}</a>#}
+                                        {#<a href="{{ generate_ad_url(ad) }}#comments" class="h-comment">{{ article.comments|length }}</a>#}
+                                        {#<span class="meta-date">{{ article.publishDate | date('d/m') }}</span>#}
+                                    {#</li>#}
+                                    {#{% endfor %}#}
+                                </ul>
+                            </div>
+                            <div class="column9">
+                               {{ ad.content }}
+                            </div>
+                        </div>
+
+                        <div class="article-title">
+                            <div class="share-block right">
+                                <div>
+                                    <div class="share-article left">
+                                        <span>Social media</span>
+                                        <strong>Share this article</strong>
+                                    </div>
+                                    <div class="left">
+                                        <a href="#" class="custom-soc icon-text">&#62217;</a>
+                                        <a href="#" class="custom-soc icon-text">&#62220;</a>
+                                        <a href="#" class="custom-soc icon-text">&#62223;</a>
+                                        <a href="#" class="custom-soc icon-text">&#62226;</a>
+                                        <a href="#" class="custom-soc icon-text">&#62232;</a>
+                                    </div>
+                                    <div class="clear-float"></div>
+                                </div>
+                                <div>
+                                    <a href="#" class="small-button"><span class="icon-text">&#59158;</span>&nbsp;&nbsp;Print this article</a>
+                                    <a href="#" class="small-button"><span class="icon-text">&#9993;</span>&nbsp;&nbsp;Send e-mail</a>
+                                </div>
+                            </div>
+
+                            {{ block('display_author') }}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <!-- END .content-block -->
+        </div>
+
+        <!-- END .single-block -->
+    </div>
+{% endblock %}
+

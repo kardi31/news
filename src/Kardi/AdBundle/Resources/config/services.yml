@@ -1,4 +1,9 @@
 services:
-#    kardi_ad.example:
-#        class: Kardi\AdBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    kardi_ad.ad_url_extension:
+        class: Kardi\AdBundle\Twig\UrlExtension
+        arguments: ['@kardi_ad.router.ad']
+        tags:
+            - { name: twig.extension }
+    kardi_ad.router.ad:
+        class: Kardi\AdBundle\Router\AdRouter
+        arguments: ['@router']

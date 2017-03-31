@@ -81,6 +81,7 @@ class LoadAdData extends AbstractFixture implements OrderedFixtureInterface
 
 
             $ad->setTitle('test ad '.$langs[$randLang].' title '.$j);
+            $ad->setSlug('test-ad-'.$langs[$randLang].'-title-'.$j);
 
             $plContent = '';
             $enContent = '';

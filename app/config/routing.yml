@@ -8,10 +8,10 @@ emigrant_news:
     type: be_simple_i18n
     prefix:   /
 
-#kardi_news:
-#    resource: "@KardiNewsBundle/Resources/config/routing.yml"
-#    type: be_simple_i18n
-#    prefix: /
+kardi_ad:
+    resource: "@KardiAdBundle/Resources/config/routing.yml"
+    type: be_simple_i18n
+    prefix: /
 
 kardi_page:
     resource: "@KardiPageBundle/Resources/config/routing.yml"

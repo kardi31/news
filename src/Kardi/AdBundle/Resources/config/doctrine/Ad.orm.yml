@@ -26,6 +26,9 @@ Kardi\AdBundle\Entity\Ad:
     title:
       type: string
       length: 255
+    slug:
+      type: string
+      length: 255
     lang:
       type: string
       length: 255

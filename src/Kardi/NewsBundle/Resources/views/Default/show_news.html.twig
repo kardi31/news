@@ -80,11 +80,11 @@
                             <div class="share-block right">
                                 <div>
                                     <div class="share-article left">
-                                        <span>Social media</span>
-                                        <strong>Share this article</strong>
+                                        <span>{% trans %}Social media {% endtrans %}</span>
+                                        <strong>{% trans %}Share this article {% endtrans %}</strong>
                                     </div>
                                     <div class="left">
-                                        <a href="#" class="custom-soc icon-text">&#62217;</a>
+                                        <a href="{{ facebook_share_link() }}" class="custom-soc icon-text">&#62217;</a>
                                         <a href="#" class="custom-soc icon-text">&#62220;</a>
                                         <a href="#" class="custom-soc icon-text">&#62223;</a>
                                         <a href="#" class="custom-soc icon-text">&#62226;</a>
@@ -93,8 +93,7 @@
                                     <div class="clear-float"></div>
                                 </div>
                                 <div>
-                                    <a href="#" class="small-button"><span class="icon-text">&#59158;</span>&nbsp;&nbsp;Print this article</a>
-                                    <a href="#" class="small-button"><span class="icon-text">&#9993;</span>&nbsp;&nbsp;Send e-mail</a>
+                                    <a href="#" class="small-button"><span class="icon-text">&#59158;</span>&nbsp;&nbsp;{% trans %}Print{% endtrans %}</a>
                                 </div>
                             </div>
 
@@ -127,7 +126,6 @@
                                 {{ include('KardiNewsBundle:Default:show_comment.html.twig',{'comment': comment, 'newsId': news.id}) }}
                             {% endfor %}
                         </ol>
-                        <hr />
                     </div>
                 </div>
 

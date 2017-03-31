@@ -17,4 +17,15 @@ class DefaultController extends Controller
 
         return $this->render('KardiAdBundle:Default:latest_ads.html.twig', ['ads' => $latestAds]);
     }
+
+    public function showAdAction($slug, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $ad = $em->getRepository('KardiAdBundle:Ad')
+            ->find($id);
+
+        return $this->render('KardiAdBundle:Default:show_ad.html.twig', [
+            'ad' => $ad
+        ]);
+    }
 }
