@@ -7,15 +7,38 @@ services:
         arguments: ['%kernel.default_locale%']
         tags:
             - { name: kernel.event_subscriber }
-    kardi.framework.facebook_service:
-        class: Kardi\FrameworkBundle\Service\Facebook
+    kardi.framework.social_media_service:
+        class: Kardi\FrameworkBundle\Service\SocialMedia
+        arguments:
+            - '@kardi.framework.facebook_service'
+            - '@kardi.framework.twitter_service'
+            - '@kardi.framework.google_plus_service'
+            - '@kardi.framework.pinterest_plus_service'
+            - '@kardi.framework.linkedin_service'
+
+    kardi.framework.base_social_media_service:
+        class: Kardi\FrameworkBundle\Service\BaseSocialMedia
+        abstract:  true
         arguments:
             - '@kardi.helper.url'
-    kardi.framework.social_media_provider:
-        class: Kardi\FrameworkBundle\Provider\SocialMedia
+    kardi.framework.facebook_service:
+        class: Kardi\FrameworkBundle\Service\Facebook
+        parent: kardi.framework.base_social_media_service
+    kardi.framework.twitter_service:
+        class: Kardi\FrameworkBundle\Service\Twitter
+        parent: kardi.framework.base_social_media_service
+    kardi.framework.google_plus_service:
+        class: Kardi\FrameworkBundle\Service\GooglePlus
+        parent: kardi.framework.base_social_media_service
+    kardi.framework.pinterest_plus_service:
+        class: Kardi\FrameworkBundle\Service\Pinterest
+        parent: kardi.framework.base_social_media_service
+    kardi.framework.linkedin_service:
+        class: Kardi\FrameworkBundle\Service\Linkedin
+        parent: kardi.framework.base_social_media_service
     kardi_news.social_media_extension:
         class: Kardi\FrameworkBundle\Twig\SocialMediaExtension
         arguments:
-            - '@kardi.framework.facebook_service'
+            - '@kardi.framework.social_media_service'
         tags:
             - { name: twig.extension }

@@ -3,14 +3,14 @@
 {% import 'KardiFrameworkBundle:Message:display_flash_message.html.twig' as flash_macro %}
 
 
-{% block topscripts %}
-    {{ parent() }}
-    {% javascripts
-    '@EmigrantNewsBundle/Resources/Public/js/comment.js'
-    output='js/compiled/news.js' %}
-    <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endblock %}
+{#{% block topscripts %}#}
+    {#{{ parent() }}#}
+    {#{% javascripts#}
+    {#'@EmigrantNewsBundle/Resources/Public/js/comment.js'#}
+    {#output='js/compiled/news.js' %}#}
+    {#<script src="{{ asset_url }}"></script>#}
+    {#{% endjavascripts %}#}
+{#{% endblock %}#}
 
 {% block title %}
     {{ news.trans('title') }}
@@ -84,16 +84,16 @@
                                         <strong>{% trans %}Share this article {% endtrans %}</strong>
                                     </div>
                                     <div class="left">
-                                        <a href="{{ facebook_share_link() }}" class="custom-soc icon-text">&#62217;</a>
-                                        <a href="#" class="custom-soc icon-text">&#62220;</a>
-                                        <a href="#" class="custom-soc icon-text">&#62223;</a>
-                                        <a href="#" class="custom-soc icon-text">&#62226;</a>
-                                        <a href="#" class="custom-soc icon-text">&#62232;</a>
+                                        <a href="{{ twitter_share_link() }}" class="custom-soc icon-text">&#62217;</a>
+                                        <a href="{{ facebook_share_link() }}" class="custom-soc icon-text">&#62220;</a>
+                                        <a href="{{ google_plus_share_link() }}" class="custom-soc icon-text">&#62223;</a>
+                                        <a href="{{ pinterest_share_link() }}" class="custom-soc icon-text">&#62226;</a>
+                                        <a href="{{ linkedin_share_link() }}" class="custom-soc icon-text">&#62232;</a>
                                     </div>
                                     <div class="clear-float"></div>
                                 </div>
                                 <div>
-                                    <a href="#" class="small-button"><span class="icon-text">&#59158;</span>&nbsp;&nbsp;{% trans %}Print{% endtrans %}</a>
+                                    <a href="window.print()" class="small-button"><span class="icon-text">&#59158;</span>&nbsp;&nbsp;{% trans %}Print{% endtrans %}</a>
                                 </div>
                             </div>
 
