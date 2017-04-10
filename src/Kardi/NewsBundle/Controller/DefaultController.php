@@ -14,6 +14,7 @@ class DefaultController extends Controller
      * @var int
      */
     protected $alreadyOnHomepage = 1;
+    private $categoryNewsNumber = 10;
 
     public function breakingNewsAction()
     {
@@ -159,6 +160,69 @@ class DefaultController extends Controller
             'commentForm' => $commentForm->createView(),
             'newsId' => $newsId,
             'parentId' => $parentId
+        ]);
+    }
+
+    public function showCategoryAction($slug, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository('KardiNewsBundle:Category')
+            ->getCategoryBySlug($slug);
+
+        $newsListQuery = $em->getRepository('KardiNewsBundle:News')
+            ->getCategoryNewsListQuery($category->getId(), null);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $newsListQuery,
+            $request->query->getInt('page', 1),
+            $this->categoryNewsNumber
+        );
+
+        return $this->render('KardiNewsBundle:Default:show_category.html.twig', [
+            'pagination' => $pagination,
+            'category' => $category
+        ]);
+    }
+
+    public function showTagNewsListAction($slug, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $tag = $em->getRepository('KardiNewsBundle:Tag')
+            ->getTagBySlug($slug);
+
+        $newsListQuery = $em->getRepository('KardiNewsBundle:News')
+            ->getTagNewsListQuery($tag->getId(), null);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $newsListQuery,
+            $request->query->getInt('page', 1),
+            $this->categoryNewsNumber
+        );
+
+        return $this->render('KardiNewsBundle:Default:show_tag_news_list.html.twig', [
+            'pagination' => $pagination,
+            'tag' => $tag
+        ]);
+    }
+
+    public function showAllNewsAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $newsListQuery = $em->getRepository('KardiNewsBundle:News')
+            ->getAllNewsListQuery(null);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $newsListQuery,
+            $request->query->getInt('page', 1),
+            $this->categoryNewsNumber
+        );
+
+        return $this->render('KardiNewsBundle:Default:show_news_list.html.twig', [
+            'pagination' => $pagination
         ]);
     }
 }

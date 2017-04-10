@@ -31,6 +31,9 @@ class AppKernel extends Kernel
             new Kardi\MediaBundle\KardiMediaBundle(),
             new Kardi\AdBundle\KardiAdBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new Kardi\SeoBundle\KardiSeoBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Emigrant\AdBundle\EmigrantAdBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

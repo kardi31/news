@@ -18,9 +18,9 @@ abstract class Translation {
 //        $locale = $GLOBALS['locale'] ?: 'pl';
     $locale = 'pl';
 
-
-        if (isset($this->translationsArray[$locale])) {
-            return call_user_func_array(array($this->translationsArray[$locale],'get'.ucwords($field)),[]);
+        $functionName = 'get'.ucwords($field);
+        if (isset($this->translationsArray[$locale]) && method_exists($this->translationsArray[$locale],$functionName)) {
+            return call_user_func_array(array($this->translationsArray[$locale],$functionName),[]);
         }
 
         throw new Exception('Missing translation for field '.$field);

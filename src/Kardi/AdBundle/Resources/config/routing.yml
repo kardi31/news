@@ -1,3 +1,6 @@
 kardi_ad_show:
     locales:  { en: "/advertisement/{categoryslug}/{slug}/{id}", pl: "/ogloszenia/{categoryslug}/{slug}/{id}" }
     defaults: { _controller: KardiAdBundle:Default:showAd }
+kardi_ad_category:
+    locales:  { en: "/advertisement/{slug}/", pl: "/ogloszenia/{slug}/" }
+    defaults: { _controller: KardiAdBundle:Default:showCategory }

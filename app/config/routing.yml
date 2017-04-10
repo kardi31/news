@@ -1,3 +1,8 @@
+emigrant_ad:
+    resource: "@EmigrantAdBundle/Resources/config/routing.yml"
+    type: be_simple_i18n
+    prefix:   /
+
 kardi_newsletter:
     resource: "@KardiNewsletterBundle/Resources/config/routing.yml"
     type: be_simple_i18n

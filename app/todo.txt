@@ -1,11 +1,6 @@
 Lista newsow wg tagow.
 
-
-widok kategorii, lista tagow
-
-wyswietlanie pojedynczego ogloszenia
-
-wyswietlanie galeri pod newsem
+oddzielic emigrant bundle od kardi bundle
 
 
 dodac cos po lewej stronie na dole

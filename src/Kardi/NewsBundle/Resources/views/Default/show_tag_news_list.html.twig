@@ -1,0 +1,6 @@
+{% extends 'KardiNewsBundle:Default:category_view.html.twig' %}
+
+
+{% block title %}{{ meta_title(tag) }}{% endblock %}
+{% block description %}{{ meta_description(tag) }}{% endblock %}
+{% block h1 %}{% trans %}Articles about {% endtrans %} {{ tag.trans('title') }} {% endblock %}

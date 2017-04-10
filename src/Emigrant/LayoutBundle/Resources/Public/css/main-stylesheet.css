@@ -922,7 +922,15 @@ a:focus {
 	text-transform: uppercase;
 	vertical-align: top;
 	margin-left: 5px;
-	margin-top: 3px;
+	/*margin-top: 3px;*/
+}
+
+.meta .tag a{
+	color: #ffffff;
+}
+
+.meta .tag a:hover{
+	color:#ffffff;
 }
 
 .wide-article {

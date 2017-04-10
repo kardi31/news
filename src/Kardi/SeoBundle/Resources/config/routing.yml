@@ -1,0 +1,3 @@
+kardi_seo_homepage:
+    path:     /
+    defaults: { _controller: KardiSeoBundle:Default:index }

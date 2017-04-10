@@ -36,9 +36,13 @@ services:
     kardi.framework.linkedin_service:
         class: Kardi\FrameworkBundle\Service\Linkedin
         parent: kardi.framework.base_social_media_service
-    kardi_news.social_media_extension:
+    kardi_framework.social_media_extension:
         class: Kardi\FrameworkBundle\Twig\SocialMediaExtension
         arguments:
             - '@kardi.framework.social_media_service'
+        tags:
+            - { name: twig.extension }
+    kardi_framework.text_extension:
+        class: Kardi\FrameworkBundle\Twig\TextExtension
         tags:
             - { name: twig.extension }

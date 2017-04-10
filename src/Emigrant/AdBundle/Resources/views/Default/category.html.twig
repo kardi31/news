@@ -1,0 +1,53 @@
+{% extends 'EmigrantLayoutBundle:Default:index.html.twig' %}
+
+{% block title %}{{ meta_title(category) }}{% endblock %}
+{% block description %}{{ meta_description(category) }}{% endblock %}
+{% block h1 %}{{ category.trans('title') }} {% endblock %}
+
+{% block contentBlock %}
+    <div class="single-block">
+
+        <div class="content-block main left">
+
+            <div class="block">
+                <div class="block-title">
+                    <a href="/" class="right">{% trans %}Back to homepage {% endtrans %}</a>
+                    <h1>{{ category.trans('title') }}</h1>
+                </div>
+                <div class="block-content category-list">
+                    {% for ad in pagination %}
+                        <div class="article-big">
+                            <div class="article-photo">
+                                <a href="{{ generate_ad_url(ad) }}" class="hover-effect delegate"><span
+                                            class="cover"><img src="{{ asset(ad.photo.mainPhoto.show('210x140')) }}"
+                                                               alt="{{ ad.title }}"></span></a>
+                            </div>
+                            <div class="article-content">
+                                <strong><a href="{{ generate_ad_url(ad) }}">{{ ad.title }}</a></strong>
+                                <span class="meta">
+
+                                    {% if ad.price %}
+                                        <span class="author">
+                                            <span class="icon-text">&#59141;</span>{{ ad.price | localizedcurrency(ad.currency) }}
+                                        </span>
+                                    {% endif %}
+                                    <span class="datePublished">
+                                        <span class="icon-text">🕔 {{ ad.publishDate | date('d/m/Y H:i') }}</span></span>
+                                </span>
+                                <p>{{ truncate(ad.content,20,'words') }}</p>
+                                <span class="meta">
+                                <a href="{{ generate_ad_url(ad) }}" class="more">{% trans %}
+                                    Read Full Advertisement{% endtrans %}<span class="icon-text">▸</span></a>
+                            </span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="pagination">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

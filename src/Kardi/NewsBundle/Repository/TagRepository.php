@@ -24,4 +24,17 @@ class TagRepository extends \Doctrine\ORM\EntityRepository
 
         return $query->getResult();
     }
+
+    public function getTagBySlug($slug) {
+        $qb = $this->createQueryBuilder('t');
+        $qb->join('t.translations','tt');
+        $qb->andWhere('tt.slug like :slug');
+        $qb->setParameter('slug', $slug);
+        $qb->orderBy('t.id','DESC');
+        $qb->setMaxResults(1);
+
+        $query = $qb->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
 }

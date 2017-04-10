@@ -1,0 +1,4 @@
+kardi_ad:
+    resource: "@KardiAdBundle/Resources/config/routing.yml"
+    type: be_simple_i18n
+    prefix:   /

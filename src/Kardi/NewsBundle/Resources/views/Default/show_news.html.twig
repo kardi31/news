@@ -3,14 +3,15 @@
 {% import 'KardiFrameworkBundle:Message:display_flash_message.html.twig' as flash_macro %}
 
 
-{#{% block topscripts %}#}
-    {#{{ parent() }}#}
-    {#{% javascripts#}
-    {#'@EmigrantNewsBundle/Resources/Public/js/comment.js'#}
-    {#output='js/compiled/news.js' %}#}
-    {#<script src="{{ asset_url }}"></script>#}
-    {#{% endjavascripts %}#}
-{#{% endblock %}#}
+{% block topscripts %}
+    {{ parent() }}
+    {% javascripts
+    '@EmigrantNewsBundle/Resources/Public/js/comment.js'
+    '@KardiGalleryBundle/Resources/Public/js/tomasz-underimage-gallery.js'
+    output='js/compiled/news.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
 
 {% block title %}
     {{ news.trans('title') }}
@@ -23,11 +24,19 @@
 
 {% block display_author %}
     <div class="author">
-        <span class="hover-effect left delegate"><span class="cover" style="font-size:20px;"><i></i><img src="{{ asset('bundles/emigrantlayout/images/photos/avatar-1.jpg') }}" alt="{{ news.author }}"></span></span>
+        <span class="hover-effect left delegate">
+            <span class="cover" style="font-size:20px;">
+                <img src="{{ asset('bundles/emigrantlayout/images/photos/avatar-1.jpg') }}" alt="{{ news.author }}">
+            </span>
+        </span>
         <div class="a-content">
             <span>{% trans %}Author{% endtrans %} <b>{{ news.author }}</b></span>
             <span class="meta">{{ news.publishDate | date('d/m/Y H:i') }}
-                {#<span class="tag">{{ news.category.trans('title') }}</span>#}
+                <span class="tag">
+                    <a href="{{ path('kardi_news_category', {'slug': news.category.trans('slug')}) }}">
+                        {{ news.category.trans('title') }}
+                    </a>
+                </span>
             </span>
         </div>
     </div>
@@ -42,19 +51,34 @@
         <div class="content-block main left">
 
             <div class="article-title">
-
-
                 <h1>{{ news.trans('title') }}</h1>
                 {{ block('display_author') }}
             </div>
             <div class="block">
                 <div class="block-content">
+                    <div class="photo-gallery-full">
+                        <div class="the-image">
+                            <a href="#" class="photo-controls left icon-text"></a>
+                            <a href="#" class="photo-controls right icon-text"></a>
+                            <img src="{{ news.photo.mainPhoto.show('856x380') }}" alt="{{ news.trans('title') }}"/>
+                        </div>
 
-                    <p>
-                        <span class="hover-effect">
-                            <img src="{{ news.photo.mainPhoto.show('856x380')}}" alt="{{ news.trans('title') }}" />
-                        </span>
-                    </p>
+                        <div class="photo-gallery-thumbs scrolls" id="" style="overflow: visible;">
+                            <div class="inner-thumb">
+                                {% for photo in news.photo.children %}
+                                    <a href="#" class="delegate">
+                                        <img src="{{ photo.show('80x80') }}" data-src="{{ photo.show('856x300') }}" alt="{{ news.trans('title') }}">
+                                    </a>
+                                    <a href="#" class="delegate">
+                                        <img src="{{ photo.show('80x80') }}" data-src="{{ photo.show('856x300') }}" alt="{{ news.trans('title') }}">
+                                    </a>
+                                    <a href="#" class="delegate">
+                                        <img src="{{ photo.show('80x80') }}" data-src="{{ photo.show('856x300') }}" alt="{{ news.trans('title') }}">
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="shortcode-content">
 
@@ -63,16 +87,17 @@
                                 <h3 class="highlight-title">{% trans %}Related Articles {% endtrans %}</h3>
                                 <ul>
                                     {% for article in relatedArticles %}
-                                    <li>
-                                        <a href="{{ generate_news_url(news) }}">{{ article.trans('title') }}</a>
-                                        <a href="{{ generate_news_url(news) }}#comments" class="h-comment">{{ article.comments|length }}</a>
-                                        <span class="meta-date">{{ article.publishDate | date('d/m') }}</span>
-                                    </li>
+                                        <li>
+                                            <a href="{{ generate_news_url(news) }}">{{ article.trans('title') }}</a>
+                                            <a href="{{ generate_news_url(news) }}#comments"
+                                               class="h-comment">{{ article.comments|length }}</a>
+                                            <span class="meta-date">{{ article.publishDate | date('d/m') }}</span>
+                                        </li>
                                     {% endfor %}
                                 </ul>
                             </div>
                             <div class="column9">
-                               {{ news.trans('content') }}
+                                {{ news.trans('content') }}
                             </div>
                         </div>
 
@@ -86,14 +111,17 @@
                                     <div class="left">
                                         <a href="{{ twitter_share_link() }}" class="custom-soc icon-text">&#62217;</a>
                                         <a href="{{ facebook_share_link() }}" class="custom-soc icon-text">&#62220;</a>
-                                        <a href="{{ google_plus_share_link() }}" class="custom-soc icon-text">&#62223;</a>
+                                        <a href="{{ google_plus_share_link() }}"
+                                           class="custom-soc icon-text">&#62223;</a>
                                         <a href="{{ pinterest_share_link() }}" class="custom-soc icon-text">&#62226;</a>
                                         <a href="{{ linkedin_share_link() }}" class="custom-soc icon-text">&#62232;</a>
                                     </div>
                                     <div class="clear-float"></div>
                                 </div>
                                 <div>
-                                    <a href="window.print()" class="small-button"><span class="icon-text">&#59158;</span>&nbsp;&nbsp;{% trans %}Print{% endtrans %}</a>
+                                    <a href="window.print()" class="small-button"><span
+                                                class="icon-text">&#59158;</span>&nbsp;&nbsp;{% trans %}
+                                        Print{% endtrans %}</a>
                                 </div>
                             </div>
 
@@ -102,7 +130,7 @@
                             <div class="article-tags tag-cloud">
                                 <strong>{% trans %}TAGS {% endtrans %}:</strong>
                                 {% for tag in news.getTags %}
-                                    <a href="#">{{ tag.trans('title') }}</a>
+                                    <a href="{{ path('kardi_news_tag',{'slug': tag.trans('slug')}) }}">{{ tag.trans('title') }}</a>
                                 {% endfor %}
                             </div>
                         </div>

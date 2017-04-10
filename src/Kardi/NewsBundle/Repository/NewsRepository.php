@@ -8,9 +8,10 @@ namespace Kardi\NewsBundle\Repository;
  */
 class NewsRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getBreakingNews() {
+    public function getBreakingNews()
+    {
         $qb = $this->createQueryBuilder('n');
-        $qb->orderBy('n.id','DESC');
+        $qb->orderBy('n.id', 'DESC');
         $qb->andWhere('n.breaking_news = 1');
 
         $query = $qb->getQuery();
@@ -18,9 +19,10 @@ class NewsRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
-    public function getLatestNews() {
+    public function getLatestNews()
+    {
         $qb = $this->createQueryBuilder('n');
-        $qb->orderBy('n.id','DESC');
+        $qb->orderBy('n.id', 'DESC');
         $qb->setMaxResults(1);
 
         $query = $qb->getQuery();
@@ -28,9 +30,10 @@ class NewsRepository extends \Doctrine\ORM\EntityRepository
         return $query->getOneOrNullResult();
     }
 
-    public function getLastNewsList($offset, $limit) {
+    public function getLastNewsList($offset, $limit)
+    {
         $qb = $this->createQueryBuilder('n');
-        $qb->orderBy('n.id','DESC');
+        $qb->orderBy('n.id', 'DESC');
         $qb->setFirstResult($offset);
         $qb->setMaxResults($limit);
 
@@ -39,15 +42,54 @@ class NewsRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
-    public function getLastCategoryNewsList($categoryId, $limit) {
+    public function getLastCategoryNewsList($categoryId, $limit)
+    {
+        $query = $this->getCategoryNewsListQuery($categoryId, $limit);
+
+        return $query->getResult();
+    }
+
+    // query to use for pagination
+    public function getCategoryNewsListQuery($categoryId, $limit)
+    {
         $qb = $this->createQueryBuilder('n');
         $qb->andWhere('n.category_id = :category_id');
         $qb->setParameter('category_id', $categoryId);
-        $qb->orderBy('n.id','DESC');
-        $qb->setMaxResults($limit);
+        $qb->orderBy('n.id', 'DESC');
 
-        $query = $qb->getQuery();
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
 
-        return $query->getResult();
+        return $qb->getQuery();
+    }
+
+    // query to use for pagination
+    public function getTagNewsListQuery($tagId, $limit)
+    {
+        $qb = $this->createQueryBuilder('n');
+        $qb->innerJoin('n.tags', 't');
+        $qb->andWhere('t.id = :tag_id');
+        $qb->setParameter('tag_id', $tagId);
+        $qb->orderBy('n.id', 'DESC');
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery();
+    }
+
+    // query to use for pagination
+    public function getAllNewsListQuery($limit = null)
+    {
+        $qb = $this->createQueryBuilder('n');
+        $qb->orderBy('n.id', 'DESC');
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery();
     }
 }

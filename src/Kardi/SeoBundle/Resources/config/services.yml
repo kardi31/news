@@ -1,0 +1,12 @@
+services:
+    kardi_seo.service.meta_generator:
+        class: Kardi\SeoBundle\Service\MetaGenerator
+        arguments:
+            - '@service_container'
+            - '@translator.default'
+    kardi_seo.meta_extension:
+        class: Kardi\SeoBundle\Twig\MetaExtension
+        arguments:
+            - '@kardi_seo.service.meta_generator'
+        tags:
+            - { name: twig.extension }

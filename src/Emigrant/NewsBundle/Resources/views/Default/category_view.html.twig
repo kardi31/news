@@ -1,0 +1,43 @@
+{% extends 'EmigrantLayoutBundle:Default:index.html.twig' %}
+
+{% block title %}Default title{% endblock %}
+{% block description %}Default desc{% endblock %}
+
+{% block contentBlock %}
+    <div class="single-block">
+
+        <div class="content-block main left">
+
+            <div class="block">
+                <div class="block-title">
+                    <a href="/" class="right">{% trans %}Back to homepage {% endtrans %}</a>
+                   {% block h1 %} <h1>Default h1</h1> {% endblock h1 %}
+                </div>
+                <div class="block-content category-list">
+                    {% for news in pagination %}
+                    <div class="article-big">
+                        <div class="article-photo">
+                            <a href="{{ generate_news_url(news) }}" class="hover-effect delegate"><span class="cover"><img src="{{ asset(news.photo.mainPhoto.show('210x140')) }}" alt="{{ news.trans('title') }}"></span></a>
+                        </div>
+                        <div class="article-content">
+                            <strong><a href="{{ generate_news_url(news) }}">{{ news.trans('title') }}</a><a href="{{ generate_news_url(news) }}#comments" class="h-comment">{{ news.comments | length }}</a></strong>
+                            <span class="meta">
+                                <span class="author"><span class="icon-text">👤</span>{{ news.author }}</span>
+                                <span class="datePublished"><span class="icon-text">🕔 {{ news.publishDate | date('d/m/Y H:i') }}</span></span>
+                            </span>
+                            <p>{{ truncate(news.trans('content'),20,'words') }}</p>
+                            <span class="meta">
+                                <a href="{{ generate_news_url(news) }}" class="more">{% trans %}Read Full Article{% endtrans %}<span class="icon-text">▸</span></a>
+                            </span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="pagination">
+                        {{ knp_pagination_render(pagination, 'EmigrantLayoutBundle:Pagination:default.html.twig') }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
