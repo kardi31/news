@@ -37,6 +37,7 @@ class AdRepository extends \Doctrine\ORM\EntityRepository
         $qb->andWhere('a.category_id = :category_id');
         $qb->setParameter('category_id', $categoryId);
         $qb->orderBy('a.id', 'DESC');
+        $qb->andWhere('a.expiredAt > CURRENT_TIMESTAMP()');
 
         if ($locale) {
             $qb->andWhere('a.lang = :locale');

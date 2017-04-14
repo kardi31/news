@@ -1,0 +1,11 @@
+kardi_admin_news:
+    path:  /list-news
+    defaults: { _controller: KardiNewsBundle:Admin:listNews}
+kardi_admin_edit_news:
+    path:  /edit-news/{id}
+    defaults: { _controller: KardiNewsBundle:Admin:editNews}
+    requirements:
+        id: '\d+'
+kardi_admin_add_news:
+    path:  /add-news
+    defaults: { _controller: KardiNewsBundle:Admin:addNews}

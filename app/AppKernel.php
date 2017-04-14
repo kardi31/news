@@ -7,6 +7,7 @@ class AppKernel extends Kernel
 {
     public function registerBundles()
     {
+//        die('beforedep');
         $bundles = [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
@@ -34,6 +35,7 @@ class AppKernel extends Kernel
             new Kardi\SeoBundle\KardiSeoBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Emigrant\AdBundle\EmigrantAdBundle(),
+            new Kardi\AdminBundle\KardiAdminBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

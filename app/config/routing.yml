@@ -1,3 +1,7 @@
+kardi_admin:
+    resource: "@KardiAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
 emigrant_ad:
     resource: "@EmigrantAdBundle/Resources/config/routing.yml"
     type: be_simple_i18n
@@ -37,3 +41,4 @@ emigrant_layout:
 #kardi_layout:
 #    resource: "@KardiLayoutBundle/Resources/config/routing.yml"
 #    prefix:   /
+

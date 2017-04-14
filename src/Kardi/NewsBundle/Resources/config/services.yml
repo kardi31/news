@@ -12,3 +12,30 @@ services:
     kardi_news.router.news:
         class: Kardi\NewsBundle\Router\NewsRouter
         arguments: ['@router']
+    kardi_news.repository.category:
+        class: Kardi\NewsBundle\Repository\CategoryRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - Kardi\NewsBundle\Entity\Category
+    kardi_news.provider.category:
+        class: Kardi\NewsBundle\Provider\CategoryProvider
+        arguments:
+            - '@kardi_news.repository.category'
+
+    kardi_news.form.admin.news:
+        class: Kardi\NewsBundle\Form\Type\Admin\News
+        arguments:
+            - '@kardi_news.provider.category'
+            - '@kardi_news.provider.tag'
+        tags:
+            - { name: form.type }
+
+    kardi_news.repository.tag:
+        class: Kardi\NewsBundle\Repository\TagRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - Kardi\NewsBundle\Entity\Tag
+    kardi_news.provider.tag:
+        class: Kardi\NewsBundle\Provider\TagProvider
+        arguments:
+            - '@kardi_news.repository.tag'

@@ -1,0 +1,30 @@
+.page-logo {
+  font-size: 30px;
+  color: #ffffff;
+  font-weight: bold;
+
+  span {
+    color: #add8e6;
+  }
+}
+
+.form-group .required {
+  color: inherit;
+  font-size: inherit;
+  padding-left: inherit;
+
+  &:after {
+    display: inline-block;
+    content: " *";
+    margin-left: 3px;
+    color: #e02222;
+  }
+}
+
+@media (min-width: 768px) {
+  .form-horizontal {
+    .mt-checkbox.mt-checkbox-single{
+      margin-top:7px;
+    }
+  }
+}

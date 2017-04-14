@@ -1,0 +1,144 @@
+{% extends 'bootstrap_3_layout.html.twig' %}
+
+{%- block form_row -%}
+    <div class="form-group">
+        {{- form_label(form) -}}
+        {{- form_errors(form) -}}
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock form_row -%}
+
+{% block form_widget_simple -%}
+    {% if type is not defined or type not in ['file', 'hidden'] %}
+        {%- set attr = attr|merge({class: (attr.class|default('') ~ ' form-control')|trim}) -%}
+    {% endif %}
+
+    {% if type is not defined or type not in ['file', 'hidden', 'datetime'] %}
+        <div class="col-md-4">
+    {% endif %}
+
+    {{- parent() -}}
+
+    {% if type is not defined or type not in ['file', 'hidden', 'datetime'] %}
+        </div>
+    {% endif %}
+{%- endblock form_widget_simple %}
+
+{% block form_start -%}
+    {% if type is not defined or type not in ['file', 'hidden'] %}
+        {%- set attr = attr|merge({class: (attr.class|default('') ~ ' form-horizontal')|trim}) -%}
+    {% endif %}
+<div class="form-body">
+    {{- parent() -}}
+    {%- endblock form_start %}
+
+
+    {%- block submit_widget -%}
+    {#{%- set type = type|default('submit') -%}#}
+</div>
+{{ block('input_submit') }}
+{%- endblock submit_widget -%}
+
+{% block form_label -%}
+    {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' control-label col-md-3')|trim}) -%}
+    {{- parent() -}}
+{%- endblock form_label %}
+
+{% block checkbox_label %}
+    {% if not compound -%}
+        {% set label_attr = label_attr|merge({'for': id}) %}
+    {%- endif -%}
+    {% if required %}
+        {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' required')|trim}) %}
+    {% endif %}
+    {% if parent_label_class is defined %}
+        {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' ' ~ parent_label_class)|trim}) %}
+    {% endif %}
+    {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' control-label col-md-3')|trim}) -%}
+    {% if label is not same as(false) and label is empty %}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+            '%name%': name,
+            '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {% endif %}
+    <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+    {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
+    </label>
+{% endblock %}
+
+{% block checkbox_widget -%}
+
+    {{ block('checkbox_label') }}
+    <div class="col-md-9">
+        <label class="mt-checkbox mt-checkbox-single">
+            <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+            <span></span>
+        </label>
+    </div>
+{%- endblock checkbox_widget %}
+
+
+{%- block button_row -%}
+    {{- form_widget(form) -}}
+{%- endblock button_row -%}
+
+{%- block input_submit -%}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+            '%name%': name,
+            '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <input type="{{ type|default('submit') }}" {{ block('button_attributes') }}
+           value="{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}"/>
+{%- endblock input_submit -%}
+
+
+{% block textarea_widget -%}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-control ckeditor-custom')|trim}) %}
+    <div class="col-md-9">
+        {{- parent() -}}
+    </div>
+{%- endblock textarea_widget %}
+
+{%- block choice_widget -%}
+    <div class="col-md-4">
+        {% if expanded %}
+            {{- block('choice_widget_expanded') -}}
+        {% else %}
+            {{- block('choice_widget_collapsed') -}}
+        {% endif %}
+    </div>
+{%- endblock choice_widget -%}
+
+{%- block datetime_widget -%}
+    {% if widget == 'single_text' %}
+        {% set type='datetime' %}
+        <div class="col-md-4">
+            <div class="input-group date form_datetime form_datetime bs-datetime">
+                {{- block('form_widget_simple') -}}
+                <span class="input-group-addon">
+                    <button class="btn default date-set"
+                            type="button">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    {%- else -%}
+        <div {{ block('widget_container_attributes') }}>
+            {{- form_errors(form.date) -}}
+            {{- form_errors(form.time) -}}
+            {{- form_widget(form.date) -}}
+            {{- form_widget(form.time) -}}
+        </div>
+    {%- endif -%}
+{%- endblock datetime_widget -%}
