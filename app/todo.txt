@@ -2,6 +2,18 @@ Lista newsow wg tagow.
 
 oddzielic emigrant bundle od kardi bundle
 
+PANEL ADMINISTRACYJNY
+- zrobic zdjecia
+- zrobić metatagi
+- lista newsow z datatable
+- zrobić edycje menu
+
+
+
+
+
+
+
 
 dodac cos po lewej stronie na dole
 

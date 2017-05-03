@@ -38,8 +38,8 @@ class News extends AbstractType
         $builder->add('publishDate', DateTimeType::class, ['label' => 'Data publikacji',
             'widget' => 'single_text',
 
-            'format' => 'dd-MM-yyyy HH:mm',
-            'attr' => ['class' => 'datetimepicker-custom']]);
+            'format' => 'dd-MM-yyyy HH:mm'
+        ]);
         $builder->add('active', CheckboxType::class, ['compound' => false, 'label' => 'Aktywny', 'required' => false, 'data' => false]);
         $builder->add('breakingNews', CheckboxType::class, ['compound' => false, 'label' => 'Ważny news', 'required' => false, 'data' => false]);
         $builder->add('categoryId', ChoiceType::class, ['choices' => $this->categoryProvider->prependCategories(), 'label' => 'Kategoria']);

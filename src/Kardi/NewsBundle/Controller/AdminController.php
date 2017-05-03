@@ -44,6 +44,6 @@ class AdminController extends Controller
 
         $form = $this->createForm(News::class, $news);
 
-        return $this->render('KardiNewsBundle:Admin:edit_news.html.twig', ['form' => $form->createView()]);
+        return $this->render('KardiNewsBundle:Admin:edit_news.html.twig', ['form' => $form->createView(), 'news' => $news]);
     }
 }

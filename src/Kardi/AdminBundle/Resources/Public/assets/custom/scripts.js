@@ -27,10 +27,10 @@ $(function () {
     });
 
     // Datetime picker
-    $(".datetimepicker-custom").datetimepicker({
+    $(".datetimepicker-custom2").datetimepicker({
         autoclose: true,
         isRTL: false,
-        format: "dd/mm/yyyy hh:ii",
+        format: "dd-mm-yyyy hh:ii",
         fontAwesome: true,
         pickerPosition: "bottom-left"
     });
