@@ -1,0 +1,33 @@
+<div id="photo_admin_tab">
+    <div id="tab_images_uploader_container" class="text-align-reverse margin-bottom-10">
+        <a id="tab_images_uploader_pickfiles" href="javascript:;" class="btn btn-success">
+            <i class="fa fa-plus"></i> Wybierz zdjęcia </a>
+        <a id="tab_images_uploader_uploadfiles" href="javascript:;" class="btn btn-primary">
+            <i class="fa fa-share"></i> Załaduj zdjęcia </a>
+    </div>
+    <div class="row">
+        <div id="tab_images_uploader_filelist" class="col-md-6 col-sm-12"></div>
+    </div>
+    <div class="table table-bordered table-hover">
+        {% for photo in photos %}
+            <div class="col-lg-3 col-xs-6 col-sm-4 col-md-4 photo-list-wrapper">
+                <a href="{{ photo.show }}" class="fancybox-button" data-rel="fancybox-button"><img
+                            class="img-responsive img-admin-responsive" src="{{ photo.show('126x126') }}" alt=""> </a>
+                <div class="admin-image-buttons">
+                    {% if not loop.first %}
+                        <a href="javascript:;" class="btn btn-default btn-sm move-left" data-id="{{ photo.id }}">
+                            <i class="fa fa-arrow-circle-left"></i> </a>
+                    {% endif %}
+                    <a href="javascript:;" class="btn btn-default btn-sm delete" data-id="{{ photo.id }}">
+                        <i class="fa fa-times"></i> Usuń </a>
+                    {% if not loop.last %}
+                        <a href="javascript:;" class="btn btn-default btn-sm move-right" data-id="{{ photo.id }}">
+                            <i class="fa fa-arrow-circle-right"></i> </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="clearfix"></div>
+    </div>
+</div>

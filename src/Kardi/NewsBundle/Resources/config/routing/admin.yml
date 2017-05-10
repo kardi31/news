@@ -9,3 +9,6 @@ kardi_admin_edit_news:
 kardi_admin_add_news:
     path:  /add-news
     defaults: { _controller: KardiNewsBundle:Admin:addNews}
+kardi_admin_upload_news_photo:
+    path:  /upload-news-photo
+    defaults: { _controller: KardiNewsBundle:Admin:uploadNewsPhoto}

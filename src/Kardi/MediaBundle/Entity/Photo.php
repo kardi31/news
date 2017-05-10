@@ -287,22 +287,27 @@ class Photo
     }
 
     /**
-     * @param string $size
+     * @param null|string $size
      * @return string
      */
-    public function show($size = '800x600')
+    public function show(?string $size = null)
     {
         if (strlen($this->getPhoto())) {
-            return $this->getPhoto();
+
+            if ($size) {
+                return sprintf('/photos/%s/%s', $size, $this->getPhoto());
+            }
+
+            return '/photos/' . $this->getPhoto();
         }
 
         $size = str_replace('x', '/', $size);
 
-        $types = ['fashion','animals','sports','nightlife','cats','technics','transport'];
+        $types = ['fashion', 'animals', 'sports', 'nightlife', 'cats', 'technics', 'transport'];
 
         $type = $types[array_rand($types)];
-
-        return 'http://lorempixel.com/'.$size.'/'.$type;
+        return '#';
+//        return 'http://lorempixel.com/' . $size . '/' . $type;
     }
 }
 

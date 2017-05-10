@@ -36,6 +36,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Emigrant\AdBundle\EmigrantAdBundle(),
             new Kardi\AdminBundle\KardiAdminBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

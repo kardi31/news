@@ -1,0 +1,24 @@
+kardi_photo_upload:
+    path:  /upload
+    defaults: { _controller: KardiMediaBundle:Admin:upload }
+kardi_media_upload_photo:
+    path:  /upload-photo
+    defaults: { _controller: KardiMediaBundle:Admin:uploadPhoto }
+    options:
+        expose: true
+kardi_media_refresh_photo_list:
+    path:  /refresh-photo-list
+    defaults: { _controller: KardiMediaBundle:Admin:refreshPhotoList }
+    options:
+        expose: true
+kardi_media_move_photo:
+    path:  /move-photo
+    defaults: { _controller: KardiMediaBundle:Admin:movePhoto }
+    options:
+        expose: true
+
+kardi_media_remove_photo:
+    path:  /remove-photo
+    defaults: { _controller: KardiMediaBundle:Admin:removePhoto }
+    options:
+        expose: true

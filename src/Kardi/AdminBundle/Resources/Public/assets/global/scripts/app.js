@@ -832,7 +832,7 @@ var App = function() {
         alert: function(options) {
 
             options = $.extend(true, {
-                container: "", // alerts parent container(by default placed after the page breadcrumbs)
+                container: "#admin_message_box", // alerts parent container(by default placed after the page breadcrumbs)
                 place: "append", // "append" or "prepend" in container 
                 type: 'success', // alert's type
                 message: "", // alert's message

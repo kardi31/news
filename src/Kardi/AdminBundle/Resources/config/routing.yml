@@ -1,7 +1,9 @@
 kardi_news:
     resource: "@KardiNewsBundle/Resources/config/routing/admin.yml"
     prefix:   /news
+kardi_media:
+    resource: "@KardiMediaBundle/Resources/config/routing/admin.yml"
+    prefix:   /media
 kardi_admin_homepage:
     path:     /
     defaults: { _controller: KardiAdminBundle:Default:index }
-

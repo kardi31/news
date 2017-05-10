@@ -1,3 +1,54 @@
+/*
+  1. Images
+ */
+
+/* 1. Images */
+
+.img-admin-responsive {
+  width: auto !important;
+  max-width: 100%;
+}
+
+.admin-image-buttons {
+  margin-top: 5px;
+}
+
+.photo-list-wrapper {
+  margin-bottom: 5px;
+  text-align: center;
+  border: 1px solid #e7ecf1;
+
+  &:nth-of-type(4n) {
+    &:after {
+      display: block;
+      clear: both;
+      content: " ";
+    }
+  }
+
+  &:nth-of-type(4n+1) {
+    clear: left;
+
+    &:before {
+      display: block;
+      clear: both;
+      content: " ";
+    }
+  }
+
+  a.fancybox-button {
+    display: inline-block;
+    margin-bottom: 2px;
+    box-shadow: 1px 1px 3px #888888;
+
+    img{
+
+    }
+  }
+}
+
+/* 2. */
+
 .page-logo {
   font-size: 30px;
   color: #ffffff;
@@ -23,13 +74,8 @@
 
 @media (min-width: 768px) {
   .form-horizontal {
-    .mt-checkbox.mt-checkbox-single{
-      margin-top:7px;
+    .mt-checkbox.mt-checkbox-single {
+      margin-top: 7px;
     }
   }
-}
-
-.img-admin-responsive{
-  width:auto !important;
-  max-width:100%;
 }

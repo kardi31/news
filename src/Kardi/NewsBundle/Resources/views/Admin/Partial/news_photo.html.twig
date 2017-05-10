@@ -1,37 +1,7 @@
 <div role="tabpanel" class="tab-pane active" id="form_photo">
-    <div class="alert alert-success margin-bottom-10">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-        <i class="fa fa-warning fa-lg"></i> Image type and information need to be specified.
-    </div>
-    <div id="tab_images_uploader_container" class="text-align-reverse margin-bottom-10">
-        <a id="tab_images_uploader_pickfiles" href="javascript:;" class="btn btn-success">
-            <i class="fa fa-plus"></i> Select Files </a>
-        <a id="tab_images_uploader_uploadfiles" href="javascript:;" class="btn btn-primary">
-            <i class="fa fa-share"></i> Upload Files </a>
-    </div>
-    <div class="row">
-        <div id="tab_images_uploader_filelist" class="col-md-6 col-sm-12"></div>
-    </div>
-    <table class="table table-bordered table-hover">
-        <thead>
-        <tr role="row" class="heading">
-            <th width="8%"> Image</th>
-            <th width="10%"></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for photo in news.photo.children %}
-            <tr>
-                <td>
-                    <a href="{{ photo.show }}" class="fancybox-button" data-rel="fancybox-button">
-                        <img class="img-responsive" src="{{ photo.show('126x126') }}" alt=""> </a>
-                </td>
-                <td>
-                    <a href="javascript:;" class="btn btn-default btn-sm">
-                        <i class="fa fa-times"></i> Remove </a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {{ render(controller(
+    'KardiMediaBundle:Admin:refreshPhotoList',
+    { 'rootId': news.photo.id }
+    )) }}
+    {#{% include '@KardiMedia/Admin/photo_list.html.twig' with {'photos': news.photo.children} %}#}
 </div>

@@ -74,6 +74,8 @@
 
     <div class="container-fluid">
         <div class="page-content">
+            <div id="admin_message_box"></div>
+
             {% block content %}
 
             {% endblock content %}
@@ -751,7 +753,8 @@
     output='js/compiled/admin_core_plugins.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
-
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 
     <!-- END CORE PLUGINS -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
