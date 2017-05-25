@@ -1,1 +1,21 @@
 services:
+    kardi_media.service.file:
+        class: Kardi\MediaBundle\Service\File
+    kardi_media.subscriber.photo:
+        class: Kardi\MediaBundle\Subscriber\PrePhotoEditSubscriber
+        arguments:
+            - '@request_stack'
+            - %photo%
+        tags:
+            - { name: kernel.event_subscriber }
+    kardi_media.service.photo:
+        class: Kardi\MediaBundle\Service\Photo
+        arguments:
+            - %photo_directory%
+
+    kardi_media.twig.photo:
+        class: Kardi\MediaBundle\Twig\PhotoExtension
+        arguments:
+            - '@kardi_media.service.photo'
+        tags:
+            - { name: twig.extension }

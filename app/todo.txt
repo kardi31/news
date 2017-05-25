@@ -4,6 +4,9 @@ oddzielic emigrant bundle od kardi bundle
 
 PANEL ADMINISTRACYJNY
 - zrobic zdjecia
+
+  - cropowanie zdjec pozostalo
+
 - zrobić metatagi
 - lista newsow z datatable
 - zrobić edycje menu

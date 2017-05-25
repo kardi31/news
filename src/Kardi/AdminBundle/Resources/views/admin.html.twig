@@ -61,6 +61,11 @@
         <!-- END CUSTOM LAYOUT STYLES -->
     {% endblock styles %}
     <link rel="shortcut icon" href="favicon.ico"/>
+
+
+    {% block top_javascripts %}
+        <script src="{{ asset('bundles/kardiadmin/assets/global/plugins/jquery.min.js')}}"></script>
+    {% endblock top_javascripts %}
 </head>
 <!-- END HEAD -->
 

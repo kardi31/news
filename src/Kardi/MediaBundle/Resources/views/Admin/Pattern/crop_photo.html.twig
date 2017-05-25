@@ -1,0 +1,23 @@
+{% set sizeExploded = size|split('x') %}
+
+
+            <style>
+                #yourId{{ key }} {
+                    width: {{sizeExploded[0]}}px;
+                    height: {{sizeExploded[1]}}px;
+                    position: relative; /* or fixed or absolute */
+                }
+            </style>
+            <script>
+                $(function () {
+                    var cropperOptions = {
+                        cropUrl:Routing.generate('kardi_media_crop_edited'),
+                        loadPicture:'{{ photo.show }}',
+                        cropData:{
+                            "outputImage": '{{ photo.show(size) }}'
+                        }
+                    }
+                    var cropperHeader = new Croppic('yourId{{ key }}', cropperOptions);
+                })
+            </script>
+            <div id="yourId{{ key }}"></div>

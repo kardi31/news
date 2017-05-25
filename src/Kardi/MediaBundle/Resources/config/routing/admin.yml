@@ -22,3 +22,16 @@ kardi_media_remove_photo:
     defaults: { _controller: KardiMediaBundle:Admin:removePhoto }
     options:
         expose: true
+
+kardi_media_edit_photo:
+    path:  /edit-photo/{id}/
+    defaults: { _controller: KardiMediaBundle:Admin:editPhoto}
+    requirements:
+        id: '\d+'
+        photo: '\d+'
+
+kardi_media_crop_edited:
+    path:  /crop-edited/
+    defaults: { _controller: KardiMediaBundle:Admin:cropEditedPhoto}
+    options:
+        expose: true

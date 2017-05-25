@@ -2,16 +2,44 @@
 
 namespace Kardi\MediaBundle\Controller;
 
+use Kardi\FrameworkBundle\Helper\Text;
 use Kardi\MediaBundle\Entity\Photo;
+use Kardi\MediaBundle\Service\Croppic;
 use stojg\crop\CropCenter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AdminController extends Controller
 {
+    public function editPhotoAction(Request $request, int $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $photoRepository = $em->getRepository('KardiMediaBundle:Photo');
+        $photo = $photoRepository->find($id);
+
+        if (!$photo) {
+            throw new \Exception('Zdjęcie nie istnieje');
+        }
+
+        $returnUrl = $request->getSession()->get('_returnUrl');
+        $photoSizes = $request->getSession()->get('_photoSizes');
+
+        return $this->render('KardiMediaBundle:Admin:edit_photo.html.twig', ['photoSizes' => $photoSizes, 'photo' => $photo]);
+    }
+
+    public function cropEditedPhotoAction(Request $request)
+    {
+        $attributes = $request->request;
+        dump($request);
+        dump($attributes);
+        $photoDir = $this->getParameter('photo_directory');
+
+        return Croppic::crop($photoDir, $attributes->get('imgUrl'), $attributes->get('outputImage'), $attributes->get('imgInitW'), $attributes->get('imgInitH'), $attributes->get('imgW'), $attributes->get('imgH'), $attributes->get('imgY1'), $attributes->get('imgX1'), $attributes->get('cropW'), $attributes->get('cropH'), $attributes->get('angle'));
+    }
+
     public function uploadAction(Request $request)
     {
         if ($request->isXmlHttpRequest() && !$request->isMethod('POST')) {
@@ -52,14 +80,15 @@ class AdminController extends Controller
         $tempDir = $this->getParameter('photo_temp_directory');
         $photoDir = $this->getParameter('photo_directory');
 
-        $uploadedFile = $tempDir . '/' . $filename;
-
         if (!is_dir($photoDir)) {
             mkdir($photoDir);
         }
 
-        foreach ($photoSizes as $size) {
+        $newFilename = Text::createUniqueFilename($filename, $photoDir);
 
+        $uploadedFile = $tempDir . '/' . $filename;
+
+        foreach ($photoSizes as $size) {
             $center = new CropCenter($uploadedFile);
             $sizeArray = explode('x', $size);
             $croppedImage = $center->resizeAndCrop($sizeArray[0], $sizeArray[1]);
@@ -67,13 +96,13 @@ class AdminController extends Controller
             if (!is_dir($targetDir)) {
                 mkdir($targetDir);
             }
-            $croppedImage->writeImage(sprintf('%s/%s', $targetDir, $filename));
+            $croppedImage->writeImage(sprintf('%s/%s', $targetDir, $newFilename));
         }
 
-        @copy($uploadedFile, sprintf('%s/%s', $photoDir, $filename));
+        @copy($uploadedFile, sprintf('%s/%s', $photoDir, $newFilename));
         unlink($uploadedFile);
 
-        $rootId = $this->appendPhotoToElement($filename, $bundle, $entity, $elementId);
+        $rootId = $this->appendPhotoToElement($newFilename, $bundle, $entity, $elementId);
 
         return new JSONResponse([
             'success' => 'true',
@@ -132,7 +161,7 @@ class AdminController extends Controller
         $photoRoot = $photoRepository->find($rootId);
 
         $mediaPhotoRepository = $em->getRepository('KardiMediaBundle:Photo');
-        $photos = $mediaPhotoRepository->getChildren($photoRoot,false, null, 'ASC', true);
+        $photos = $mediaPhotoRepository->getChildren($photoRoot, false, null, 'ASC', true);
 
         return $this->render('KardiMediaBundle:Admin:photo_list.html.twig', ['photos' => $photos]);
     }
@@ -150,12 +179,30 @@ class AdminController extends Controller
         }
 
         if ($direction == 'right') {
-            $photoRepository->moveDown($entity);
+            // if photo is not a root image
+            if ($entity->getParent()) {
+                $photoRepository->moveDown($entity);
+            } // otherwise swap root image with first child
+            else {
+                if ($children = $entity->getChildren()) {
+                    $this->swapChildrenWithParentImage($children->first());
+
+                    $rootId = $children->first()->getParent()->getId();
+                }
+            }
         } elseif ($direction == 'left') {
-            $photoRepository->moveUp($entity);
+            // if photo has previous sibling
+            if ($photoRepository->getPrevSiblings($entity)) {
+                $photoRepository->moveUp($entity);
+            } // otherwise swap photo with root image
+            else {
+                $this->swapChildrenWithParentImage($entity);
+            }
         }
 
-        $rootId = $entity->getParent()->getId();
+        if (!isset($rootId)) {
+            $rootId = $entity->getParent()->getId();
+        }
 
         return new JSONResponse([
             'success' => 'true',
@@ -174,14 +221,50 @@ class AdminController extends Controller
             return false;
         }
 
+        // if we try to remove parent image
+        if (!$entity->getParent()) {
+            $firstChild = $entity->getChildren()->first();
+
+            $this->swapChildrenWithParentImage($firstChild);
+
+            $entity = $firstChild;
+        }
+
         $rootId = $entity->getParent()->getId();
+
+        $filename = $entity->getPhoto();
 
         $em->remove($entity);
         $em->flush();
+
+        $fileService = $this->container->get('kardi_media.service.file');
+        $fileService->unlinkFile($filename, $this->getParameter('photo_directory'), true);
 
         return new JSONResponse([
             'success' => 'true',
             'rootId' => $rootId
         ]);
     }
+
+    private function swapChildrenWithParentImage($childNode)
+    {
+        $parentNode = $childNode->getParent();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $oldParentNode = clone $parentNode;
+
+        $parentNode->setPhoto($childNode->getPhoto());
+        $parentNode->setFolder($childNode->getFolder());
+
+        $childNode->setPhoto($oldParentNode->getPhoto());
+        $childNode->setFolder($oldParentNode->getFolder());
+
+        $em->persist($parentNode);
+        $em->persist($childNode);
+
+        $em->flush();
+    }
+
+
 }

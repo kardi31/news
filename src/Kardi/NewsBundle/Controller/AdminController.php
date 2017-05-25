@@ -2,9 +2,12 @@
 
 namespace Kardi\NewsBundle\Controller;
 
+use Kardi\MediaBundle\Event\MediaEvents;
+use Kardi\MediaBundle\Event\PrePhotoEditEvent;
 use Kardi\NewsBundle\Entity\NewsTranslation;
 use Kardi\NewsBundle\Form\Type\Admin\News;
 use Kardi\NewsBundle\Entity\News as NewsEntity;
+use RecursiveDirectoryIterator;
 use stojg\crop\CropCenter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -45,6 +48,7 @@ class AdminController extends Controller
             throw new \Exception('News nie istnieje');
         }
 
+        $this->get('event_dispatcher')->dispatch(MediaEvents::PRE_PHOTO_EDIT, new PrePhotoEditEvent('kardinewsbundle_news'));
 
         $form = $this->createForm(News::class, $news);
 

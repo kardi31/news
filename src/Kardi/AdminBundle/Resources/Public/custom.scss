@@ -41,8 +41,29 @@
     margin-bottom: 2px;
     box-shadow: 1px 1px 3px #888888;
 
-    img{
+    img {
 
+    }
+  }
+}
+
+#photo_admin_tab {
+  position: relative;
+
+  #loadingImageWrapper {
+    display: block;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #000000;
+    opacity: 0.7;
+
+    img {
+      margin:0 auto;
+      margin-top:10%;
+      display:block;
     }
   }
 }

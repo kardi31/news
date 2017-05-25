@@ -1,0 +1,20 @@
+<div id="photo_admin_tab">
+    <div id="tab_images_uploader_container" class="text-align-reverse margin-bottom-10">
+        <a id="tab_images_uploader_pickfiles" href="javascript:;" class="btn btn-success">
+            <i class="fa fa-plus"></i> Wybierz zdjęcia </a>
+        <a id="tab_images_uploader_uploadfiles" href="javascript:;" class="btn btn-primary">
+            <i class="fa fa-share"></i> Załaduj zdjęcia </a>
+    </div>
+    <div class="row">
+        <div id="tab_images_uploader_filelist" class="col-md-6 col-sm-12"></div>
+    </div>
+
+    <div class="table table-bordered table-hover" id="photo_admin_table">
+        {{ render(controller(
+        'KardiMediaBundle:Admin:refreshPhotoList',
+        {
+            'rootId': rootId
+        }
+        )) }}
+    </div>
+</div>

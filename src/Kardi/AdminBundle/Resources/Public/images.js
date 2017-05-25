@@ -5,7 +5,7 @@ var refreshPhotoList = function (rootId) {
             'rootId': rootId
         },
         success: function (data) {
-            $('#photo_admin_tab').html(data);
+            $('#photo_admin_table').html(data);
         },
         type: 'POST'
     });
@@ -33,7 +33,6 @@ var moveImagePhoto = function(direction, id){
 }
 
 var removeImagePhoto = function(id){
-    console.log(id);
     $.ajax({
         url: Routing.generate('kardi_media_remove_photo'),
         data: {
@@ -44,6 +43,18 @@ var removeImagePhoto = function(id){
         },
         type: 'POST'
     });
+}
+
+var showLoader = function() {
+    var loader = $('<div id="loadingImageWrapper"><img src="/bundles/kardiadmin/assets/global/img/loading.gif" alt="loading" id="loadingImage" /></div>');
+
+    $('#photo_admin_table').append(loader);
+}
+
+var hideLoader = function() {
+    var loader = $('#photo_admin_tab').find('#loadingImageWrapper');
+    loader.fadeOut(200);
+    loader.remove();
 }
 
 var EditImages = function () {
@@ -79,6 +90,8 @@ var EditImages = function () {
 
                     $('#tab_images_uploader_uploadfiles').click(function () {
                         uploader.start();
+
+                        showLoader();
                         return false;
                     });
 
@@ -100,7 +113,7 @@ var EditImages = function () {
 
                 FileUploaded: function (up, file, response) {
                     var response = $.parseJSON(response.response);
-                    // var url = Routing.generate('kardi_media_upload_photo');
+
                     if (response.result && response.result == 'OK') {
                         var filename = response.filename; // uploaded file's unique name. Here you can collect uploaded file names and submit an jax request to your server side script to process the uploaded files and update the images tabke
                         $.ajax({
@@ -119,8 +132,7 @@ var EditImages = function () {
                                     icon: 'thumb-o'
                                 });
                             },
-                            error: function (data) {
-
+                            error: function () {
                                 $('#uploaded_file_' + file.id + ' > .status').removeClass("label-info").addClass("label-danger").html('<i class="fa fa-warning"></i> Wystąpił błąd'); // set failed upload
                                 App.alert({
                                     type: 'danger',
@@ -128,6 +140,14 @@ var EditImages = function () {
                                     closeInSeconds: 10,
                                     icon: 'danger'
                                 });
+                            },
+                            complete: function() {
+                                // usuń przycisk usuń, żeby użytkownicy nie probowali usuwac zdjec juz dodanych poprzez ten przycisk
+                                $('.alert.added-files .remove').remove();
+
+                                var fileLoaders = $('#tab_images_uploader_filelist').find('.alert');
+                                fileLoaders.delay(3500).fadeOut(600, function() { $(this).remove(); });
+                                // fileLoaders.remove();
                             },
                             type: 'POST'
                         });
@@ -166,13 +186,15 @@ $(function () {
     confirmPhotoRemoval();
 
     $('#photo_admin_tab').delegate('.admin-image-buttons .move-right','click',function(){
+        showLoader();
         moveImagePhoto('right',$(this).data('id'));
     });
     $('#photo_admin_tab').delegate('.admin-image-buttons .move-left','click',function(){
+        showLoader();
         moveImagePhoto('left',$(this).data('id'));
     });
     $('#photo_admin_tab').delegate('.admin-image-buttons .delete','click',function(){
-        console.log($(this).data('id'));
+        showLoader();
         removeImagePhoto($(this).data('id'));
     });
 });

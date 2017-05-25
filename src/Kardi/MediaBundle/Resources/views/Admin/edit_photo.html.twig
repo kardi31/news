@@ -1,0 +1,60 @@
+{% extends 'KardiAdminBundle::admin.html.twig' %}
+
+{% block footer_javascripts %}
+    {{ parent() }}
+    {% javascripts
+    '@KardiAdminBundle/Resources/Public/plugins/croppic/croppic.min.js'
+    output='js/compiled/crop_photo_scripts.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock footer_javascripts %}
+
+{% block styles %}
+    {{ parent() }}
+    {% stylesheets
+    '@KardiAdminBundle/Resources/Public/plugins/croppic/croppic.css'
+    filter='cssrewrite' output='css/compiled/crop_photo_scripts.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+
+    <style>
+        .page-content{
+            background:darkgrey;
+        }
+    </style>
+{% endblock styles %}
+
+{% block content %}
+
+
+    <div class="panel-group">
+    {% for size in photoSizes %}
+        <div class="clearfix"></div>
+
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse{{ loop.index }}">Zdjęcie {{ size }}</a>
+                </h4>
+            </div>
+
+            <div id="collapse{{ loop.index }}" class="panel-collapse collapse">
+
+                <div class="panel-body">
+        {#<div class="col-md-6">#}
+            {% include '@KardiMedia/Admin/Pattern/crop_photo.html.twig' with {key: loop.index, size: size} %}
+
+                </div>
+            </div>
+        </div>
+        {#</div>#}
+        {#<div class="col-md-6">#}
+            {#<img src="{{ photo.show(size) }}" class="img-responsive" />#}
+        {#</div>#}
+        {#<div class="clearfix"></div>#}
+        <div style="margin-bottom:15px;"></div>
+
+    {% endfor %}
+    </div>
+{% endblock content %}
