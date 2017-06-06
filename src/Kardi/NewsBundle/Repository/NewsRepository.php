@@ -2,11 +2,14 @@
 
 namespace Kardi\NewsBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
+use Kardi\AdminBundle\Repository\DataTableRepository;
+
 /**
  * Class NewsRepository
  * @package Kardi\NewsBundle\Repository
  */
-class NewsRepository extends \Doctrine\ORM\EntityRepository
+class NewsRepository extends DataTableRepository
 {
     public function getBreakingNews()
     {
@@ -91,5 +94,34 @@ class NewsRepository extends \Doctrine\ORM\EntityRepository
         }
 
         return $qb->getQuery();
+    }
+
+    /**
+     * @param array $fields
+     * @param array $data
+     * @param QueryBuilder|null $queryBuilder
+     * @return mixed
+     */
+    public function getDatatableResults(array $fields, array $data, ?QueryBuilder $queryBuilder = null)
+    {
+        if (!$queryBuilder) {
+            $queryBuilder = $this->getNewsQueryBuilder();
+        }
+
+        return parent::getDatatableResults($fields, $data, $queryBuilder);
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    private function getNewsQueryBuilder()
+    {
+         $qb = $this->createQueryBuilder('n')
+        ->select('n')
+        ->leftJoin('n.comments', 'c')
+         ->leftJoin('n.translations', 'nt')
+        ->groupBy('n.id');
+
+        return $qb;
     }
 }

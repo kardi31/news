@@ -1,0 +1,14 @@
+{% macro show(items) %}
+    <nav class="navbar" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <ul class="nav navbar-nav margin-bottom-35 nav-tabs" role="tablist">
+            {% for item in items %}
+                <li {% if loop.index == 1 %} class="active" {% endif %}  role="presentation">
+                    <a href="#{{ item.href }}" role="tab" data-toggle="tab"> <i class="fa {{item.icon}}"></i>
+                        {{ item.title }} </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+{% endmacro show %}

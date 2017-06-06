@@ -1,0 +1,23 @@
+@import '../../../../../Kardi/FrameworkBundle/Resources/Public/css/plugins.scss';
+
+.page-wrapper {
+  background: url('/bundles/gardenlayout/images/tlo-top.jpg') no-repeat top center
+}
+
+.main-header {
+  @include clearfix-after;
+}
+
+.main-header .header-top ul {
+  border-bottom: 1px solid #008000;
+
+  li:first-of-type {
+    margin-left: 0px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  nav.main-menu {
+    margin-top: 40px;
+  }
+}

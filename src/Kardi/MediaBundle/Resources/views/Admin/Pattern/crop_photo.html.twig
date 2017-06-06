@@ -1,23 +1,44 @@
-{% set sizeExploded = size|split('x') %}
+<div class="col-md-6 col-lg-4 cropperRowWrapper">
+    <div class="cropperRow" id="cropperRow{{ key }}">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-default modalShow">
+            Edytuj miniaturkę w rozmiarze {{ size }}
+        </button>
+        <img src="{{ photo.show(size) }}" class="photoPreview" alt="Show photo"/>
+        <!-- Modal -->
 
+        <div class="modal fade" aria-labelledby="modalLabel" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Crop the image</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="cropperWrapper">
+                            <img class="originalPhoto" id="originalPhoto" src="{{ photo.show() }}" alt="Picture"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success cropIt">Crop</button>
+                        <button type="button" class="btn btn-default" id="closeModal" data-dismiss="modal">Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var targetElement = $('#cropperRow{{ key }}');
 
-            <style>
-                #yourId{{ key }} {
-                    width: {{sizeExploded[0]}}px;
-                    height: {{sizeExploded[1]}}px;
-                    position: relative; /* or fixed or absolute */
-                }
-            </style>
-            <script>
-                $(function () {
-                    var cropperOptions = {
-                        cropUrl:Routing.generate('kardi_media_crop_edited'),
-                        loadPicture:'{{ photo.show }}',
-                        cropData:{
-                            "outputImage": '{{ photo.show(size) }}'
-                        }
-                    }
-                    var cropperHeader = new Croppic('yourId{{ key }}', cropperOptions);
-                })
-            </script>
-            <div id="yourId{{ key }}"></div>
+        kardiCroppic(targetElement,
+            {
+                size: '{{ size }}',
+                outputFilename: '{{ photo.show(size) }}'
+            }
+        );
+    })
+</script>

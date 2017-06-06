@@ -18,12 +18,12 @@ class News extends Translation
     /**
      * @var integer
      */
-    private $category_id;
+    private $categoryId;
 
     /**
      * @var boolean
      */
-    private $breaking_news = 0;
+    private $breakingNews = 0;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -50,7 +50,7 @@ class News extends Translation
      */
     private $active = 0;
 
-    private $photo_root_id;
+    private $photoRootId;
     /**
      * Constructor
      */
@@ -78,7 +78,7 @@ class News extends Translation
      */
     public function setCategoryId($categoryId)
     {
-        $this->category_id = $categoryId;
+        $this->categoryId = $categoryId;
 
         return $this;
     }
@@ -90,7 +90,7 @@ class News extends Translation
      */
     public function getCategoryId()
     {
-        return $this->category_id;
+        return $this->categoryId;
     }
 
     /**
@@ -102,7 +102,7 @@ class News extends Translation
      */
     public function setBreakingNews($breakingNews)
     {
-        $this->breaking_news = $breakingNews;
+        $this->breakingNews = $breakingNews;
 
         return $this;
     }
@@ -114,7 +114,7 @@ class News extends Translation
      */
     public function getBreakingNews()
     {
-        return $this->breaking_news;
+        return $this->breakingNews;
     }
 
     /**
@@ -228,11 +228,8 @@ class News extends Translation
 //    }
 
     /**
-     * Set publishDate
-     *
-     * @param \DateTime $publishDate
-     *
-     * @return News
+     * @param bool $publishDate
+     * @return $this
      */
     public function setPublishDate($publishDate = false)
     {
@@ -382,7 +379,7 @@ class News extends Translation
      */
     public function setPhotoRootId($photoRootId)
     {
-        $this->photo_root_id = $photoRootId;
+        $this->photoRootId = $photoRootId;
 
         return $this;
     }
@@ -394,7 +391,7 @@ class News extends Translation
      */
     public function getPhotoRootId()
     {
-        return $this->photo_root_id;
+        return $this->photoRootId;
     }
 
     /**

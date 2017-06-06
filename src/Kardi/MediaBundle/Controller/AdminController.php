@@ -4,7 +4,6 @@ namespace Kardi\MediaBundle\Controller;
 
 use Kardi\FrameworkBundle\Helper\Text;
 use Kardi\MediaBundle\Entity\Photo;
-use Kardi\MediaBundle\Service\Croppic;
 use stojg\crop\CropCenter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,19 +24,22 @@ class AdminController extends Controller
         }
 
         $returnUrl = $request->getSession()->get('_returnUrl');
+        $returnTitle = $request->getSession()->get('_returnTitle');
         $photoSizes = $request->getSession()->get('_photoSizes');
 
-        return $this->render('KardiMediaBundle:Admin:edit_photo.html.twig', ['photoSizes' => $photoSizes, 'photo' => $photo]);
+        return $this->render('KardiMediaBundle:Admin:edit_photo.html.twig', ['photoSizes' => $photoSizes, 'photo' => $photo, 'returnTitle' => $returnTitle, 'returnUrl' => $returnUrl]);
     }
 
     public function cropEditedPhotoAction(Request $request)
     {
-        $attributes = $request->request;
-        dump($request);
-        dump($attributes);
-        $photoDir = $this->getParameter('photo_directory');
+        $data = $request->request->get('photo');
+        $filename = $request->request->get('filename');
 
-        return Croppic::crop($photoDir, $attributes->get('imgUrl'), $attributes->get('outputImage'), $attributes->get('imgInitW'), $attributes->get('imgInitH'), $attributes->get('imgW'), $attributes->get('imgH'), $attributes->get('imgY1'), $attributes->get('imgX1'), $attributes->get('cropW'), $attributes->get('cropH'), $attributes->get('angle'));
+        $result = $this->get('kardi_media.service.photo')->createPhotoFromBase($data, $filename);
+
+        return new JsonResponse([
+           'success' => $result
+        ]);
     }
 
     public function uploadAction(Request $request)

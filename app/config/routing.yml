@@ -1,21 +1,25 @@
+garden_layout:
+    resource: "@GardenLayoutBundle/Resources/config/routing.yml"
+    prefix:   /
+
 kardi_admin:
     resource: "@KardiAdminBundle/Resources/config/routing.yml"
     prefix:   /admin
 
-emigrant_ad:
-    resource: "@EmigrantAdBundle/Resources/config/routing.yml"
-    type: be_simple_i18n
-    prefix:   /
+#emigrant_ad:
+#    resource: "@EmigrantAdBundle/Resources/config/routing.yml"
+#    type: be_simple_i18n
+#    prefix:   /
 
 kardi_newsletter:
     resource: "@KardiNewsletterBundle/Resources/config/routing.yml"
     type: be_simple_i18n
     prefix:   /
 
-emigrant_news:
-    resource: "@EmigrantNewsBundle/Resources/config/routing.yml"
-    type: be_simple_i18n
-    prefix:   /
+#emigrant_news:
+#    resource: "@EmigrantNewsBundle/Resources/config/routing.yml"
+#    type: be_simple_i18n
+#    prefix:   /
 
 kardi_ad:
     resource: "@KardiAdBundle/Resources/config/routing.yml"
@@ -24,15 +28,15 @@ kardi_ad:
 
 kardi_page:
     resource: "@KardiPageBundle/Resources/config/routing.yml"
-#    prefix:   /
+    prefix:   /
 
 #ens_jobeet:
 #    resource: "@EnsJobeetBundle/Resources/config/routing.yml"
 #    prefix:   /
 
-emigrant_layout:
-    resource: "@EmigrantLayoutBundle/Resources/config/routing.yml"
-    prefix:   /
+#emigrant_layout:
+#    resource: "@EmigrantLayoutBundle/Resources/config/routing.yml"
+#    prefix:   /
 
 #kardi_menu:
 #    resource: "@KardiMenuBundle/Resources/config/routing.yml"

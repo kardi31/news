@@ -1,60 +1,54 @@
-{% extends 'KardiAdminBundle::admin.html.twig' %}
-
-{% block footer_javascripts %}
-    {{ parent() }}
-    {% javascripts
-    '@KardiAdminBundle/Resources/Public/plugins/croppic/croppic.min.js'
-    output='js/compiled/crop_photo_scripts.js' %}
-    <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endblock footer_javascripts %}
+{% extends 'KardiAdminBundle:Template:edit.html.twig' %}
 
 {% block styles %}
     {{ parent() }}
-    {% stylesheets
-    '@KardiAdminBundle/Resources/Public/plugins/croppic/croppic.css'
-    filter='cssrewrite' output='css/compiled/crop_photo_scripts.css' %}
-    <link rel="stylesheet" href="{{ asset_url }}"/>
-    {% endstylesheets %}
 
-    <style>
-        .page-content{
-            background:darkgrey;
-        }
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bundles/kardiadmin/plugins/cropper/dist/cropper.min.css">
+    <link rel="stylesheet" href="/bundles/kardiadmin/plugins/cropper/examples/crop-avatar/css/main.css">
 {% endblock styles %}
 
+{% block footer_javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/kardimedia/js/kardi_cropper.js') }}"></script>
+    <script src="{{ asset('bundles/kardiadmin/plugins/cropper/dist/cropper.js') }}"></script>
+{% endblock footer_javascripts %}
+
+{% block pageTitle %}
+    Edytuj zdjęcie
+{% endblock %}
+
 {% block content %}
+    {% set breadcrumbItems = {(returnUrl): returnTitle, '':'Edytuj zdjęcie'} %}
+    {% set withoutSidebar = true %}
+    {{ parent() }}
+{% endblock content %}
 
+{% block pageContent %}
+    <!-- BEGIN PAGE BASE CONTENT -->
+    <div class="row">
+        <div class="col-md-12">
 
-    <div class="panel-group">
-    {% for size in photoSizes %}
-        <div class="clearfix"></div>
-
-        <div class="panel panel-default">
-
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse{{ loop.index }}">Zdjęcie {{ size }}</a>
-                </h4>
-            </div>
-
-            <div id="collapse{{ loop.index }}" class="panel-collapse collapse">
-
-                <div class="panel-body">
-        {#<div class="col-md-6">#}
-            {% include '@KardiMedia/Admin/Pattern/crop_photo.html.twig' with {key: loop.index, size: size} %}
-
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-news"></i> {{ block('pageTitle') }}
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    {% for size in photoSizes %}
+                        {% include '@KardiMedia/Admin/Pattern/crop_photo.html.twig' with {size: size, key: loop.index} %}
+                    {% endfor %}
+                    <div class="clearfix"></div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-5 col-md-6">
+                                <a href="{{ returnUrl }}" class="btn btn-warning">Powrót</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        {#</div>#}
-        {#<div class="col-md-6">#}
-            {#<img src="{{ photo.show(size) }}" class="img-responsive" />#}
-        {#</div>#}
-        {#<div class="clearfix"></div>#}
-        <div style="margin-bottom:15px;"></div>
-
-    {% endfor %}
     </div>
-{% endblock content %}
+{% endblock pageContent %}

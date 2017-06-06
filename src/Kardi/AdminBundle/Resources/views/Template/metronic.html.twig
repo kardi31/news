@@ -1,0 +1,125 @@
+{% extends 'KardiAdminBundle::admin.html.twig' %}
+
+{% import 'KardiAdminBundle:Include:breadcrumb.html.twig' as breadcrumb %}
+{% import 'KardiAdminBundle:Include:datatable.html.twig' as datatable %}
+
+{% block content %}
+    {{ block('breadcrumbs') }}
+    <div class="page-content-container">
+        <div class="page-content-row">
+            {{ block('pageContent') }}
+        </div>
+    </div>
+{% endblock content %}
+
+
+{% block pageContent %}
+
+{% endblock pageContent %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <h1>
+            {% block pageTitle %}
+
+            {% endblock pageTitle %}
+        </h1>
+
+        {% set breadcrumbHomepage = {'kardi_admin_homepage' : 'Strona główna'} %}
+
+        {% if breadcrumbItems is not defined %}
+            {% set breadcrumbItems = breadcrumbHomepage %}
+        {% else %}
+            {% set breadcrumbItems = breadcrumbHomepage|merge(breadcrumbItems) %}
+        {% endif %}
+        {{ breadcrumb.show(breadcrumbItems) }}
+
+        <!-- Sidebar Toggle Button -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".page-sidebar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="toggle-icon">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </span>
+        </button>
+        <!-- Sidebar Toggle Button -->
+    </div>
+{% endblock breadcrumbs %}
+
+{% block testjs %}
+<script>
+    $(function(){
+
+
+        $('.date-picker').datepicker({
+            rtl: App.isRTL(),
+            autoclose: true
+        });
+
+        var grid = new Datatable();
+
+        grid.init({
+            src: $("#datatable_ajax2"),
+            onSuccess: function (grid, response) {
+                // grid:        grid object
+                // response:    json object of server side ajax response
+                // execute some code after table records loaded
+            },
+            onError: function (grid) {
+                // execute some code on network or other general error
+            },
+            onDataLoad: function(grid) {
+                // execute some code on ajax data load
+            },
+            loadingMessage: 'Loading...',
+            dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options
+
+                // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js).
+                // So when dropdowns used the scrollable div should be removed.
+                //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+
+                // save datatable state(pagination, sort, etc) in cookie.
+                "bStateSave": false,
+
+                // save custom filters to the state
+                "fnStateSaveParams":    function ( oSettings, sValue ) {
+                    $("#datatable_ajax2 tr.filter .form-control").each(function() {
+                        sValue[$(this).attr('name')] = $(this).val();
+                    });
+
+                    return sValue;
+                },
+
+                // read the custom filters from saved state and populate the filter inputs
+                "fnStateLoadParams" : function ( oSettings, oData ) {
+                    //Load custom filters
+                    $("#datatable_ajax2 tr.filter .form-control").each(function() {
+                        var element = $(this);
+                        if (oData[element.attr('name')]) {
+                            element.val( oData[element.attr('name')] );
+                        }
+                    });
+
+                    return true;
+                },
+
+                "lengthMenu": [
+                    [5, 10, 20, 50, 100, 150, -1],
+                    [5, 10, 20, 50, 100, 150, "All"] // change per page values here
+                ],
+                "pageLength": 5, // default record count per page
+                "ajax": {
+                    "url": '{{ path('kardi_admin_news_data') }}', // ajax source
+                },
+                "ordering": true,
+                "order": [
+                    [1, "asc"]
+                ]// set first column as a default sort by asc
+            }
+        });
+
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,3 @@
+garden_layout_homepage:
+    path:     /
+    defaults: { _controller: GardenLayoutBundle:Default:index }

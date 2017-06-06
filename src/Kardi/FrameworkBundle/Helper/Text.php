@@ -135,4 +135,9 @@ class Text
             return strtolower($string);
         }
     }
+
+    public static function wrapInQuotes($string)
+    {
+        return sprintf("'%s'", $string);
+    }
 }

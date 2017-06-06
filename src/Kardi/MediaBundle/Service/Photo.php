@@ -5,21 +5,29 @@ namespace Kardi\MediaBundle\Service;
 
 class Photo
 {
-    private $photoPath;
-
-    public function __construct($photoPath)
+    /**
+     * @param stream resource $data
+     * @param string $filename
+     * @return bool
+     */
+    public function createPhotoFromBase($data, string $filename)
     {
-        $this->photoPath = $photoPath;
-    }
+        try {
+            list($type, $data) = explode(';', $data);
+            list(, $data) = explode(',', $data);
+            $data = base64_decode($data);
 
-    public function getPhotoPath($absolute = false)
-    {
-        if ($absolute) {
-            return $this->photoPath;
+            $fullFilename = $_SERVER['DOCUMENT_ROOT'] . $filename;
+
+            if (file_exists($fullFilename)) {
+                unlink($fullFilename);
+            }
+            
+            file_put_contents($fullFilename, $data);
+        } catch (\Exception $e) {
+            return false;
         }
 
-        $realpath = realpath($this->photoPath);
-
-        return substr($realpath, strpos($realpath, 'web') + 3);
+        return true;
     }
 }

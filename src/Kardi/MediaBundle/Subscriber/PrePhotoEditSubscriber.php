@@ -34,6 +34,7 @@ class PrePhotoEditSubscriber implements EventSubscriberInterface
         $request = $this->requestStack->getMasterRequest();
 
         $request->getSession()->set('_returnUrl', $request->getRequestUri());
+        $request->getSession()->set('_returnTitle', $event->getPageTitle());
     }
 
     public function setPhotoSizes(PrePhotoEditEvent $event)
@@ -52,8 +53,9 @@ class PrePhotoEditSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            MediaEvents::PRE_PHOTO_EDIT => ['setReturnUrl', 0],
-            MediaEvents::PRE_PHOTO_EDIT => ['setPhotoSizes', 0],
+            MediaEvents::PRE_PHOTO_EDIT => [
+                ['setReturnUrl', 0], ['setPhotoSizes', 1]
+            ]
         ];
     }
 }

@@ -1,0 +1,4 @@
+services:
+#    garden_layout.example:
+#        class: Garden\LayoutBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

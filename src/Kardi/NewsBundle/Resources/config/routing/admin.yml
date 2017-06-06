@@ -1,6 +1,11 @@
 kardi_admin_news:
     path:  /list-news
     defaults: { _controller: KardiNewsBundle:Admin:listNews}
+kardi_admin_news_data:
+    path:  /list-news-data
+    defaults: { _controller: KardiNewsBundle:Admin:listNewsData}
+    options:
+        expose: true
 kardi_admin_edit_news:
     path:  /edit-news/{id}
     defaults: { _controller: KardiNewsBundle:Admin:editNews}
@@ -9,3 +14,13 @@ kardi_admin_edit_news:
 kardi_admin_add_news:
     path:  /add-news
     defaults: { _controller: KardiNewsBundle:Admin:addNews}
+kardi_admin_news_toggle_breaking:
+    path:  /toggle-breaking/{id}
+    defaults: { _controller: KardiNewsBundle:Admin:toggleBreaking}
+    requirements:
+        id: '\d+'
+kardi_admin_news_toggle_active:
+    path:  /toggle-active/{id}
+    defaults: { _controller: KardiNewsBundle:Admin:toggleActive}
+    requirements:
+        id: '\d+'

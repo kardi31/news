@@ -1,0 +1,53 @@
+{% extends 'KardiAdminBundle:Template:metronic.html.twig' %}
+
+{% import 'KardiAdminBundle:Include:sidebar.html.twig' as sidebar %}
+
+{% block content %}
+    {{ block('breadcrumbs') }}
+
+    <div class="page-content-container">
+        <div class="page-content-row">
+
+            {% if withoutSidebar is not defined %}
+                {{ block('pageContentWithSidebar') }}
+            {% else %}
+                {{ block('pageContent') }}
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
+
+
+{% block pageContent %}
+
+{% endblock pageContent %}
+
+{% block pageContentWithSidebar %}
+
+    <!-- BEGIN PAGE SIDEBAR -->
+    <div class="page-sidebar">
+        {{ sidebar.show(sidebarItems|default({})) }}
+    </div>
+    <!-- END PAGE SIDEBAR -->
+    <div class="page-content-col">
+        {{ block('pageContent') }}
+    </div>
+{% endblock pageContentWithSidebar %}
+
+{% block top_javascripts %}
+    {{ parent() }}
+    <script>
+        $(function () {
+            // if nav tabs exists
+            if ($('.tab-content').length) {
+                var activeTabElement = $('.tab-content .tab-pane.active');
+
+                $('a[role="tab"]').parent().removeClass('active');
+                activeTabElement.each(function () {
+                    $('a[href="#' + $(this).attr('id') + '"][role="tab"]').parent().addClass('active');
+                });
+
+            }
+        });
+    </script>
+{% endblock top_javascripts %}

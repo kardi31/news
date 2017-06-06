@@ -10,10 +10,15 @@ class PrePhotoEditEvent extends Event
      * @var string
      */
     private $paramName;
+    /**
+     * @var string
+     */
+    private $pageTitle;
 
-    public function __construct($paramName)
+    public function __construct($paramName, $pageTitle)
     {
         $this->paramName = $paramName;
+        $this->pageTitle = $pageTitle;
     }
 
     /**
@@ -32,5 +37,20 @@ class PrePhotoEditEvent extends Event
         $this->paramName = $paramName;
     }
 
+    /**
+     * @return string
+     */
+    public function getPageTitle(): string
+    {
+        return $this->pageTitle;
+    }
+
+    /**
+     * @param string $pageTitle
+     */
+    public function setPageTitle(string $pageTitle)
+    {
+        $this->pageTitle = $pageTitle;
+    }
 
 }

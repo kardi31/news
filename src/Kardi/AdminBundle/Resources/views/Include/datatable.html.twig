@@ -1,0 +1,44 @@
+{% macro filterText() %}
+    <input type="text" class="form-control form-filter input-sm"/>
+{% endmacro %}
+
+{% macro filterBool() %}
+    <select name="order_status" class="form-control form-filter input-sm">
+        <option value="">Wybierz...</option>
+        <option value="0">Nie</option>
+        <option value="1">Tak</option>
+    </select>
+{% endmacro %}
+
+{% macro filterDate() %}
+    <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+        <input type="text" class="form-control form-filter input-sm" readonly placeholder="Od">
+        <span class="input-group-btn">
+            <button class="btn btn-sm default"
+                    type="button">
+                <i class="fa fa-calendar"></i>
+            </button>
+        </span>
+    </div>
+    <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+        <input type="text" class="form-control form-filter input-sm" readonly
+               placeholder="Do">
+        <span class="input-group-btn">
+            <button class="btn btn-sm default"
+                    type="button">
+                <i class="fa fa-calendar"></i>
+            </button>
+        </span>
+    </div>
+{% endmacro %}
+
+{% macro filterButtons() %}
+    <div class="margin-bottom-5">
+        <button class="btn btn-sm green btn-outline filter-submit margin-bottom">
+            <i class="fa fa-search"></i> Szukaj
+        </button>
+    </div>
+    <button class="btn btn-sm red btn-outline filter-cancel">
+        <i class="fa fa-times"></i> Wyczyść
+    </button>
+{% endmacro %}

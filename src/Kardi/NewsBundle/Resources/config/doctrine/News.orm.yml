@@ -7,13 +7,13 @@ Kardi\NewsBundle\Entity\News:
       type: integer
       generator: { strategy: AUTO }
   fields:
-    category_id:
+    categoryId:
       type: integer
       length: 11
-    photo_root_id:
+    photoRootId:
       type: integer
       length: 11
-    publish_date:
+    publishDate:
       type: datetime
     author:
       type: string
@@ -22,7 +22,7 @@ Kardi\NewsBundle\Entity\News:
       type: boolean
       options:
           default: 0
-    breaking_news:
+    breakingNews:
       type: boolean
       options:
           default: 0

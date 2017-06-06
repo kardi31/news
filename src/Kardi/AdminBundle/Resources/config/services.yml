@@ -1,1 +1,5 @@
 services:
+    kardi_admin.helper.datatable:
+        class: Kardi\AdminBundle\Helper\Datatable
+        arguments:
+            - '@router'
