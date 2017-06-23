@@ -7,3 +7,9 @@ kardi_media:
 kardi_admin_homepage:
     path:     /
     defaults: { _controller: KardiAdminBundle:Default:index }
+kardi_menu:
+    resource: "@KardiMenuBundle/Resources/config/routing/admin.yml"
+    prefix:   /menu
+kardi_page:
+    resource: "@KardiPageBundle/Resources/config/routing/admin.yml"
+    prefix:   /page

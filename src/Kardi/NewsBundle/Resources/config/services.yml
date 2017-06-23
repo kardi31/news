@@ -1,7 +1,7 @@
 services:
     kardi_news.news_url_extension:
         class: Kardi\NewsBundle\Twig\UrlExtension
-        arguments: ['@kardi_news.router.news']
+        arguments: ['@kardi_news.provider.route.news']
         tags:
             - { name: twig.extension }
     kardi_news.comment_extension:
@@ -9,9 +9,14 @@ services:
         arguments: ['@service_container']
         tags:
             - { name: twig.extension }
-    kardi_news.router.news:
-        class: Kardi\NewsBundle\Router\NewsRouter
-        arguments: ['@router']
+    kardi_news.provider.route.news:
+        class: Kardi\NewsBundle\Provider\Route\NewsRouteProvider
+        arguments: ['@be_simple_i18n_routing.router']
+    kardi_news.provider.route.category:
+        class: Kardi\NewsBundle\Provider\Route\CategoryRouteProvider
+        arguments:
+            - '@translator.default'
+            - '@kardi_news.repository.category'
     kardi_news.repository.category:
         class: Kardi\NewsBundle\Repository\CategoryRepository
         factory: ["@doctrine.orm.entity_manager", getRepository]
@@ -39,3 +44,25 @@ services:
         class: Kardi\NewsBundle\Provider\TagProvider
         arguments:
             - '@kardi_news.repository.tag'
+    kardi_news.service.news:
+        class: Kardi\NewsBundle\Service\NewsService
+        arguments:
+            - %languages%
+    kardi_news.service.category:
+        class: Kardi\NewsBundle\Service\CategoryService
+        arguments:
+            - %languages%
+    kardi_news.service.tag:
+        class: Kardi\NewsBundle\Service\TagService
+        arguments:
+            - %languages%
+    kardi_news.router.category:
+           class: Kardi\NewsBundle\Router\CategoryRouter
+           calls:
+               - [ setContext, [ '@router.request_context' ] ]
+           arguments:
+               - '@kardi_news.repository.category'
+               - '@kardi_news.provider.route.category'
+           tags:
+               - name: router
+                 priority: 30

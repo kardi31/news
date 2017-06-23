@@ -38,22 +38,35 @@ Kardi\NewsBundle\Entity\News:
     translations:
       targetEntity: NewsTranslation
       mappedBy: news
+      cascade: ["persist"]
     comments:
       targetEntity: Comment
       mappedBy: news
+      cascade: ["persist"]
   manyToOne:
       category:
         targetEntity: Category
         inversedBy: news
+        cascade: ["persist"]
         joinColumn:
           name: category_id
           referencedColumnName: id
       photo:
         targetEntity: Kardi\MediaBundle\Entity\Photo
+        cascade: ["persist"]
         joinColumn:
           name: photo_root_id
           referencedColumnName: id
   manyToMany:
-    tags:
+   tags:
       targetEntity: Kardi\NewsBundle\Entity\Tag
-      mappedBy: news
+      inversedBy: newsList
+      cascade: ["persist"]
+      joinTable:
+        name: news_tags
+        joinColumns:
+          news_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          tag_id:
+            referencedColumnName: id

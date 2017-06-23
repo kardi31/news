@@ -25,9 +25,23 @@ class DataTableRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->prepareWhereStatement($fields, $data, $qb, $keys);
 
         $qb = $this->prepareOrderStatement($fields, $data, $qb, $keys);
+        return $qb->getQuery()->getResult();
+    }
 
-        $query = $qb->getQuery();
-        return $query->getResult();
+    /**
+     * @param array $fields
+     * @param array $data
+     * @param QueryBuilder $qb
+     * @return mixed
+     */
+    public function countDatatableResults(array $fields, array $data, QueryBuilder $qb)
+    {
+        $keys = array_keys($fields);
+
+        $qb = $this->prepareWhereStatement($fields, $data, $qb, $keys);
+
+        $qb = $this->prepareOrderStatement($fields, $data, $qb, $keys);
+        return count($qb->getQuery()->getArrayResult());
     }
 
     /**
@@ -49,16 +63,14 @@ class DataTableRepository extends \Doctrine\ORM\EntityRepository
                     $qb->having($qb->expr()->eq($fieldName, $searchValue));
                 } elseif (strpos($searchValue, '-+-') !== false) {
                     // search for date ranges
-                    $rangeValues = explode('-+-', $searchValue);
+                    $rangeValues = array_map('trim', explode('-+-', $searchValue));
 
                     if (!empty($rangeValues[0]) && !empty($rangeValues[1])) {
                         $qb->andWhere($qb->expr()->between($fieldName, Text::wrapInQuotes(Date::transform($rangeValues[0])), Text::wrapInQuotes(Date::transform($rangeValues[1]))));
-                    }
-                    elseif (!empty($rangeValues[0])) {
-                        $qb->andWhere($qb->expr()->lte($fieldName, Text::wrapInQuotes(Date::transform($rangeValues[0]))));
-                    }
-                    else {
-                        $qb->andWhere($qb->expr()->gte($fieldName, Text::wrapInQuotes(Date::transform($rangeValues[1]))));
+                    } elseif (!empty($rangeValues[0])) {
+                        $qb->andWhere($qb->expr()->gte($fieldName, Text::wrapInQuotes(Date::transform($rangeValues[0]))));
+                    } elseif (!empty($rangeValues[1])) {
+                        $qb->andWhere($qb->expr()->lte($fieldName, Text::wrapInQuotes(Date::transform($rangeValues[1]))));
                     }
                 } elseif (is_numeric($searchValue)) {
                     // if numeric value
@@ -69,7 +81,6 @@ class DataTableRepository extends \Doctrine\ORM\EntityRepository
                 }
             }
         }
-
         return $qb;
     }
 
@@ -84,10 +95,13 @@ class DataTableRepository extends \Doctrine\ORM\EntityRepository
     {
         $orderColumn = $data['order'][0]['column'];
 
-        $orderField = $fields[$keys[$orderColumn]] ?? null;
+        if (isset($keys[$orderColumn]) && isset($fields[$keys[$orderColumn]])) {
 
-        if ($orderField) {
-            $qb->orderBy($orderField, $data['order'][0]['dir']);
+            $orderField = $fields[$keys[$orderColumn]] ?? null;
+
+            if ($orderField) {
+                $qb->orderBy($orderField, $data['order'][0]['dir']);
+            }
         }
 
         return $qb;

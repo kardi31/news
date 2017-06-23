@@ -1,15 +1,18 @@
 kardi_news_all:
     locales:  { en: "/news/", pl: "/wiadomosci/" }
     defaults: { _controller: KardiNewsBundle:Default:showAllNews }
+    options:
+         linkable: true
+         title: 'Aktualności'
 kardi_news_show:
     locales:  { en: "/news/{categoryslug}/{slug}/{id}", pl: "/wiadomosci/{categoryslug}/{slug}/{id}" }
     defaults: { _controller: KardiNewsBundle:Default:showNews }
 kardi_news_comment_add:
     locales:  { en: "/add-comment/{newsId}/{parentId}", pl: "/dodaj-komentarz/wiadomosc/{newsId}/komentarz/{parentId}" }
     defaults: { _controller: KardiNewsBundle:Default:addComment }
-kardi_news_category:
-    locales:  { en: "/news/{slug}/", pl: "/wiadomosci/{slug}/" }
-    defaults: { _controller: KardiNewsBundle:Default:showCategory }
+#kardi_news_category:
+#    locales:  { en: "/news/{slug}/", pl: "/wiadomosci/{slug}/" }
+#    defaults: { _controller: KardiNewsBundle:Default:showCategory }
 kardi_news_tag:
     locales:  { en: "/news/tag/{slug}/", pl: "/wiadomosci/tag/{slug}/" }
     defaults: { _controller: KardiNewsBundle:Default:showTagNewsList }

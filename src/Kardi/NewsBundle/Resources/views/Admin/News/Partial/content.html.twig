@@ -1,0 +1,26 @@
+<div role="tabpanel" class="tab-pane active" id="form_content">
+    <div class="tabbable-custom">
+        <ul class="nav nav-tabs" role="tablist">
+            {% for translation in form.translations %}
+                {% set lang = translation.vars.value.lang %}
+                <li role="presentation" class="{% if loop.index == 1 %} active {% endif %}">
+                    <a href="#form_content_lang_{{ lang }}" role="tab" data-toggle="tab">
+                        {{ lang | upper}}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="tab-content">
+            {# iterate over each existing tag and render its only field: name #}
+            {% for translation in form.translations %}
+                {% set lang = translation.vars.value.lang %}
+                <div role="tabpanel" class="tab-pane {% if loop.index == 1 %} active {% endif %}" id="form_content_lang_{{ lang }}">
+                    {{ form_row(translation.title) }}
+                    {{ form_row(translation.content) }}
+                    {{ form_row(translation.lang) }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

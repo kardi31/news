@@ -46,21 +46,22 @@ var Datatable = function () {
                     "language": { // language settings
                         // metronic spesific
                         "metronicGroupActions": "_TOTAL_ records selected:  ",
-                        "metronicAjaxRequestGeneralError": "Could not complete request. Please check your internet connection",
+                        "metronicAjaxRequestGeneralError": "Whoops! Wystąpił błąd! Skontaktuj się z administratorem strony.",
 
                         // data tables spesific
-                        "lengthMenu": "<span class='seperator'>|</span>View _MENU_ records",
-                        "info": "<span class='seperator'>|</span>Found total _TOTAL_ records",
+                        "lengthMenu": "<span class='seperator'>|</span>Pokaż _MENU_ rekordów",
+                        "info": "<span class='seperator'>|</span>Wyświetlono _MAX_ rekordów",
+                        "infoFiltered": "spośród _TOTAL_ znalezionych",
                         "infoEmpty": "Brak danych",
                         "emptyTable": "Brak danych",
-                        "zeroRecords": "No matching records found",
+                        "zeroRecords": "Brak danych",
                         "paginate": {
-                            "previous": "Prev",
-                            "next": "Next",
-                            "last": "Last",
-                            "first": "First",
-                            "page": "Page",
-                            "pageOf": "of"
+                            "previous": "Poprzednia",
+                            "next": "Następna",
+                            "last": "Ostatnia",
+                            "first": "Pierwsza",
+                            "page": "Strona",
+                            "pageOf": "z"
                         }
                     },
 
@@ -138,6 +139,7 @@ var Datatable = function () {
                             tableInitialized = true; // set table initialized
                             table.show(); // display table
                         }
+
                         countSelectedRecords(); // reset selected records indicator
 
                         // callback for ajax data load
@@ -217,11 +219,17 @@ var Datatable = function () {
                     if ($(this).val().length > 0) {
                         filterValue.push($(this).val());
                     }
+                    else {
+                        console.log(td.find('textarea.form-filter, select.form-filter, input.form-filter').length);
+                        if (td.find('textarea.form-filter, select.form-filter, input.form-filter').length > 1) {
+                            filterValue.push(' ');
+                        }
+                    }
                 });
                 if (filterValue.length > 0) {
                     dataTable.columns(key).search(filterValue.join('-+-'));
                 }
-                else{
+                else {
                     dataTable.columns(key).search('');
                 }
             });

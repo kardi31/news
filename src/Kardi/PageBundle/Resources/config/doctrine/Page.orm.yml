@@ -1,0 +1,32 @@
+Kardi\PageBundle\Entity\Page:
+  type: entity
+  repositoryClass: Kardi\PageBundle\Repository\PageRepository
+  table: page_page
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    photoRootId:
+      type: integer
+      length: 11
+    type:
+      type: string
+      length: 255
+    updatedAt:
+      type: datetime
+      nullable: true
+  lifecycleCallbacks:
+      prePersist: [setUpdatedAt]
+  oneToMany:
+    translations:
+      targetEntity: PageTranslation
+      mappedBy: page
+      cascade: ["persist"]
+  manyToOne:
+      photo:
+        targetEntity: Kardi\MediaBundle\Entity\Photo
+        cascade: ["persist"]
+        joinColumn:
+          name: photo_root_id
+          referencedColumnName: id

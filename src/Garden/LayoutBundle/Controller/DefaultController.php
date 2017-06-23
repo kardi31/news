@@ -8,6 +8,11 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('GardenLayoutBundle:Default:index.html.twig');
+
+        $em = $this->getDoctrine()->getManager();
+        $homepage = $em->getRepository('KardiPageBundle:Page')
+            ->getHomepage();
+
+        return $this->render('GardenLayoutBundle:Default:index.html.twig', ['homepage' => $homepage]);
     }
 }

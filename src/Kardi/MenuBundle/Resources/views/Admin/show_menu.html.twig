@@ -1,0 +1,50 @@
+{% extends 'KardiAdminBundle:Template:metronic.html.twig' %}
+
+{% import 'KardiFrameworkBundle:Message:display_bootstrap_flash_message.html.twig' as flashMessage %}
+
+{% block pageTitle %}
+    {{ menu.title }}
+{% endblock pageTitle %}
+
+{% block content %}
+    {% set breadcrumbItems = {'kardi_admin_menu_list': 'Lista menu','':(block('pageTitle'))} %}
+    {{ parent() }}
+{% endblock content %}
+
+{% block pageContent %}
+    <!-- BEGIN PAGE BASE CONTENT -->
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="portlet light portlet-fit portlet-datatable bordered">
+                <div class="portlet-body">
+                    <div class="table-container">
+                        {{ flashMessage.display_flash_message() }}
+
+                        <div id="tree_4" class="tree-demo"> </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock pageContent %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/kardiadmin/assets/global/plugins/jstree/dist/themes/default/style.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/kardiadmin/assets/global/css/components.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/kardiadmin/assets/global/css/plugins.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bundles/kardiadmin/assets/global/plugins/datatables/datatables.min.css') }}"/>
+    <link rel="stylesheet"
+          src="{{ asset('bundles/kardiadmin/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}"/>
+{% endblock styles %}
+
+{% block footer_javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/kardiadmin/assets/global/plugins/jstree/dist/jstree.js') }}"></script>
+    <script src="{{ asset('bundles/kardiadmin/assets/pages/scripts/ui-tree.js') }}"></script>
+    <script src="{{ asset('bundles/kardiadmin/assets/global/scripts/datatable.js') }}"></script>
+    <script src="{{ asset('bundles/kardiadmin/assets/global/plugins/datatables/datatables.min.js') }}"></script>
+    <script src="{{ asset('bundles/kardiadmin/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}"></script>
+{% endblock footer_javascripts %}

@@ -22,7 +22,7 @@ class Tag extends Translation
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $news;
+    private $newsList;
 
     /**
      * Constructor
@@ -30,7 +30,7 @@ class Tag extends Translation
     public function __construct()
     {
         $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->news = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->newsList = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -78,37 +78,37 @@ class Tag extends Translation
     }
 
     /**
-     * Add news
+     * Add newsList
      *
-     * @param \Kardi\NewsBundle\Entity\News $news
+     * @param \Kardi\NewsBundle\Entity\News $newsList
      *
      * @return Tag
      */
-    public function addNews(\Kardi\NewsBundle\Entity\News $news)
+    public function addNews(\Kardi\NewsBundle\Entity\News $newsList)
     {
-        $this->news[] = $news;
+        $this->newsList[] = $newsList;
 
         return $this;
     }
 
     /**
-     * Remove news
+     * Remove newsList
      *
-     * @param \Kardi\NewsBundle\Entity\News $news
+     * @param \Kardi\NewsBundle\Entity\News $newsList
      */
-    public function removeNews(\Kardi\NewsBundle\Entity\News $news)
+    public function removeNews(\Kardi\NewsBundle\Entity\News $newsList)
     {
-        $this->news->removeElement($news);
+        $this->newsList->removeElement($newsList);
     }
 
     /**
-     * Get news
+     * Get newsList
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getNews()
     {
-        return $this->news;
+        return $this->newsList;
     }
 
     /**

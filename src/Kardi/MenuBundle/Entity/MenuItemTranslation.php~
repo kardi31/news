@@ -20,12 +20,23 @@ class MenuItemTranslation
     /**
      * @var string
      */
+    private $lang;
+
+    /**
+     * @var string
+     */
     private $title;
 
     /**
      * @var string
      */
     private $slug;
+
+    /**
+     * @var \Kardi\MenuBundle\Entity\MenuItem
+     */
+    private $menuItem;
+
 
     /**
      * Get id
@@ -59,6 +70,30 @@ class MenuItemTranslation
     public function getItemId()
     {
         return $this->item_id;
+    }
+
+    /**
+     * Set lang
+     *
+     * @param string $lang
+     *
+     * @return MenuItemTranslation
+     */
+    public function setLang($lang)
+    {
+        $this->lang = $lang;
+
+        return $this;
+    }
+
+    /**
+     * Get lang
+     *
+     * @return string
+     */
+    public function getLang()
+    {
+        return $this->lang;
     }
 
     /**
@@ -110,7 +145,7 @@ class MenuItemTranslation
     }
 
     /**
-     * Set menu
+     * Set menuItem
      *
      * @param \Kardi\MenuBundle\Entity\MenuItem $menuItem
      *
@@ -118,52 +153,18 @@ class MenuItemTranslation
      */
     public function setMenuItem(\Kardi\MenuBundle\Entity\MenuItem $menuItem = null)
     {
-        $this->menu_item = $menuItem;
+        $this->menuItem = $menuItem;
 
         return $this;
     }
 
     /**
-     * Get menu
+     * Get menuItem
      *
      * @return \Kardi\MenuBundle\Entity\MenuItem
      */
     public function getMenuItem()
     {
-        return $this->menu_item;
-    }
-    /**
-     * @var string
-     */
-    private $lang;
-
-    /**
-     * @var \Kardi\MenuBundle\Entity\Translation
-     */
-    private $menu_item;
-
-
-    /**
-     * Set lang
-     *
-     * @param string $lang
-     *
-     * @return MenuItemTranslation
-     */
-    public function setLang($lang)
-    {
-        $this->lang = $lang;
-
-        return $this;
-    }
-
-    /**
-     * Get lang
-     *
-     * @return string
-     */
-    public function getLang()
-    {
-        return $this->lang;
+        return $this->menuItem;
     }
 }

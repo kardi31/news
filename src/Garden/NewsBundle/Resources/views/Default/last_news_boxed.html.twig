@@ -1,0 +1,64 @@
+<!--Featured Three Column-->
+<section class="featured-three-column style-two">
+    <div class="auto-container">
+        <div class="row clearfix">
+            {% for news in newsList %}
+                <!--Column-->
+                <div class="col-md-4 col-sm-6 col-xs-12 column">
+                    <article class="inner-box">
+                        <figure class="image">
+                            <a href="{{ generate_news_url(news) }}">
+                                <img
+                                        src="{{ news.photo.mainPhoto.show('370x250') }}"
+                                        alt="">
+                            </a>
+                            <div class="overlay">
+                                <span class="left-curve"></span>
+                                <span class="right-curve"></span>
+                                <a href="{{ generate_news_url(news) }}" class="overlay-link"></a>
+                            </div>
+                        </figure>
+                        <div class="content">
+                            <h3>{{ news.trans('title') }}</h3>
+                            <div class="text">
+                                <p>{{ news.trans('content') | striptags | truncate(50)  }}</p>
+                            </div>
+                            <div class="link">
+                                <a href="{{ generate_news_url(news) }}" class="read-more normal-btn theme-btn"><span class="fa fa-caret-right"></span> Czytaj więcej</a></div>
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{#
+<div class="block">
+    <div class="block-title">
+        <a href="{{ path('kardi_news_all') }}" class="right">{% trans %} See all articles {% endtrans %}</a>
+        <h2>{% trans %} Latest news {% endtrans %}</h2>
+    </div>
+    <div class="block-content">
+        <ul class="article-block-big">
+            {% for news in newsList %}
+            <li>
+                <div class="article-photo">
+                    <a href="{{ generate_news_url(news) }}" class="hover-effect"><img src="{{ asset(news.photo.mainPhoto.show('190x130')) }}" alt="{{ news.trans('title') }}"/></a>
+                </div>
+                <div class="article-content">
+                    <h4>
+                        <a href="{{ generate_news_url(news) }}">{{ news.trans('title') }}</a>
+                        {% if comments_active() %}
+                            <a href="{{ generate_news_url(news) }}#comments" class="h-comment">{{ news.countComments }}</a>
+                        {% endif %}
+                    </h4>
+                    <span class="meta">
+                        <a href="{{ generate_news_url(news) }}"><span class="icon-text">&#128340;</span>{{ news.publishDate(false) }}</a>
+                    </span>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+#}

@@ -1,26 +1,73 @@
 kardi_admin_news:
     path:  /list-news
-    defaults: { _controller: KardiNewsBundle:Admin:listNews}
+    defaults: { _controller: KardiNewsBundle:Admin/News:listNews}
 kardi_admin_news_data:
     path:  /list-news-data
-    defaults: { _controller: KardiNewsBundle:Admin:listNewsData}
+    defaults: { _controller: KardiNewsBundle:Admin/News:listNewsData}
     options:
         expose: true
 kardi_admin_edit_news:
     path:  /edit-news/{id}
-    defaults: { _controller: KardiNewsBundle:Admin:editNews}
+    defaults: { _controller: KardiNewsBundle:Admin/News:editNews}
+    requirements:
+        id: '\d+'
+kardi_admin_delete_news:
+    path:  /delete-news/{id}
+    defaults: { _controller: KardiNewsBundle:Admin/News:deleteNews}
     requirements:
         id: '\d+'
 kardi_admin_add_news:
     path:  /add-news
-    defaults: { _controller: KardiNewsBundle:Admin:addNews}
+    defaults: { _controller: KardiNewsBundle:Admin/News:addNews}
 kardi_admin_news_toggle_breaking:
     path:  /toggle-breaking/{id}
-    defaults: { _controller: KardiNewsBundle:Admin:toggleBreaking}
+    defaults: { _controller: KardiNewsBundle:Admin/News:toggleBreaking}
     requirements:
         id: '\d+'
 kardi_admin_news_toggle_active:
     path:  /toggle-active/{id}
-    defaults: { _controller: KardiNewsBundle:Admin:toggleActive}
+    defaults: { _controller: KardiNewsBundle:Admin/News:toggleActive}
     requirements:
         id: '\d+'
+kardi_admin_news_category:
+    path:  /list-category
+    defaults: { _controller: KardiNewsBundle:Admin/Category:listCategory}
+kardi_admin_category_data:
+    path:  /list-category-data
+    defaults: { _controller: KardiNewsBundle:Admin/Category:listCategoryData}
+    options:
+        expose: true
+kardi_admin_edit_category:
+    path:  /edit-category/{id}
+    defaults: { _controller: KardiNewsBundle:Admin/Category:editCategory}
+    requirements:
+        id: '\d+'
+kardi_admin_add_category:
+    path:  /add-category
+    defaults: { _controller: KardiNewsBundle:Admin/Category:addCategory}
+kardi_admin_category_toggle_active:
+    path:  /category-toggle-active/{id}
+    defaults: { _controller: KardiNewsBundle:Admin/Category:toggleActive}
+    requirements:
+        id: '\d+'
+kardi_admin_news_tag:
+    path:  /list-tag
+    defaults: { _controller: KardiNewsBundle:Admin/Tag:listTag}
+kardi_admin_news_tag_data:
+    path:  /list-tag-data
+    defaults: { _controller: KardiNewsBundle:Admin/Tag:listTagData}
+    options:
+        expose: true
+kardi_admin_edit_news_tag:
+    path:  /edit-tag/{id}
+    defaults: { _controller: KardiNewsBundle:Admin/Tag:editTag}
+    requirements:
+        id: '\d+'
+kardi_admin_delete_news_tag:
+    path:  /delete-tag/{id}
+    defaults: { _controller: KardiNewsBundle:Admin/Tag:deleteTag}
+    requirements:
+        id: '\d+'
+kardi_admin_add_news_tag:
+    path:  /add-tag
+    defaults: { _controller: KardiNewsBundle:Admin/Tag:addTag}

@@ -1,0 +1,18 @@
+{% extends '@KardiPage/Admin/edit_page.html.twig' %}
+
+{% block pageTitle %}
+    Dodaj stronę
+{% endblock pageTitle %}
+
+{% block content %}
+    {% set breadcrumbItems = {'kardi_admin_page': 'Strony', '':(block('pageTitle'))} %}
+    {% set sidebarItems = [
+    {'href': 'form_content', 'icon': 'fa-newspaper-o', 'title': 'Treść'},
+    {'href': 'form_settings', 'icon': 'fa-cog', 'title': 'Ustawienia'},
+    ] %}
+
+    {{ parent() }}
+{% endblock content %}
+
+{% block additional_js %}
+{% endblock additional_js %}

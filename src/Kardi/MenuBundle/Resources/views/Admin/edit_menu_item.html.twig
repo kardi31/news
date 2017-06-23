@@ -1,0 +1,60 @@
+{% extends 'KardiAdminBundle:Template:edit.html.twig' %}
+
+{% import 'KardiFrameworkBundle:Message:display_bootstrap_flash_message.html.twig' as flashMessage %}
+
+{% block pageTitle %}
+    Lista menu
+{% endblock pageTitle %}
+
+{% block content %}
+    {% set breadcrumbItems = {'':(block('pageTitle'))} %}
+    {% if sidebarItems is not defined %}
+        {% set sidebarItems = [
+        {'href': 'form_content', 'icon': 'fa-newspaper-o', 'title': 'Treść'},
+        {'href': 'form_settings', 'icon': 'fa-cog', 'title': 'Ustawienia'},
+        ] %}
+    {% endif %}
+    {{ parent() }}
+{% endblock content %}
+
+{% block pageContent %}
+    <!-- BEGIN PAGE BASE CONTENT -->
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-news"></i> {{ block('pageTitle') }}
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    {% form_theme form with ['@KardiAdmin/Default/Form/metronic_layout.html.twig', _self] %}
+                    {{ form_start(form) }}
+                    <div class="tab-content">
+                        {% include '@KardiMenu/Admin/Partial/content.html.twig' %}
+                        {% include '@KardiMenu/Admin/Partial/settings.html.twig' %}
+                    </div>
+                    {{ form_row(form.submit, { 'cancelUrl': path('kardi_admin_menu_show',{'id' : menuItem.id}) }) }}
+                    {{ form_end(form) }}
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock pageContent %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" src="{{ asset('bundles/kardiadmin/assets/global/plugins/datatables/datatables.min.css') }}"/>
+    <link rel="stylesheet"
+          src="{{ asset('bundles/kardiadmin/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}"/>
+{% endblock styles %}
+
+{% block footer_javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/kardiadmin/assets/global/scripts/datatable.js') }}"></script>
+    <script src="{{ asset('bundles/kardiadmin/assets/global/plugins/datatables/datatables.min.js') }}"></script>
+    <script src="{{ asset('bundles/kardiadmin/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}"></script>
+{% endblock footer_javascripts %}

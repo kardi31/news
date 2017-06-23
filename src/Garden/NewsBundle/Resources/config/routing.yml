@@ -1,0 +1,4 @@
+kardi_news:
+    resource: "@KardiNewsBundle/Resources/config/routing.yml"
+    type: be_simple_i18n
+    prefix:   /

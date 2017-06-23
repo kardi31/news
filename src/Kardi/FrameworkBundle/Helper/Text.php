@@ -4,8 +4,19 @@ namespace Kardi\FrameworkBundle\Helper;
 
 class Text
 {
-    public static function createUniqueFilename($filename, $directory)
+    /**
+     * @param $filename
+     * @param $directory
+     * @param bool $slugify
+     * @return string
+     */
+    public static function createUniqueFilename($filename, $directory, $slugify = false)
     {
+        if ($slugify) {
+            dump($filename);
+            $filename = self::createSlug($filename);
+            dump($filename);
+        }
         if (is_dir($directory)) {
             $filePath = realpath($directory . DIRECTORY_SEPARATOR . $filename);
             if (file_exists($filePath)) {
@@ -25,7 +36,12 @@ class Text
         }
     }
 
-
+    /**
+     * @param $string
+     * @param bool $toLower
+     * @param string $space
+     * @return string
+     */
     public static function createSlug($string, $toLower = true, $space = '-')
     {
         $chars = array(
@@ -134,6 +150,8 @@ class Text
         if ($toLower) {
             return strtolower($string);
         }
+
+        return $string;
     }
 
     public static function wrapInQuotes($string)

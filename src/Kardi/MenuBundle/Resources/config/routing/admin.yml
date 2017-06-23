@@ -1,0 +1,24 @@
+kardi_admin_menu_list:
+    path:     /list-menu
+    defaults: { _controller: KardiMenuBundle:Admin\Menu:listMenu }
+kardi_admin_menu_show:
+    path:     /show-menu/{id}
+    defaults: { _controller: KardiMenuBundle:Admin\Menu:showMenu }
+kardi_admin_menu_show_menu_data:
+    path:     /show-menu-data
+    defaults: { _controller: KardiMenuBundle:Admin\Menu:showMenuData }
+    options:
+         expose: true
+kardi_admin_menu_move_menu_item:
+    path:     /move-menu-item
+    defaults: { _controller: KardiMenuBundle:Admin\Menu:moveMenuItem }
+    options:
+         expose: true
+kardi_admin_menu_edit_item:
+    path:     /edit-menu-item/{id}
+    defaults: { _controller: KardiMenuBundle:Admin\Menu:editMenuItem }
+kardi_admin_menu_delete_item:
+    path:     /delete-menu-item/{id}
+    defaults: { _controller: KardiMenuBundle:Admin\Menu:deleteMenuItem }
+    options:
+         expose: true

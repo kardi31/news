@@ -17,11 +17,14 @@ class DefaultController extends Controller
         $menu = $em->getRepository('KardiMenuBundle:Menu')
             ->getMainMenu();
 
-//        if(!$menu){
-//            throw new \Exception('Main menu not found');
-//        }
+        $menuItems = $em->getRepository('KardiMenuBundle:MenuItem')
+            ->fetchMenuTree($menu->getId());
 
-        return $this->render('KardiMenuBundle:Default:main-menu.html.twig', ['menu' => $menu]);
+        if(!$menu){
+            throw new \Exception('Main menu not found');
+        }
+
+        return $this->render('KardiMenuBundle:Default:main-menu.html.twig', ['menuItems' => $menuItems]);
     }
 
     public function secondaryMenuAction()

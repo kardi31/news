@@ -10,6 +10,15 @@
     </select>
 {% endmacro %}
 
+{% macro filterSelect(options) %}
+    <select name="order_status" class="form-control form-filter input-sm">
+        <option value="">Wybierz...</option>
+        {% for option in options %}
+            <option value="{{ option['id'] }}">{{option['title']}}</option>
+        {% endfor %}
+    </select>
+{% endmacro %}
+
 {% macro filterDate() %}
     <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
         <input type="text" class="form-control form-filter input-sm" readonly placeholder="Od">

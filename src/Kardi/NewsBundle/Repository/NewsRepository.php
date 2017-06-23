@@ -15,7 +15,7 @@ class NewsRepository extends DataTableRepository
     {
         $qb = $this->createQueryBuilder('n');
         $qb->orderBy('n.id', 'DESC');
-        $qb->andWhere('n.breaking_news = 1');
+        $qb->andWhere('n.breakingNews = 1');
 
         $query = $qb->getQuery();
 
@@ -56,8 +56,8 @@ class NewsRepository extends DataTableRepository
     public function getCategoryNewsListQuery($categoryId, $limit)
     {
         $qb = $this->createQueryBuilder('n');
-        $qb->andWhere('n.category_id = :category_id');
-        $qb->setParameter('category_id', $categoryId);
+        $qb->andWhere('n.categoryId = :categoryId');
+        $qb->setParameter('categoryId', $categoryId);
         $qb->orderBy('n.id', 'DESC');
 
         if ($limit) {
@@ -100,28 +100,50 @@ class NewsRepository extends DataTableRepository
      * @param array $fields
      * @param array $data
      * @param QueryBuilder|null $queryBuilder
+     * @param null|string $locale
      * @return mixed
      */
-    public function getDatatableResults(array $fields, array $data, ?QueryBuilder $queryBuilder = null)
+    public function getDatatableResults(array $fields, array $data, ?QueryBuilder $queryBuilder = null, ?string $locale = null)
     {
         if (!$queryBuilder) {
-            $queryBuilder = $this->getNewsQueryBuilder();
+            $queryBuilder = $this->getNewsQueryBuilder($locale);
         }
 
         return parent::getDatatableResults($fields, $data, $queryBuilder);
     }
 
     /**
+     * @param array $fields
+     * @param array $data
+     * @param QueryBuilder|null $queryBuilder
+     * @param null|string $locale
+     * @return mixed
+     */
+    public function countDatatableResults(array $fields, array $data, ?QueryBuilder $queryBuilder = null, ?string $locale = null)
+    {
+        if (!$queryBuilder) {
+            $queryBuilder = $this->getNewsQueryBuilder($locale);
+        }
+
+        return parent::countDatatableResults($fields, $data, $queryBuilder);
+    }
+
+    /**
+     * @param null|string $locale
      * @return QueryBuilder
      */
-    private function getNewsQueryBuilder()
+    private function getNewsQueryBuilder(?string $locale): QueryBuilder
     {
-         $qb = $this->createQueryBuilder('n')
-        ->select('n')
-        ->leftJoin('n.comments', 'c')
-         ->leftJoin('n.translations', 'nt')
-        ->groupBy('n.id');
-
+        $qb = $this->createQueryBuilder('n')
+            ->select('n, count(c) as comment_count')
+            ->leftJoin('n.comments', 'c')
+            ->leftJoin('n.translations', 'nt')
+            ->leftJoin('n.category', 'cat')
+            ->leftJoin('cat.translations', 'catt')
+            ->andWhere("nt.lang = :locale")
+            ->andWhere("catt.lang = :locale")
+            ->setParameter('locale', $locale)
+            ->groupBy('n.id');
         return $qb;
     }
 }

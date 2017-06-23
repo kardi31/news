@@ -26,6 +26,10 @@ class Category extends Translation
     private $translations;
 
     /**
+     * @var boolean
+     */
+    private $active = 1;
+    /**
      * Constructor
      */
     public function __construct()
@@ -120,4 +124,23 @@ class Category extends Translation
         return parent::trans($field);
     }
 
+
+    /**
+     * @param $active
+     * @return $this
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
 }

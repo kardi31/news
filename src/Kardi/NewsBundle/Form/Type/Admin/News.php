@@ -2,6 +2,9 @@
 
 namespace Kardi\NewsBundle\Form\Type\Admin;
 
+use Kardi\AdminBundle\Form\Type\TranslationForm;
+use Kardi\NewsBundle\Entity\NewsTranslation;
+use Kardi\NewsBundle\Form\Type\Admin\Translation;
 use Kardi\NewsBundle\Entity\News as NewsEntity;
 use Kardi\NewsBundle\Provider\CategoryProvider;
 use Kardi\NewsBundle\Provider\TagProvider;
@@ -40,13 +43,16 @@ class News extends AbstractType
 
             'format' => 'dd-MM-yyyy HH:mm'
         ]);
-        $builder->add('active', CheckboxType::class, ['compound' => false, 'label' => 'Aktywny', 'required' => false, 'data' => false]);
-        $builder->add('breakingNews', CheckboxType::class, ['compound' => false, 'label' => 'Ważny news', 'required' => false, 'data' => false]);
+        $builder->add('active', CheckboxType::class, ['compound' => false, 'label' => 'Aktywny', 'required' => false]);
+        $builder->add('breakingNews', CheckboxType::class, ['compound' => false, 'label' => 'Ważny news', 'required' => false]);
         $builder->add('categoryId', ChoiceType::class, ['choices' => $this->categoryProvider->prependCategories(), 'label' => 'Kategoria']);
         $builder->add('submit', SubmitType::class, ['attr' => ['class' => 'button'], 'label' => 'Zapisz']);
 
         $builder->add('translations', CollectionType::class, [
-            'entry_type' => NewsTranslation::class
+            'entry_type' => TranslationForm::class,
+            'entry_options' => [
+                'data_class' => NewsTranslation::class
+            ]
         ]);
 
         $builder->add(
@@ -61,6 +67,7 @@ class News extends AbstractType
                 },
                 'multiple' => true,
                 'label' => 'Tagi',
+                'required' => false,
                 'attr' =>
                     [
                         'class' => 'select2-multiple'

@@ -1,0 +1,20 @@
+{% extends 'KardiNewsBundle:Admin/News:edit_news.html.twig' %}
+
+{% block pageTitle %}
+    Dodaj news
+{% endblock pageTitle %}
+
+{% block content %}
+    {% set breadcrumbItems = {'kardi_admin_news': 'Newsy', '':(block('pageTitle'))} %}
+    {% set sidebarItems = [
+    {'href': 'form_content', 'icon': 'fa-newspaper-o', 'title': 'Treść'},
+    {'href': 'form_settings', 'icon': 'fa-cog', 'title': 'Ustawienia'},
+    {'href': 'form_tags', 'icon': 'fa-tag', 'title': 'Tagi'},
+    {'href': 'form_meta', 'icon': 'fa-tag', 'title': 'Meta tagi'},
+    ] %}
+
+    {{ parent() }}
+{% endblock content %}
+
+{% block additional_js %}
+{% endblock additional_js %}

@@ -3,7 +3,6 @@
 namespace Kardi\AdBundle\Router;
 
 
-use BeSimple\I18nRoutingBundle\Routing\Router;
 use Kardi\AdBundle\Entity\Ad;
 
 class AdRouter
@@ -17,7 +16,7 @@ class AdRouter
      * NewsRouter constructor.
      * @param Router $router
      */
-    public function __construct(Router $router)
+    public function __construct($router)
     {
         $this->_router = $router;
     }

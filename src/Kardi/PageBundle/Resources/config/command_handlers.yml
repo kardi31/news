@@ -1,0 +1,14 @@
+services:
+    kardi_page.command.handler.add:
+        class: Kardi\PageBundle\Command\Handler\AddPageCommandHandler
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: command_handler, handles: Kardi\PageBundle\Command\AddPageCommand }
+    kardi_page.command.handler.delete:
+        class: Kardi\PageBundle\Command\Handler\DeletePageCommandHandler
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@kardi_media.service.photo'
+        tags:
+            - { name: command_handler, handles: Kardi\PageBundle\Command\DeletePageCommand }

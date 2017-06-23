@@ -1,16 +1,16 @@
-# src/Kardi/MenuBundle/Resources/config/doctrine/MenuItem.orm.yml
 Kardi\MenuBundle\Entity\MenuItem:
   type: entity
-  repositoryClass: Gedmo\Tree\Entity\Repository\NestedTreeRepository
+  repositoryClass: Kardi\MenuBundle\Repository\MenuItemRepository
   table: menu_menuitem
-  gedmo:
-    tree:
-      type: nested
   id:
     id:
       type: integer
       generator: { strategy: AUTO }
   fields:
+    route:
+      type: string
+      length: 255
+      nullable: true
     custom_url:
       type: string
       length: 255
@@ -18,37 +18,15 @@ Kardi\MenuBundle\Entity\MenuItem:
     menu_id:
       type: integer
       length: 11
-    lft:
+    pos:
       type: integer
       nullable: false
+    parent:
+      type: integer
+      nullable: true
       options:
-          unsigned: false
-      gedmo:
-        - treeLeft
-    rgt:
-      type: integer
-      gedmo:
-        - treeRight
-    lvl:
-      type: integer
-      gedmo:
-        - treeLevel
+         default: null
   manyToOne:
-      root:
-        targetEntity: MenuItem
-        joinColumn:
-          referencedColumnName: id
-          onDelete: CASCADE
-        gedmo:
-          - treeRoot
-      parent:
-        targetEntity: MenuItem
-        inversedBy: children
-        joinColumn:
-          referencedColumnName: id
-          onDelete: CASCADE
-        gedmo:
-          - treeParent
       menu:
         targetEntity: Menu
         inversedBy: items
@@ -56,11 +34,6 @@ Kardi\MenuBundle\Entity\MenuItem:
           name: menu_id
           referencedColumnName: id
   oneToMany:
-    children:
-      targetEntity: MenuItem
-      mappedBy: parent
-      orderBy:
-        lft: ASC
     translations:
       targetEntity: MenuItemTranslation
       mappedBy: menuItem

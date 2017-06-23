@@ -1,4 +1,13 @@
 services:
-#    kardi_menu.example:
-#        class: Kardi\MenuBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    kardi_menu.provider.linkable_route:
+        class: Kardi\MenuBundle\Provider\LinkableRouteProvider
+        arguments:
+            - '@router'
+            - '@kardi_news.provider.route.category'
+    kardi_menu.form.admin.menu_item:
+        class: Kardi\MenuBundle\Form\MenuItem
+        arguments:
+            - '@kardi_menu.provider.linkable_route'
+        tags:
+            - { name: form.type }
+

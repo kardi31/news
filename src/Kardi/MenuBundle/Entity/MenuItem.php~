@@ -17,27 +17,12 @@ class MenuItem extends Translation
     /**
      * @var string
      */
-    protected $translations;
-
-    /**
-     * @var string
-     */
     private $custom_url;
 
     /**
      * @var integer
      */
     private $menu_id;
-
-    /**
-     * @var integer
-     */
-    private $lft;
-
-    /**
-     * @var integer
-     */
-    private $rgt;
 
     /**
      * @var integer
@@ -50,14 +35,9 @@ class MenuItem extends Translation
     private $children;
 
     /**
-     * @var \Kardi\MenuBundle\Entity\MenuItem
+     * @var \Doctrine\Common\Collections\Collection
      */
-    private $root;
-
-    /**
-     * @var \Kardi\MenuBundle\Entity\MenuItem
-     */
-    private $parent;
+    private $translations;
 
     /**
      * @var \Kardi\MenuBundle\Entity\Menu
@@ -83,13 +63,6 @@ class MenuItem extends Translation
         return $this->id;
     }
 
-    public function setLink($link)
-    {
-        $this->link = $customUrl;
-
-        return $this;
-    }
-    
     /**
      * Set customUrl
      *
@@ -139,54 +112,6 @@ class MenuItem extends Translation
     }
 
     /**
-     * Set lft
-     *
-     * @param integer $lft
-     *
-     * @return MenuItem
-     */
-    public function setLft($lft)
-    {
-        $this->lft = $lft;
-
-        return $this;
-    }
-
-    /**
-     * Get lft
-     *
-     * @return integer
-     */
-    public function getLft()
-    {
-        return $this->lft;
-    }
-
-    /**
-     * Set rgt
-     *
-     * @param integer $rgt
-     *
-     * @return MenuItem
-     */
-    public function setRgt($rgt)
-    {
-        $this->rgt = $rgt;
-
-        return $this;
-    }
-
-    /**
-     * Get rgt
-     *
-     * @return integer
-     */
-    public function getRgt()
-    {
-        return $this->rgt;
-    }
-
-    /**
      * Set lvl
      *
      * @param integer $lvl
@@ -211,85 +136,37 @@ class MenuItem extends Translation
     }
 
     /**
-     * Add child
+     * Add translation
      *
-     * @param \Kardi\MenuBundle\Entity\MenuItem $child
+     * @param \Kardi\MenuBundle\Entity\MenuItemTranslation $translation
      *
      * @return MenuItem
      */
-    public function addChild(\Kardi\MenuBundle\Entity\MenuItem $child)
+    public function addTranslation(\Kardi\MenuBundle\Entity\MenuItemTranslation $translation)
     {
-        $this->children[] = $child;
+        $this->translations[] = $translation;
 
         return $this;
     }
 
     /**
-     * Remove child
+     * Remove translation
      *
-     * @param \Kardi\MenuBundle\Entity\MenuItem $child
+     * @param \Kardi\MenuBundle\Entity\MenuItemTranslation $translation
      */
-    public function removeChild(\Kardi\MenuBundle\Entity\MenuItem $child)
+    public function removeTranslation(\Kardi\MenuBundle\Entity\MenuItemTranslation $translation)
     {
-        $this->children->removeElement($child);
+        $this->translations->removeElement($translation);
     }
 
     /**
-     * Get children
+     * Get translations
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getChildren()
+    public function getTranslations()
     {
-        return $this->children;
-    }
-
-    /**
-     * Set root
-     *
-     * @param \Kardi\MenuBundle\Entity\MenuItem $root
-     *
-     * @return MenuItem
-     */
-    public function setRoot(\Kardi\MenuBundle\Entity\MenuItem $root = null)
-    {
-        $this->root = $root;
-
-        return $this;
-    }
-
-    /**
-     * Get root
-     *
-     * @return \Kardi\MenuBundle\Entity\MenuItem
-     */
-    public function getRoot()
-    {
-        return $this->root;
-    }
-
-    /**
-     * Set parent
-     *
-     * @param \Kardi\MenuBundle\Entity\MenuItem $parent
-     *
-     * @return MenuItem
-     */
-    public function setParent(\Kardi\MenuBundle\Entity\MenuItem $parent = null)
-    {
-        $this->parent = $parent;
-
-        return $this;
-    }
-
-    /**
-     * Get parent
-     *
-     * @return \Kardi\MenuBundle\Entity\MenuItem
-     */
-    public function getParent()
-    {
-        return $this->parent;
+        return $this->translations;
     }
 
     /**
@@ -315,58 +192,26 @@ class MenuItem extends Translation
     {
         return $this->menu;
     }
-    
-    /**
-     * 
-     * @param \Kardi\MenuBundle\Entity\MenuItemTranslation $itemTranslation
-     * @return \Kardi\MenuBundle\Entity\MenuItem
-     */
-    public function addTranslation(\Kardi\MenuBundle\Entity\MenuItemTranslation $itemTranslation)
-    {
-        $this->translations[] = $itemTranslation;
 
-        $this->setTranslations($this->translations);
-        
-        return $this;
-    }
 
     /**
-     * Remove item translation
-     *
-     * @param \Kardi\MenuBundle\Entity\MenuItem $itemTranslation
+     * @return string
      */
-    public function removeItemTranslation(\Kardi\MenuBundle\Entity\MenuItemTranslation $itemTranslation)
-    {
-        $this->translations->removeElement($itemTranslation);
-        
-        $this->setTranslations($this->translations);
-    }
-
-    /**
-     * Get all item translations
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTranslations()
-    {
-        return $this->translations;
-    }
-    
     public function getLink()
     {
-
-//        dump($this->container);exit;
         $children = $this->getChildren();
 
         if (count($children) > 0) {
             return 'javascript:void(0)';
         }
 
-//        return $this->trans('slug'); //''; //$this->getSlug();
+        return $this->trans('slug');
     }
-    
-    public function getTitle()
+
+    public function trans($field)
     {
-//        return $this->trans('title');
+        $this->setTranslations($this->translations);
+
+        return parent::trans($field);
     }
 }

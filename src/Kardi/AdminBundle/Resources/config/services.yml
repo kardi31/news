@@ -3,3 +3,9 @@ services:
         class: Kardi\AdminBundle\Helper\Datatable
         arguments:
             - '@router'
+    kardi_admin.twig.datatable_extension:
+        class: Kardi\AdminBundle\Twig\DatatableExtension
+        arguments:
+            - '@kardi_admin.helper.datatable'
+        tags:
+            - { name: twig.extension }

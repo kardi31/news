@@ -2,6 +2,7 @@
 
 namespace Kardi\MenuBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Kardi\FrameworkBundle\Entity\Translation;
 
 /**
@@ -25,21 +26,6 @@ class MenuItem extends Translation
     private $menu_id;
 
     /**
-     * @var integer
-     */
-    private $lft;
-
-    /**
-     * @var integer
-     */
-    private $rgt;
-
-    /**
-     * @var integer
-     */
-    private $lvl;
-
-    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $children;
@@ -50,19 +36,14 @@ class MenuItem extends Translation
     private $translations;
 
     /**
-     * @var \Kardi\MenuBundle\Entity\MenuItem
-     */
-    private $root;
-
-    /**
-     * @var \Kardi\MenuBundle\Entity\MenuItem
-     */
-    private $parent;
-
-    /**
      * @var \Kardi\MenuBundle\Entity\Menu
      */
     private $menu;
+
+    /**
+     * @var string|null
+     */
+    private $route;
 
     /**
      * Constructor
@@ -132,54 +113,6 @@ class MenuItem extends Translation
     }
 
     /**
-     * Set lft
-     *
-     * @param integer $lft
-     *
-     * @return MenuItem
-     */
-    public function setLft($lft)
-    {
-        $this->lft = $lft;
-
-        return $this;
-    }
-
-    /**
-     * Get lft
-     *
-     * @return integer
-     */
-    public function getLft()
-    {
-        return $this->lft;
-    }
-
-    /**
-     * Set rgt
-     *
-     * @param integer $rgt
-     *
-     * @return MenuItem
-     */
-    public function setRgt($rgt)
-    {
-        $this->rgt = $rgt;
-
-        return $this;
-    }
-
-    /**
-     * Get rgt
-     *
-     * @return integer
-     */
-    public function getRgt()
-    {
-        return $this->rgt;
-    }
-
-    /**
      * Set lvl
      *
      * @param integer $lvl
@@ -201,48 +134,6 @@ class MenuItem extends Translation
     public function getLvl()
     {
         return $this->lvl;
-    }
-
-    /**
-     * Add child
-     *
-     * @param \Kardi\MenuBundle\Entity\MenuItem $child
-     *
-     * @return MenuItem
-     */
-    public function addChild(\Kardi\MenuBundle\Entity\MenuItem $child)
-    {
-        $this->children[] = $child;
-
-        return $this;
-    }
-
-    /**
-     * Remove child
-     *
-     * @param \Kardi\MenuBundle\Entity\MenuItem $child
-     */
-    public function removeChild(\Kardi\MenuBundle\Entity\MenuItem $child)
-    {
-        $this->children->removeElement($child);
-    }
-
-    /**
-     * Get children
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getChildren()
-    {
-        return $this->children;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasChildren()
-    {
-        return count($this->children) > 0;
     }
 
     /**
@@ -277,54 +168,6 @@ class MenuItem extends Translation
     public function getTranslations()
     {
         return $this->translations;
-    }
-
-    /**
-     * Set root
-     *
-     * @param \Kardi\MenuBundle\Entity\MenuItem $root
-     *
-     * @return MenuItem
-     */
-    public function setRoot(\Kardi\MenuBundle\Entity\MenuItem $root = null)
-    {
-        $this->root = $root;
-
-        return $this;
-    }
-
-    /**
-     * Get root
-     *
-     * @return \Kardi\MenuBundle\Entity\MenuItem
-     */
-    public function getRoot()
-    {
-        return $this->root;
-    }
-
-    /**
-     * Set parent
-     *
-     * @param \Kardi\MenuBundle\Entity\MenuItem $parent
-     *
-     * @return MenuItem
-     */
-    public function setParent(\Kardi\MenuBundle\Entity\MenuItem $parent = null)
-    {
-        $this->parent = $parent;
-
-        return $this;
-    }
-
-    /**
-     * Get parent
-     *
-     * @return \Kardi\MenuBundle\Entity\MenuItem
-     */
-    public function getParent()
-    {
-        return $this->parent;
     }
 
     /**
@@ -371,5 +214,129 @@ class MenuItem extends Translation
         $this->setTranslations($this->translations);
 
         return parent::trans($field);
+    }
+
+    /**
+     * @var integer
+     */
+    private $pos;
+
+    /**
+     * @var integer
+     */
+    private $parent;
+
+
+    /**
+     * Set pos
+     *
+     * @param integer $pos
+     *
+     * @return MenuItem
+     */
+    public function setPos($pos)
+    {
+        $this->pos = $pos;
+
+        return $this;
+    }
+
+    /**
+     * Get pos
+     *
+     * @return integer
+     */
+    public function getPos()
+    {
+        return $this->pos;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param integer $parent
+     *
+     * @return MenuItem
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return integer
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection|\Doctrine\Common\Collections\Collection
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    public function hasChildren()
+    {
+        return !empty($this->getChildren());
+    }
+
+    /**
+     * @param MenuItem $child
+     */
+    public function addChild(MenuItem $child)
+    {
+        if (!$this->children) {
+            $this->children = new ArrayCollection();
+        }
+
+        $this->children->add($child);
+    }
+
+    /**
+     * @param ArrayCollection $children
+     */
+    public function setChildren(ArrayCollection $children)
+    {
+        $this->children = $children;
+    }
+
+    public function sortChildren()
+    {
+        $children = $this->getChildren();
+        if ($children) {
+            $children = $children->toArray();
+        }
+
+        usort($children, [$this, 'sortByPos']);
+        $this->setChildren(new ArrayCollection($children));
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getRoute(): ?string
+    {
+        return $this->route;
+    }
+
+    /**
+     * @param null|string $route
+     */
+    public function setRoute(?string $route)
+    {
+        $this->route = $route;
+    }
+
+    private function sortByPos($a, $b)
+    {
+        return $a->getPos() > $b->getPos() ? 1 : -1;
     }
 }

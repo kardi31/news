@@ -194,7 +194,7 @@ class News extends Translation
     /**
      * @var \DateTime
      */
-    private $publish_date;
+    private $publishDate;
 
 
 //    /**
@@ -228,15 +228,18 @@ class News extends Translation
 //    }
 
     /**
-     * @param bool $publishDate
-     * @return $this
+     * Set publishDate
+     *
+     * @param \DateTime $publishDate
+     *
+     * @return News
      */
     public function setPublishDate($publishDate = false)
     {
         if (!$publishDate) {
             $publishDate = $this->getCreatedAt();
         }
-        $this->publish_date = $publishDate;
+        $this->publishDate = $publishDate;
 
         return $this;
     }
@@ -249,10 +252,10 @@ class News extends Translation
     public function getPublishDate($object = true, $format = 'Y-m-d H:i')
     {
         if ($object) {
-            return $this->publish_date;
+            return $this->publishDate;
         }
 
-        return $this->publish_date->format($format);
+        return $this->publishDate->format($format);
     }
 
     /**

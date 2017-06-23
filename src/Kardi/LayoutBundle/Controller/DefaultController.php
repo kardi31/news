@@ -6,8 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+
+    public function renderHeaderAction()
     {
-        return $this->render('KardiLayoutBundle:Default:index.html.twig');
+
     }
 }

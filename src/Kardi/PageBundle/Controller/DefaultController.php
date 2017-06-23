@@ -8,7 +8,11 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('KardiPageBundle:Default:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $homepage = $em->getRepository('KardiPageBundle:Page')
+            ->getHomepage();
+
+        return $this->render('KardiPageBundle:Default:index.html.twig', ['homepage' => $homepage]);
     }
 
     public function contactAction()

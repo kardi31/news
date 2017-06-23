@@ -49,13 +49,13 @@ class DefaultController extends Controller
         ]);
     }
 
-    public function latestNewsBigImageAction()
+    public function latestNewsAction($quantity = 6, $template)
     {
         $em = $this->getDoctrine()->getManager();
-        $latestNews = $em->getRepository('KardiNewsBundle:News')
-            ->getLatestNews();
+        $newsList = $em->getRepository('KardiNewsBundle:News')
+            ->getLastNewsList(0, $quantity);
 
-        return $this->render('KardiNewsBundle:Default:latest_news_big_image.html.twig', ['news' => $latestNews]);
+        return $this->render('KardiNewsBundle:Default:'.$template, ['newsList' => $newsList]);
     }
 
     public function lastNewsListBigImageAction($numberOfNews = 6)

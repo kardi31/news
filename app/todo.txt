@@ -2,6 +2,10 @@ Lista newsow wg tagow.
 
 oddzielic emigrant bundle od kardi bundle
 
+sprawdzic czy tagi nie sa usuwane podczas usuwania newsow
+jezeli nowy news jest dodany, nie pokazuj zdjecia roota. Jak pierwsze zdjecie dodane - zamien z rootem
+
+
 PANEL ADMINISTRACYJNY
 - zrobic zdjecia
 

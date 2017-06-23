@@ -47,7 +47,7 @@
     </div>
 {% endblock breadcrumbs %}
 
-{% block testjs %}
+{% block initDatatable %}
 <script>
     $(function(){
 
@@ -111,7 +111,7 @@
                 ],
                 "pageLength": 5, // default record count per page
                 "ajax": {
-                    "url": '{{ path('kardi_admin_news_data') }}', // ajax source
+                    "url": '{{ path(datatableRouteName) }}', // ajax source
                 },
                 "ordering": true,
                 "order": [

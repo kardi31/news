@@ -6,10 +6,17 @@ Kardi\NewsBundle\Entity\Category:
     id:
       type: integer
       generator: { strategy: AUTO }
+  fields:
+    active:
+      type: boolean
+      options:
+          default: 1
   oneToMany:
     news:
       targetEntity: News
       mappedBy: category
+      cascade: ["persist"]
     translations:
       targetEntity: CategoryTranslation
       mappedBy: category
+      cascade: ["persist"]

@@ -38,7 +38,7 @@ class AdminController extends Controller
         $result = $this->get('kardi_media.service.photo')->createPhotoFromBase($data, $filename);
 
         return new JsonResponse([
-           'success' => $result
+            'success' => $result
         ]);
     }
 
@@ -86,8 +86,8 @@ class AdminController extends Controller
             mkdir($photoDir);
         }
 
-        $newFilename = Text::createUniqueFilename($filename, $photoDir);
-
+        $newFilename = Text::createUniqueFilename($filename, $photoDir, true);
+        dump($newFilename);
         $uploadedFile = $tempDir . '/' . $filename;
 
         foreach ($photoSizes as $size) {
@@ -137,13 +137,21 @@ class AdminController extends Controller
 
         $photoRoot = $entity->getPhoto();
 
-        $photo = new Photo();
-        $photo->setPhoto($filename);
+        // jeżeli dodajemy 1 zdjęcie do nowego newsa
+        // to zamieniamy puste zdjęcie z roota na nowo dodane zdjęcie
+        if (!$photoRoot->hasPhoto()) {
+            $photoRoot->setPhoto($filename);
+            $em->persist($photoRoot);
+        } else {
 
-        $treeRepository = $em->getRepository('KardiMediaBundle:Photo');
-        $treeRepository->persistAsLastChildOf($photo, $photoRoot);
+            $photo = new Photo();
+            $photo->setPhoto($filename);
 
-        $em->persist($photo);
+            $treeRepository = $em->getRepository('KardiMediaBundle:Photo');
+            $treeRepository->persistAsLastChildOf($photo, $photoRoot);
+            $em->persist($photo);
+        }
+
         $em->flush();
 
         return $photoRoot->getId();
@@ -225,18 +233,29 @@ class AdminController extends Controller
 
         // if we try to remove parent image
         if (!$entity->getParent()) {
-            $firstChild = $entity->getChildren()->first();
+            if ($entity->hasChildren()) {
 
-            $this->swapChildrenWithParentImage($firstChild);
+                $firstChild = $entity->getChildren()->first();
 
-            $entity = $firstChild;
+                $this->swapChildrenWithParentImage($firstChild);
+
+                $entity = $firstChild;
+                $rootId = $entity->getParent()->getId();
+                $filename = $entity->getPhoto();
+                $em->remove($entity);
+            } else {
+                $rootId = $entity->getId();
+                $filename = $entity->getPhoto();
+                $entity->setFolder('');
+                $entity->setPhoto('');
+                $em->persist($entity);
+            }
+        } else {
+            $filename = $entity->getPhoto();
+            $rootId = $entity->getParent()->getId();
+            $em->remove($entity);
         }
 
-        $rootId = $entity->getParent()->getId();
-
-        $filename = $entity->getPhoto();
-
-        $em->remove($entity);
         $em->flush();
 
         $fileService = $this->container->get('kardi_media.service.file');

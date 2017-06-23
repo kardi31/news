@@ -6,7 +6,7 @@
 
 /* 1. Images */
 
-.clearfix{
+.clearfix {
   @include clearfix-after;
   @include clearfix-before;
 }
@@ -86,9 +86,9 @@
       }
     }
 
-    button.modalShow{
-      margin:5px auto;
-      display:block;
+    button.modalShow {
+      margin: 5px auto;
+      display: block;
     }
   }
 }
@@ -122,6 +122,38 @@
   .form-horizontal {
     .mt-checkbox.mt-checkbox-single {
       margin-top: 7px;
+    }
+  }
+}
+
+a.quick-sidebar-toggler {
+  color: #ffffff;
+  font-weight: normal;
+
+  i {
+    margin-right: 5px;
+  }
+}
+
+table.table.dataTable {
+  img {
+    max-width: 126px;
+    max-height: 126px;
+  }
+
+  tr {
+
+
+    td:last-of-type{
+      max-width:150px;
+    }
+
+    &:first-of-type{
+      td{
+        input, select{
+          max-width:150px;
+        }
+      }
     }
   }
 }

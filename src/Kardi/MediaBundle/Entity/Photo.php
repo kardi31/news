@@ -95,6 +95,14 @@ class Photo
     }
 
     /**
+     * @return bool
+     */
+    public function hasPhoto()
+    {
+        return (strlen($this->getPhoto()) > 0);
+    }
+
+    /**
      * Set folder
      *
      * @param string $folder
@@ -215,11 +223,10 @@ class Photo
     }
 
     /**
-     * Get children
-     *
+     * @param int|null $limit
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getChildren($limit = false)
+    public function getChildren(?int $limit = null)
     {
         if ($limit && !$this->children->isEmpty()) {
             return $this->children->slice(0, $limit);
@@ -228,6 +235,13 @@ class Photo
         return $this->children;
     }
 
+    /**
+     * @return bool
+     */
+    public function hasChildren()
+    {
+        return !$this->getChildren()->isEmpty();
+    }
     /**
      * Set root
      *
@@ -281,9 +295,7 @@ class Photo
      */
     public function getMainPhoto()
     {
-        $children = $this->getChildren();
-
-        return $children->first();
+        return $this;
     }
 
     /**
@@ -293,21 +305,19 @@ class Photo
     public function show(?string $size = null)
     {
         if (strlen($this->getPhoto())) {
+//            if (!$size) {
+                if ($size) {
+                    return sprintf('/photos/%s/%s', $size, $this->getPhoto());
+                }
 
-            if ($size) {
-                return sprintf('/photos/%s/%s', $size, $this->getPhoto());
-            }
-
-            return '/photos/' . $this->getPhoto();
+                return '/photos/' . $this->getPhoto();
+//            }
         }
 
-        $size = str_replace('x', '/', $size);
 
-        $types = ['fashion', 'animals', 'sports', 'nightlife', 'cats', 'technics', 'transport'];
+//        $types = ['fashion', 'animals', 'sports', 'nightlife', 'cats', 'technics', 'transport'];
 
-        $type = $types[array_rand($types)];
-        return '#';
-//        return 'http://lorempixel.com/' . $size . '/' . $type;
+        return 'http://placehold.it/' . $size . '?text=Brak+zdjęcia';
     }
 }
 

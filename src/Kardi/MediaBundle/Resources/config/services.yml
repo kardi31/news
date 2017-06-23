@@ -10,3 +10,11 @@ services:
             - { name: kernel.event_subscriber }
     kardi_media.service.photo:
         class: Kardi\MediaBundle\Service\Photo
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '%photo_directory%'
+#    kardi_media.repository.photo:
+#            class: Doctrine\ORM\EntityRepository
+#            factory: ["@doctrine.orm.entity_manager", getRepository]
+#            arguments:
+#                - Kardi\MediaBundle\Entity\Photo

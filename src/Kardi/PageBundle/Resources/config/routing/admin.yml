@@ -1,0 +1,21 @@
+kardi_admin_page:
+    path:  /list-page
+    defaults: { _controller: KardiPageBundle:Admin/Page:listPage}
+kardi_admin_page_data:
+    path:  /list-page-data
+    defaults: { _controller: KardiPageBundle:Admin/Page:listPageData}
+    options:
+        expose: true
+kardi_admin_edit_page:
+    path:  /edit-page/{id}
+    defaults: { _controller: KardiPageBundle:Admin/Page:editPage}
+    requirements:
+        id: '\d+'
+kardi_admin_delete_page:
+    path:  /delete-page/{id}
+    defaults: { _controller: KardiPageBundle:Admin/Page:deletePage}
+    requirements:
+        id: '\d+'
+kardi_admin_add_page:
+    path:  /add-page
+    defaults: { _controller: KardiPageBundle:Admin/Page:addPage}

@@ -1,0 +1,35 @@
+services:
+    kardi_news.command.handler.delete:
+        class: Kardi\NewsBundle\Command\Handler\DeleteNewsCommandHandler
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@kardi_media.service.photo'
+        tags:
+            - { name: command_handler, handles: Kardi\NewsBundle\Command\DeleteNewsCommand }
+    kardi_news.command.handler.add:
+        class: Kardi\NewsBundle\Command\Handler\AddNewsCommandHandler
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@kardi_news.repository.category'
+        tags:
+            - { name: command_handler, handles: Kardi\NewsBundle\Command\AddNewsCommand }
+    kardi_news.command.handler.category_add:
+        class: Kardi\NewsBundle\Command\Handler\AddCategoryCommandHandler
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: command_handler, handles: Kardi\NewsBundle\Command\AddCategoryCommand }
+    kardi_news.command.handler.tag_delete:
+        class: Kardi\NewsBundle\Command\Handler\DeleteTagCommandHandler
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@kardi_media.service.photo'
+        tags:
+            - { name: command_handler, handles: Kardi\NewsBundle\Command\DeleteTagCommand }
+    kardi_news.command.handler.tag_add:
+        class: Kardi\NewsBundle\Command\Handler\AddTagCommandHandler
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@kardi_news.repository.category'
+        tags:
+            - { name: command_handler, handles: Kardi\NewsBundle\Command\AddTagCommand }

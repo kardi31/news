@@ -7,18 +7,12 @@ Kardi\NewsBundle\Entity\Tag:
       type: integer
       generator: { strategy: AUTO }
   manyToMany:
-    news:
-      targetEntity: News
-      inversedBy: tags
-      joinTable:
-        name: news_tags
-        joinColumns:
-          tag_id:
-            referencedColumnName: id
-        inverseJoinColumns:
-          news_id:
-            referencedColumnName: id
+    newsList:
+      targetEntity: Kardi\NewsBundle\Entity\News
+      mappedBy: tags
+      cascade: ["persist"]
   oneToMany:
     translations:
       targetEntity: TagTranslation
       mappedBy: tag
+      cascade: ["persist"]
