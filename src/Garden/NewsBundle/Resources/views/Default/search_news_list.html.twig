@@ -1,0 +1,13 @@
+{% extends '@KardiNews/Default/show_news_list.html.twig' %}
+
+{% block pageTitle %}
+    Wyniki wyszukiwania
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="bread-crumb">
+        <li><a href="{{ path('garden_layout_homepage') }}">Strona główna</a></li>
+        <li><a href="{{ path('kardi_news_all') }}">Blog</a></li>
+        <li><a href="#">Wyniki wyszukiwania</a></li>
+    </ul>
+{% endblock %}

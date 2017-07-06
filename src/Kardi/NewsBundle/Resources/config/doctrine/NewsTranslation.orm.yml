@@ -20,6 +20,7 @@ Kardi\NewsBundle\Entity\NewsTranslation:
       length: 255
     content:
       type: text
+      nullable: true
   manyToOne:
       news:
         targetEntity: News

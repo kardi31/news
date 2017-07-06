@@ -13,21 +13,30 @@ use Kardi\AdminBundle\Repository\DataTableRepository;
  */
 class TagRepository extends DataTableRepository
 {
+    /**
+     * @param $limit
+     * @return array
+     */
     public function getPopularTags($limit) {
         $qb = $this->createQueryBuilder('t');
         $qb->select('t, tt');
         $qb->addSelect('count(n.id) as cnt');
         $qb->join('t.translations','tt');
-        $qb->join('t.news','n');
+        $qb->join('t.newsList','n');
         $qb->addOrderBy('cnt','DESC');
         $qb->setMaxResults($limit);
         $qb->groupBy('t.id');
+        $qb->having($qb->expr()->gt('cnt', 0));
 
         $query = $qb->getQuery();
 
         return $query->getResult();
     }
 
+    /**
+     * @param $slug
+     * @return mixed
+     */
     public function getTagBySlug($slug) {
         $qb = $this->createQueryBuilder('t');
         $qb->join('t.translations','tt');

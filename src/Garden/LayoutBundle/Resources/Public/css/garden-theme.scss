@@ -1,7 +1,8 @@
 @import '../../../../../Kardi/FrameworkBundle/Resources/Public/css/plugins.scss';
+@import '../../../../../Garden/LayoutBundle/Resources/Public/css/gallery.scss';
 
 .page-wrapper {
-  background: url('/bundles/gardenlayout/images/tlo-top.jpg') no-repeat top center
+  background-repeat: no-repeat;
 }
 
 .main-header {
@@ -20,4 +21,96 @@
   nav.main-menu {
     margin-top: 40px;
   }
+
+  .department .department-details .details {
+    min-height: 103px;
+  }
+}
+
+.department .thumb {
+  border: 10px solid white;
+}
+
+.white-homepage-title {
+
+  background: black;
+  margin: 0 auto;
+  width: 400px;
+  text-align: center;
+  padding: 5px 0px;
+  border: 2px solid #ffffff;
+  border-radius: 20px;
+
+  //background: rgba(255,255,255,0.9);
+  h3, h2 {
+    color: rgba(255, 255, 255, 1);
+  }
+
+}
+
+section.pt60 div.auto-container.pb-35 div.sec-title {
+  background: rgba(255, 255, 255, 0.2);
+  display: block;
+  margin: 0 auto;
+  width: 400px;
+  text-align: center;
+}
+
+.main-header-wrapper {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.page-wrapper {
+  background-size: contain;
+}
+
+.featured-three-column .image {
+  padding: 15px;
+}
+
+.blog-section .post-author {
+  .inner-box {
+    min-height: 0px;
+  }
+  .author-title {
+    margin-bottom: 0px;
+  }
+}
+
+.sidebar-section .comments-area .comment {
+  padding: 0px;
+  margin-bottom: 15px;
+}
+
+#writecomment .writecomment {
+  display: block;
+}
+
+.writecomment {
+  display: none;
+
+  @include clearfix-before;
+  padding-top: 10px;
+}
+
+.comment-form .form-group textarea {
+  height: auto;
+}
+
+.sidebar-section .comments-area .reply-btn {
+  padding: 4px 12px 2px;
+  float: right;
+
+  @include clearfix-after;
+}
+
+.about-section .lower-content .content-box .main-title {
+  display: block;
+}
+
+label.required:after {
+  content: "*";
+  margin-left: 2px;
+  display: inline-block;
+  color: #ff0000;
 }

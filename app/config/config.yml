@@ -42,6 +42,7 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         locale: %locale%
+        recaptcha: %recaptcha%
 
 # Doctrine Configuration
 doctrine:
@@ -116,3 +117,6 @@ assetic:
         scssphp:
            formatter: 'Leafo\ScssPhp\Formatter\Compressed'
 
+ewz_recaptcha:
+    public_key:  6Lf2UycUAAAAAIe3lAj-QlxNgV231DDa9ZsWvYP-
+    private_key: 6Lf2UycUAAAAAEP_Tz6teiGw3cwoX_NklYVRNSKW

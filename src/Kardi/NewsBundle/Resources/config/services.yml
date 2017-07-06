@@ -1,7 +1,9 @@
 services:
     kardi_news.news_url_extension:
         class: Kardi\NewsBundle\Twig\UrlExtension
-        arguments: ['@kardi_news.provider.route.news']
+        arguments:
+            - '@kardi_news.provider.route.news'
+            - '@kardi_news.provider.route.category'
         tags:
             - { name: twig.extension }
     kardi_news.comment_extension:
@@ -35,6 +37,12 @@ services:
         tags:
             - { name: form.type }
 
+    kardi_news.form.admin.search:
+        class: Kardi\NewsBundle\Form\Type\Search
+        arguments:
+            - '@router'
+        tags:
+            - { name: form.type }
     kardi_news.repository.tag:
         class: Kardi\NewsBundle\Repository\TagRepository
         factory: ["@doctrine.orm.entity_manager", getRepository]

@@ -30,6 +30,16 @@ class PageRepository extends DataTableRepository
         return $result;
     }
 
+    public function getPageByType($type)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->andWhere($qb->expr()->like('p.type', ':type'));
+        $qb->setParameter('type', $type);
+
+        $query = $qb->getQuery();
+        return $query->getOneOrNullResult();
+    }
+
     /**
      * @param array $fields
      * @param array $data

@@ -1,0 +1,89 @@
+{% extends '@GardenLayout/layout.html.twig' %}
+
+{% block subheader %}
+    {{ parent() }}
+    <!--Page Title-->
+    <section class="page-title">
+        <div class="auto-container">
+            <h1>
+                {% block pageTitle %}
+                Blog
+                {% endblock pageTitle %}
+            </h1>
+
+            {% block breadcrumbs %}
+                <ul class="bread-crumb">
+                    <li><a href="{{ path('garden_layout_homepage') }}">Strona główna</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            {% endblock breadcrumbs %}
+
+        </div>
+
+        <!--Go Down Button-->
+        <div class="go-down">
+            <div class="curve scroll-to-target" data-target="#sidebar-section"><span
+                        class="icon fa fa-arrow-down"></span></div>
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block content %}
+    <!--Sidebar Section-->
+    <div class="sidebar-section no-bg" id="sidebar-section">
+
+        <div class="auto-container">
+            <div class="row clearfix">
+
+                <!--Content Side-->
+                <div class="col-md-9 col-sm-8 col-xs-12 content-side">
+                    <!--Services Section-->
+                    <section class="blog-section">
+                        {% for news in pagination %}
+                            <!--Post-->
+                            <article class="blog-post wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                <div class="image">
+                                    <a href="{{ generate_news_url(news) }}">
+                                        <img src="{{ news.photo.mainPhoto.show('870x300') }}"
+                                             alt="{{ news.trans('title') }}"></a></div>
+                                <div class="post-title"><h2><a href="{{ generate_news_url(news) }}">{{ news.trans('title') }}</a>
+                                    </h2></div>
+                                <div class="post-info">
+                                    {% if news.author | length > 0 %}
+                                    <a href="#">
+                                        <span class="fa fa-user"></span>{{ news.author }}</a> &ensp;&ensp;
+                                    {% endif %}
+                                    <a href="#">
+                                        <span
+                                                class="fa fa-clock-o"></span>{{ news.publishDate | date('d/m/Y H:i') }}
+                                    </a></div>
+                                <div class="post-desc"><p>{{ news.trans('content') | striptags | truncate(150) }} </p>
+                                </div>
+                                <div class="more-link"><a class="theme-btn read-more"
+                                                          href="{{ generate_news_url(news) }}">Czytaj więcej</a></div>
+                            </article>
+                        {% endfor %}
+
+                        <div class="navigation">
+                            {{ knp_pagination_render(pagination) }}
+                        </div>
+                    </section>
+                </div>
+
+                {{ render(controller('GardenNewsBundle:Default:renderSidebar')) }}
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block styles %}
+    {{ parent() }}
+
+    <style>
+        .header-wrapper {
+            background-image: url('{{ page.photo.mainPhoto.show('1920x554') }}');
+        }
+    </style>
+{% endblock styles %}

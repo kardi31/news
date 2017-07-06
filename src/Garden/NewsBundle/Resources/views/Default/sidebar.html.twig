@@ -1,0 +1,53 @@
+<!--Sidebar-->
+<div class="col-md-3 col-sm-4 col-xs-12">
+    <aside class="sidebar">
+
+        {{ render(controller('KardiNewsBundle:Default:searchNews')) }}
+
+
+        {% if showLatestNews and latestNews | length > 0 %}
+            <!-- Recent Posts -->
+            <div class="widget recent-posts wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
+                <div class="sidebar-title"><h3>Najnowsze posty</h3></div>
+                {% for news in latestNews %}
+                    <div class="post">
+                        <div class="post-thumb"><a href="{{ generate_news_url(news) }}"><img
+                                        src="{{ news.photo.mainPhoto.show('80x80') }}" alt=""></a>
+                        </div>
+                        <strong class="h4"><a
+                                    href="{{ generate_news_url(news) }}">{{ news.trans('title') }}</a></strong>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!--Categories-->
+        <div class="widget links-widget">
+            <h3>Kategorie</h3>
+            <ul>
+                {% for category in categories %}
+                    <li><a href="{{ generate_category_url(category) }}">{{ category.trans('title') }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+
+        <!--Links Widget-->
+        {{ include('GardenLayoutBundle:Default:facebook_box.html.twig') }}
+
+
+        <!--Links Widget-->
+        <div class="widget popular-tags">
+            <h3>Popularne tagi</h3>
+            <div class="tags">
+                {% for tag in tags %}
+                    {% set tag = tag[0] %}
+                    <a href="
+{{ path('kardi_news_tag',{'slug': tag.trans('slug')}) }}
+">{{ tag.trans('title') }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+    </aside>
+</div>

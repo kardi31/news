@@ -20,6 +20,7 @@ Kardi\NewsBundle\Entity\CategoryTranslation:
       length: 255
     content:
       type: text
+      nullable: true
   manyToOne:
       category:
         targetEntity: Category

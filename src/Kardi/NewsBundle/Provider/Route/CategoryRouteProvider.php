@@ -41,7 +41,7 @@ class CategoryRouteProvider
     {
         $urlPrefix = $this->translator->trans('news', [], 'route');
 
-        return sprintf('%s/%s', $urlPrefix, $category->trans('title'));
+        return sprintf('/%s/%s', $urlPrefix, $category->trans('slug'));
     }
 
     /**

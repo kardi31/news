@@ -23,7 +23,7 @@ class News extends Translation
     /**
      * @var boolean
      */
-    private $breakingNews = 0;
+    private $breakingNews = false;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -48,7 +48,7 @@ class News extends Translation
     /**
      * @var boolean
      */
-    private $active = 0;
+    private $active = true;
 
     private $photoRootId;
     /**

@@ -1,3 +1,12 @@
+kardi_page_about_us:
+    locales:  { en: "/about-us/", pl: "/o-nas/" }
+    defaults: { _controller: KardiPageBundle:Default:aboutUs }
+    options:
+         linkable: true
+         title: 'O nas'
 kardi_page_contact:
-    path:     /kontakt
+    locales:  { en: "/contact/", pl: "/kontakt/" }
     defaults: { _controller: KardiPageBundle:Default:contact }
+    options:
+         linkable: true
+         title: 'Kontakt'

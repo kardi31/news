@@ -3,6 +3,7 @@
 namespace Kardi\PageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -21,4 +22,9 @@ class DefaultController extends Controller
 
         return $this->render('KardiPageBundle:Default:contact.html.twig', ['ApplicationName' => $ApplicationName]);
     }
+
+//    public function aboutUsAction()
+//    {
+//        return new Response();
+//    }
 }

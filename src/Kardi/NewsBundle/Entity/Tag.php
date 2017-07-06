@@ -123,7 +123,7 @@ class Tag extends Translation
         }
 
         $this->setTranslations($this->translations);
-
+        
         return parent::trans($field);
     }
 }

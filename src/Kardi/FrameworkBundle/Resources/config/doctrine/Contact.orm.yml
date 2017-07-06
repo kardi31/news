@@ -1,0 +1,23 @@
+Kardi\FrameworkBundle\Entity\Contact:
+  type: entity
+  repositoryClass: Kardi\FrameworkBundle\Repository\Contact
+  table: contact
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    name:
+      type: string
+      length: 255
+    email:
+      type: string
+      length: 255
+      nullable: TRUE
+    message:
+      type: text
+    createdAt:
+      type: datetime
+      nullable: true
+  lifecycleCallbacks:
+      prePersist: [setCreatedAt]

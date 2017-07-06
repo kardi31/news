@@ -1,0 +1,44 @@
+<div class="comment-form writecomment" rel="{{ parentId }}">
+
+    {% form_theme commentForm with ['GardenLayoutBundle:Form:form_comment_style.html.twig', _self] %}
+    {{ form_start(commentForm, {'action': path('kardi_news_comment_add', {'newsId': newsId, 'parentId': parentId}), 'method': 'POST' }) }}
+    <div class="row clearfix">
+
+        <div class="form-group col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group-inner">
+                <div class="icon-box"><label for="comment_author"><span
+                                class="icon fa fa-user"></span></label></div>
+
+                <div class="field-outer">
+                    {{ form_row(commentForm.author, {'label' : false, 'attr': {'placeholder': 'Imię'}}) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group-inner">
+                <div class="icon-box"><label for="comment_email"><span
+                                class="icon fa fa-envelope"></span></label></div>
+                <div class="field-outer">
+                    {{ form_row(commentForm.email, {'label' : false, 'attr': {'placeholder': 'Email'}}) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group-inner">
+                {{ form_row(commentForm.content, {'label' : false, 'attr': {'placeholder': 'Komentarz', 'rows': 4}}) }}
+            </div>
+        </div>
+
+        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                <div id="g-recaptcha-comment-{{ parentId }}" data-sitekey="{{ recaptcha.site_key }}"></div>
+        </div>
+
+        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+            <input name="captchaNotSubmitted" value="true" id="captchaNotSubmitted{{ parentId }}" type="hidden" />
+            {{ form_row(commentForm.submit_comment, {'class' : 'theme-btn normal-btn'}) }}
+        </div>
+    </div>
+    {{ form_end(commentForm) }}
+</div>

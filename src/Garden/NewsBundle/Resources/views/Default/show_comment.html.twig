@@ -1,0 +1,23 @@
+<div class="comment wow fadeInUp {% if comment.lvl>0 %} reply-comment {% endif %} " data-wow-delay="0ms" data-wow-duration="1500ms">
+    <div class="comment-info">
+        <strong>{{ comment.author }}</strong> <br>
+        <em>{{ comment.createdAt|date('d/m/Y H:i') }}</em></div>
+    <div class="text">
+        {{ comment.content }}
+    </div>
+    {% if comment.lvl == 0 %}
+        {#<a href="javascript:void(0)" data-id="{{ comment.id }}" class="theme-btn reply-btn reply-comment">{% trans %} Reply to this comment{% endtrans %}</a>#}
+    {% endif %}
+    <div class="clearfix"></div>
+    {% if(comment.lvl == 0) %}
+        {#{{ render(controller('KardiNewsBundle:Default:AddComment', { 'parentId' : comment.id, 'newsId' : newsId })) }}#}
+    {% endif %}
+
+    {% if comment.children | length > 0 %}
+        <ul>
+            {% for child in comment.children %}
+                {{ include('KardiNewsBundle:Default:show_comment.html.twig',{'comment': child}) }}
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>

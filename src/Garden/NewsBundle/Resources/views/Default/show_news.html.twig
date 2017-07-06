@@ -1,0 +1,229 @@
+{% extends '@GardenLayout/layout.html.twig' %}
+
+{% import 'KardiFrameworkBundle:Message:display_flash_message.html.twig' as flash_macro %}
+
+
+{% block topscripts %}
+    {{ parent() }}
+    {% javascripts
+    '@KardiNewsBundle/Resources/Public/js/comment.js'
+    '@KardiGalleryBundle/Resources/Public/js/tomasz-underimage-gallery.js'
+    output='js/compiled/news.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script src="https://www.google.com/recaptcha/api.js?onload=commentCaptchaCallback&render=explicit" async
+            defer></script>
+{% endblock %}
+
+{% block subheader %}
+    {{ parent() }}
+    <!--Page Title-->
+    <section class="page-title">
+        <div class="auto-container">
+            <h1>
+                {{ news.trans('title') }}
+            </h1>
+
+            {% block breadcrumbs %}
+                <ul class="bread-crumb">
+                    <li><a href="{{ path('garden_layout_homepage') }}">Strona główna</a></li>
+                    <li><a href="{{ path('kardi_news_all') }}">Blog</a></li>
+                    <li><a href="{{ generate_category_url(news.category) }}">{{ news.category.trans('title') }}</a></li>
+                    <li><a href="#">{{ news.trans('title') }}</a></li>
+                </ul>
+            {% endblock breadcrumbs %}
+        </div>
+
+        <!--Go Down Button-->
+        <div class="go-down">
+            <div class="curve scroll-to-target" data-target="#sidebar-section"><span
+                        class="icon fa fa-arrow-down"></span></div>
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block content %}
+    <!--Sidebar Section-->
+    <div class="sidebar-section no-bg" id="sidebar-section">
+
+        <div class="auto-container">
+            <div class="row clearfix">
+
+                <!--Content Side-->
+                <div class="col-md-9 col-sm-8 col-xs-12 content-side">
+                    <!--Services Section-->
+                    <section class="blog-section">
+
+                        <!--Post-->
+                        <article class="blog-post blog-details">
+
+                            <div class="post-title"><h1>{{ news.trans('title') }}</h1></div>
+                            <div class="photo-gallery-full">
+                                <div class="the-image">
+                                    <a href="#" class="photo-controls left"><i class="fa fa-arrow-left"></i></a>
+                                    <a href="#" class="photo-controls right"><i class="fa fa-arrow-right"></i></a>
+                                    <img src="{{ news.photo.child(1).show('870x300') }}"
+                                         alt="{{ news.trans('title') }}"/>
+                                </div>
+
+                                <div class="photo-gallery-thumbs scrolls" id="" style="overflow: visible;">
+                                    <div class="inner-thumb">
+
+                                        <a href="#" class="delegate">
+                                            <img src="{{ news.photo.mainPhoto.show('80x80') }}"
+                                                 data-src="{{ news.photo.mainPhoto.show('870x300') }}"
+                                                 alt="{{ news.trans('title') }}">
+                                        </a>
+                                        {% for photo in news.photo.children %}
+                                            <a href="#" class="delegate">
+                                                <img src="{{ photo.show('80x80') }}"
+                                                     data-src="{{ photo.show('870x300') }}"
+                                                     alt="{{ news.trans('title') }}">
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="post-info">
+                                {% if news.author | length > 0 %}
+                                    <a href="#"><span class="fa fa-user"></span>{{ news.author }}</a>
+                                {% endif %}
+                                <a href="#"><span
+                                            class="fa fa-clock-o"></span>{{ news.publishDate | date('d/m/Y H:i') }}</a>
+                            </div>
+                            {#<div class="image">#}
+                            {#<img src="{{ news.photo.child(1).show('870x300') }}"#}
+                            {#alt="{{ news.trans('title') }}">#}
+                            {#</div>#}
+                            <div class="post-data">
+                                {{ news.trans('content') }}
+                            </div>
+                        </article>
+
+
+                        <!--About Author-->
+                        <div class="post-author">
+                            <div class="inner-box">
+                                <div class="author-title clearfix">
+                                    <strong class="pull-left">PODZIEL SIĘ POSTEM W MEDIACH SPOŁECZNOŚCIOWYCH</strong>
+                                    <div class="pull-right social-links">
+                                        <a href="{{ facebook_share_link() }}"><span class="fa fa-facebook-f"></span></a>
+                                        &ensp;
+                                        <a href="{{ twitter_share_link() }}"><span class="fa fa-twitter"></span></a>
+                                        &ensp;
+                                        <a href="{{ google_plus_share_link() }}"><span class="fa fa-google-plus"></span></a>
+                                        &ensp;
+                                        <a href="{{ pinterest_share_link() }}"><span
+                                                    class="fa fa-pinterest-p"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--Comments Area-->
+                        <div class="comments-area">
+                            <div class="sec-title style-three">
+                                <strong class="h2">{{ commentsTotal }}  {% transchoice commentsTotal %}
+                                    comment.number{% endtranschoice %}</strong>
+                                <div class="line"></div>
+                            </div>
+                            <div class="comment-box">
+                                {{ flash_macro.display_flash_message('comment') }}
+                                {% for comment in comments %}
+                                    {{ include('KardiNewsBundle:Default:show_comment.html.twig',{'comment': comment, 'newsId': news.id}) }}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+
+                        <!-- Comment Form -->
+                        <div id="writecomment" class="comment-form wow fadeInUp" data-wow-delay="200ms"
+                             data-wow-duration="1500ms">
+
+                            <div class="sec-title style-three"><strong class="h2">{% trans %}Write a
+                                    comment {% endtrans %}</strong>
+                                <div class="line"></div>
+                            </div>
+
+                            {{ render(controller('KardiNewsBundle:Default:AddComment', { 'parentId': 'null', 'newsId' : news.id })) }}
+
+                        </div>
+
+                    </section>
+                </div>
+
+
+                {{ render(controller('GardenNewsBundle:Default:renderSidebar', {'showLatestNews': true, 'currentNews': news.id})) }}
+                <!--Sidebar-->
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block styles %}
+    {{ parent() }}
+
+    <style>
+        .header-wrapper {
+            background-image: url('{{ news.photo.mainPhoto.show('1920x554') }}');
+        }
+    </style>
+{% endblock styles %}
+
+{% block footerscripts %}
+    {{ parent() }}
+
+    <script>
+        {% set commentIds = [] %}
+        {% for comment in comments %}
+        {% set commentIds = commentIds |merge([comment.id]) %}
+        {% endfor %}
+        {% set commentIds = commentIds |merge(['null']) %}
+
+        {% for commentId in commentIds %}
+        var captchaSubmitted{{ commentId }} = function (response) {
+            $('#captchaNotSubmitted{{ commentId }}').remove();
+        }
+        {% endfor %}
+
+        var commentCaptchaCallback = function () {
+            {% for commentId in commentIds %}
+            recaptcha{{ commentId }} = grecaptcha.render('g-recaptcha-comment-{{ commentId }}', {
+                'sitekey': '{{ recaptcha.site_key }}', //Replace this with your Site key
+                'theme': 'light',
+                'callback': captchaSubmitted{{ commentId }}
+            });
+            {% endfor %}
+        };
+
+
+        $(function () {
+            $('form[name="comment"]').each(function () {
+                $(this).validate({
+                    submitHandler: function (form) {
+                        var $resultArray = $(form).serializeArray();
+                        var $parentId = $resultArray[2].value;
+                        var checkerId = '#captchaNotSubmitted' + $parentId;
+                        var result = $(form).find(checkerId);
+                        var existingErrorMessage = $(form).find('div.alert-danger');
+
+                        if (result.length == 1) {
+                            if (existingErrorMessage.length == 0) {
+                                $('<div class="alert alert-danger">Zaznacz brakujące elementy formularza, aby dodać komentarz</div>').insertBefore(checkerId);
+                            }
+                            return false;
+                        }
+                        if (result.length == 0) {
+                            existingErrorMessage.fadeOut();
+                            $form.submit();
+                        }
+                    }
+                });
+            })
+        });
+    </script>
+{% endblock %}

@@ -18,6 +18,7 @@ Kardi\NewsBundle\Entity\News:
     author:
       type: string
       length: 255
+      nullable: true
     active:
       type: boolean
       options:

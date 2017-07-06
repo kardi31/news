@@ -10,9 +10,16 @@ kardi_news_show:
 kardi_news_comment_add:
     locales:  { en: "/add-comment/{newsId}/{parentId}", pl: "/dodaj-komentarz/wiadomosc/{newsId}/komentarz/{parentId}" }
     defaults: { _controller: KardiNewsBundle:Default:addComment }
+kardi_news_tag:
+    locales:
+         en: "/news/tag/{slug}/"
+         pl: "/wiadomosci/tag/{slug}/"
+    defaults: { _controller: KardiNewsBundle:Default:showTagNewsList }
+kardi_news_search:
+    locales:
+         en: "/news/search/"
+         pl: "/wiadomosci/szukaj/"
+    defaults: { _controller: KardiNewsBundle:Default:searchNews }
 #kardi_news_category:
 #    locales:  { en: "/news/{slug}/", pl: "/wiadomosci/{slug}/" }
 #    defaults: { _controller: KardiNewsBundle:Default:showCategory }
-kardi_news_tag:
-    locales:  { en: "/news/tag/{slug}/", pl: "/wiadomosci/tag/{slug}/" }
-    defaults: { _controller: KardiNewsBundle:Default:showTagNewsList }

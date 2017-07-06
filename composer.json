@@ -48,7 +48,8 @@
         "simple-bus/symfony-bridge": "^4.1",
         "symfony/serializer": "3.2.1",
         "jms/serializer-bundle": "^2.0",
-        "symfony-cmf/routing-bundle": "^2.0"
+        "symfony-cmf/routing-bundle": "^2.0",
+        "excelwebzone/recaptcha-bundle": "^1.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
@@ -77,9 +78,7 @@
         "symfony-web-dir": "web",
         "symfony-tests-dir": "tests",
         "symfony-assets-install": "relative",
-        "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
-        },
+        "incenteev-parameters": {},
         "branch-alias": null
     }
 }

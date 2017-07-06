@@ -19,6 +19,12 @@ services:
             - '@doctrine.orm.entity_manager'
         tags:
             - { name: command_handler, handles: Kardi\NewsBundle\Command\AddCategoryCommand }
+    kardi_news.command.handler.category_edit:
+        class: Kardi\NewsBundle\Command\Handler\EditCategoryCommandHandler
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: command_handler, handles: Kardi\NewsBundle\Command\EditCategoryCommand }
     kardi_news.command.handler.tag_delete:
         class: Kardi\NewsBundle\Command\Handler\DeleteTagCommandHandler
         arguments:

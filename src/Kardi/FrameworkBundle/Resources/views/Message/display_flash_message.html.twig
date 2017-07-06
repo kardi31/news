@@ -1,16 +1,18 @@
 {% macro display_flash_message(namespace) %}
     {% for flash_message in app.session.flashBag.get(namespace~'.error') %}
-        <div class="info-message fail">
+        <div class="alert alert-warning alert-dismissible" role="alert">
             <span class="icon-text">&#9888;</span>
-            <b>{{ namespace~'.error.title' | trans({}) }}</b>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <b>{{ namespace~'.error.title' | trans() }}</b>
             <p>{{ flash_message | trans() }}</p>
         </div>
     {% endfor %}
 
     {% for flash_message in app.session.flashBag.get(namespace~'.success') %}
-        <div class="info-message success">
+        <div class="alert alert-success alert-dismissible" role="alert">
             <span class="icon-text">&#128077;</span>
-            <b>{{ namespace~'.success.title' | trans({}) }}</b>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <b>{{ 'success.title' | trans() }}</b>
             <p>{{ flash_message | trans() }}</p>
         </div>
     {% endfor %}

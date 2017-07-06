@@ -32,10 +32,11 @@ comment.comment: Wpisz swój komentarz tutaj
 comment.placeholder.name: np. Jan
 comment.placeholder.email: np. jankowalski@poczta.pl
 comment.submit: Dodaj komentarz
+success.title: Dziękujemy
 comment.success: Twój komentarz został dodany
-comment.error: Wystąpił błąd. Twój komentarz nie został dodany.
+comment.error.title: Wystąpił błąd. Twój komentarz nie został dodany.
 comment.moderate.success: Dziękujemy za dodanie komentarza. Twój komentarz oczekuje na moderacje i pojawi się na stronie wkrótce.
-comment.number: '{0}Komentarzy|{1}Komentarz|]1,5[Komentarze|]5,Inf[Komentarzy'
+comment.number: '{0}Komentarzy|{1}Komentarz|]1,5[Komentarze|]4,Inf[Komentarzy'
 Write a comment: Dodaj komentarz
 Social media: Media społecznościowe
 Share this article: Udostępnij ten artykuł
@@ -51,3 +52,8 @@ Back to homepage: Powrót na stronę główną
 Read Full Article: Przeczytaj cały artykuł
 Articles about: Wiadomości o
 Read Full Advertisement: Przeczytaj całe ogłoszenie
+search.placeholder.name: Szukaj
+contact.name: Imie i nazwisko
+contact.email: Adres email
+contact.message: Twoja wiadomość
+contact.submit: Wyślij wiadomość

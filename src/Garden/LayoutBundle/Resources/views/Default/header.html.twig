@@ -1,46 +1,51 @@
-<div class="container">
-    <div class="row">
-        <!-- Main Header -->
-        <header class="main-header" id="main-header">
+<div class="main-header-wrapper">
 
-            <div class="col-md-4">
+    <div class="container">
+        <div class="row">
+            <!-- Main Header -->
+            <header class="main-header" id="main-header">
 
-                <!-- Logo -->
-                <div class="logo">
-                    <a href="/"><img src="{{ asset('bundles/gardenlayout/images/logo.png') }}" alt="garnen-help"></a>
+                <div class="col-md-4">
+
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="/"><img src="{{ asset('bundles/gardenlayout/images/logo.png') }}"
+                                         alt="garnen-help"></a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-8">
-                <!-- Header Top -->
-                <div class="header-top">
-                    <div class="auto-container clearfix">
-                        <!-- Top Right -->
-                        <div class="top-right">
-                            <ul class="clearfix">
-                                <li><a href="#"><span class="fa fa-phone"></span> (+064)-342-27582</a></li>
-                                <li><a href="mailto:noreply@regulator.com"><span class="fa fa-at"></span>info@garden-care.com</a></li>
-                            </ul>
+                <div class="col-md-8">
+                    <!-- Header Top -->
+                    <div class="header-top">
+                        <div class="auto-container clearfix">
+                            <!-- Top Right -->
+                            <div class="top-right">
+                                <ul class="clearfix">
+                                    <li><a href="#"><span class="fa fa-phone"></span> (+064)-342-27582</a></li>
+                                    <li><a href="mailto:noreply@regulator.com"><span class="fa fa-at"></span>info@garden-care.com</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div><!-- Header Top End -->
+                    <nav class="main-menu">
+                        <div class="navbar-header">
+                            <!-- Toggle Button -->
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
                         </div>
 
-                    </div>
-                </div><!-- Header Top End -->
-                <nav class="main-menu">
-                    <div class="navbar-header">
-                        <!-- Toggle Button -->
-                        <button type="button" class="navbar-toggle" data-toggle="collapse"
-                                data-target=".navbar-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-
-                    {{ render(controller('KardiMenuBundle:Default:mainMenu')) }}
-                </nav>
-            </div>
+                        {{ render(controller('KardiMenuBundle:Default:mainMenu')) }}
+                    </nav>
+                </div>
 
 
-        </header><!--End Main Header -->
+            </header><!--End Main Header -->
 
+        </div>
     </div>
 </div>

@@ -4,3 +4,7 @@
 {% block title %}{{ meta_title(category) }}{% endblock %}
 {% block description %}{{ meta_description(category) }}{% endblock %}
 {% block h1 %}{{ category.trans('title') }} {% endblock %}
+
+{% block content %}
+    This is default category template. Please override.
+{% endblock contentBlock %}

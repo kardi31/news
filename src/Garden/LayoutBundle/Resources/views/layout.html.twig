@@ -14,21 +14,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link href="{{ asset('bundles/gardenlayout/theme/css/bootstrap-margin-padding.css') }}" rel="stylesheet">
     <link href="{{ asset('bundles/gardenlayout/theme/css/responsive.css') }}" rel="stylesheet">
+    <script src="{{ asset('bundles/gardenlayout/theme/js/jquery.js') }}"></script>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js') }}"></script><![endif]-->
     <!--[if lt IE 9]>
     <script src="{{ asset('bundles/gardenlayout/theme/js/respond.js') }}"></script><![endif]-->
 
+    {% block styles %}
+        {% stylesheets filter="scssphp" output="css/main.css"
+        "@GardenLayoutBundle/Resources/Public/css/garden-theme.scss" %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
 
-    {% stylesheets filter="scssphp" output="css/main.css"
-    "@GardenLayoutBundle/Resources/Public/css/garden-theme.scss" %}
-    <link rel="stylesheet" href="{{ asset_url }}"/>
-    {% endstylesheets %}
+        {% if backgroundImage is defined %}
+            <style>
+                .page-wrapper{
+                    background-image: url('{{ backgroundImage }}') !important;
+                }
+            </style>
+        {% endif %}
+
+        {% block inlinestyles %} {% endblock %}
+    {% endblock styles %}
 
 {% endblock %}
 
 {% block body %}
+    {#<div id="fb-root"></div>#}
+    {#<script>(function(d, s, id) {#}
+            {#var js, fjs = d.getElementsByTagName(s)[0];#}
+            {#if (d.getElementById(id)) return;#}
+            {#js = d.createElement(s); js.id = id;#}
+            {#js.src = "//connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.9&appId=530955950330860";#}
+            {#fjs.parentNode.insertBefore(js, fjs);#}
+        {#}(document, 'script', 'facebook-jssdk'));</script>#}
 
+    <div class="page-wrapper">
+        <div class="page-wrapper-sepia">
+            <div class="header-wrapper">
+                {% include 'GardenLayoutBundle:Default:header.html.twig' %}
+                {% block subheader %}
+                {% endblock %}
+            </div>
+            {% block content %}
+
+            {% endblock content %}
+
+            {% include '@GardenLayout/Default/footer.html.twig' %}
+
+        </div>
+    </div>
     <!--End pagewrapper-->
 
     <!--Scroll to top-->
@@ -37,11 +72,8 @@
 {% endblock body %}
 
 {% block footerscripts %}
-
-    <script src="{{ asset('bundles/gardenlayout/theme/js/jquery.js') }}"></script>
     <script src="{{ asset('bundles/gardenlayout/theme/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bundles/gardenlayout/theme/js/revolution.min.js') }}"></script>
     <script src="{{ asset('bundles/gardenlayout/theme/js/js-collection.js') }}"></script>
     <script src="{{ asset('bundles/gardenlayout/theme/js/script.js') }}"></script>
-
 {% endblock footerscripts %}

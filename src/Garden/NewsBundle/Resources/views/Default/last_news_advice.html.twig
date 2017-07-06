@@ -1,0 +1,33 @@
+{% set tools = ['flaticon-nature-3','flaticon-tool-1','flaticon-animal','flaticon-people','flaticon-cut-1','flaticon-nature-2'] %}
+<section class="pt-60">
+    <div class="auto-container pb-35">
+        <div class="sec-title white-homepage-title">
+            {#<div class="line"></div>#}
+            <h3>Jak dbać o ogród</h3>
+            <h2>Porady ogrodnicze</h2>
+            {#<div class="line"></div>#}
+        </div>
+        <div class="sec-content mt-50">
+            <div class="row">
+                {% for news in newsList %}
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="department">
+                        <div class="thumb">
+                            <img class="img-responsive img-fullwidth"
+                                 src="{{ news.photo.mainPhoto.show('370x250') }}"
+                                 alt="">
+                        </div>
+                        <div class="department-details">
+                            <div class="round-style"></div>
+                            <i class="icon {{ tools[loop.index-1] }}"></i>
+                            <h4 class="title">{{ news.trans('title') }}</h4>
+                            <p class="details pt-5">{{ news.trans('content') | striptags | truncate(50)  }}</p>
+                            <a href="#donation-form" class="thm-btn btn-xs mr-5"><i class="fa fa-angle-double-right"></i> Czytaj więcej</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

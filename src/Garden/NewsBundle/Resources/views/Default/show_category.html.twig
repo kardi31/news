@@ -1,0 +1,17 @@
+{% extends '@GardenNews/Default/show_news_list.html.twig' %}
+
+{% block pageTitle %}
+    {{ category.trans('title') }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="bread-crumb">
+        <li><a href="{{ path('garden_layout_homepage') }}">Strona główna</a></li>
+        <li><a href="{{ path('kardi_news_all') }}">Blog</a></li>
+        <li><a href="#">{{ category.trans('title') }}</a></li>
+    </ul>
+{% endblock %}
+
+{#{% block contentBlock %}#}
+    {#{{ render('content') }}#}
+{#{% endblock contentBlock %}#}

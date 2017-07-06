@@ -1,0 +1,96 @@
+{% extends '@GardenLayout/layout.html.twig' %}
+
+{% block subheader %}
+    {{ parent() }}
+    <!--Page Title-->
+    <section class="page-title">
+        <div class="auto-container">
+            <h1>
+                {% block pageTitle %}
+                    O nas
+                {% endblock pageTitle %}
+            </h1>
+
+            {% block breadcrumbs %}
+                <ul class="bread-crumb">
+                    <li><a href="{{ path('garden_layout_homepage') }}">Strona główna</a></li>
+                    <li><a href="#">O nas</a></li>
+                </ul>
+            {% endblock breadcrumbs %}
+
+        </div>
+
+        <!--Go Down Button-->
+        <div class="go-down">
+            <div class="curve scroll-to-target" data-target="#sidebar-section"><span
+                        class="icon fa fa-arrow-down"></span></div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block content %}
+    <!--About Section-->
+    <section class="about-section" id="about-section">
+        <!--Desc Box-->
+        <div class="desc-box">
+            <div class="auto-container">
+                <div class="sec-title no-underline">
+                    {{ page2.trans('content') | raw }}
+                </div>
+            </div>
+        </div>
+
+        <!--Lower Content-->
+        <div class="lower-content">
+            <div class="auto-container">
+                <div class="content-box">
+                    <div class="row clearfix">
+
+                        <!--Column-->
+                        <div class="col-md-7  col-sm-7 col-xs-12 column">
+                            <strong class="h2 main-title">{{ page.trans('title') | raw}} </strong>
+
+                            {{ page.trans('content') | raw }}
+                        </div>
+
+
+                        <!--Column-->
+                        <div class="col-md-5  col-sm-5 col-xs-12 column">
+                            {% for photo in page.photo.children %}
+                            <article class="featured-box">
+                                <figure class="image">
+                                    <img src="{{ photo.show('420x284') }}"
+                                         alt="{{ page.trans('title') }}"
+                                         class="img-responsive"
+                                    />
+                                </figure>
+                            </article>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block inlinestyles %}
+    <style>
+        .lower-content {
+            background-image: url({{ page.photo.mainPhoto.show() }});
+        }
+    </style>
+{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+
+    <style>
+        .header-wrapper {
+            background-image: url('{{ page2.photo.mainPhoto.show('1920x554') }}');
+        }
+    </style>
+{% endblock styles %}

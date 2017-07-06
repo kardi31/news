@@ -33,12 +33,17 @@ class NewsRepository extends DataTableRepository
         return $query->getOneOrNullResult();
     }
 
-    public function getLastNewsList($offset, $limit)
+    public function getLastNewsList($offset, $limit, ?int $excludeId = null)
     {
         $qb = $this->createQueryBuilder('n');
         $qb->orderBy('n.id', 'DESC');
         $qb->setFirstResult($offset);
         $qb->setMaxResults($limit);
+
+        if ($excludeId) {
+            $qb->andWhere($qb->expr()->neq('n.id', ':excludeId'));
+            $qb->setParameter('excludeId', $excludeId);
+        }
 
         $query = $qb->getQuery();
 
@@ -145,5 +150,32 @@ class NewsRepository extends DataTableRepository
             ->setParameter('locale', $locale)
             ->groupBy('n.id');
         return $qb;
+    }
+
+    public function searchForNewsesQuery($queryString, string $locale)
+    {
+        $qb = $this->createQueryBuilder('n');
+        $qb->select('n')
+            ->leftJoin('n.translations', 'nt')
+            ->leftJoin('n.category', 'cat')
+            ->leftJoin('cat.translations', 'catt')
+            ->leftJoin('n.tags', 't')
+            ->leftJoin('t.translations', 'tt')
+            ->andWhere("nt.lang = :locale")
+            ->andWhere("catt.lang = :locale")
+            ->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->like('LOWER(nt.title)', ':queryString'),
+                    $qb->expr()->like('LOWER(catt.title)', ':queryString'),
+                    $qb->expr()->like('LOWER(tt.title)', ':queryString'),
+                    $qb->expr()->like('LOWER(nt.content)', ':queryString')
+                )
+            )
+            ->setParameters([
+                'locale' => $locale,
+                'queryString' => strtolower($queryString)
+            ])
+            ->groupBy('n.id');
+        return $qb->getQuery();
     }
 }

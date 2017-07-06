@@ -3,6 +3,8 @@
 namespace Kardi\NewsBundle\Controller;
 
 use Kardi\NewsBundle\Form\Type\Comment;
+use Kardi\NewsBundle\Form\Type\Search;
+use Nietonfir\Google\ReCaptchaBundle\Controller\ReCaptchaValidationInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,7 +57,7 @@ class DefaultController extends Controller
         $newsList = $em->getRepository('KardiNewsBundle:News')
             ->getLastNewsList(0, $quantity);
 
-        return $this->render('KardiNewsBundle:Default:'.$template, ['newsList' => $newsList]);
+        return $this->render('KardiNewsBundle:Default:' . $template, ['newsList' => $newsList]);
     }
 
     public function lastNewsListBigImageAction($numberOfNews = 6)
@@ -67,21 +69,24 @@ class DefaultController extends Controller
         return $this->render('KardiNewsBundle:Default:last_news_list_big_image.html.twig', ['newsList' => $newsList]);
     }
 
-    public function lastCategoryNewsAction($categorySlug, $numberOfNews = 5)
+    public function lastCategoryNewsAction($categoryIdOrSlug, $quantity = 5, $template = 'last_category_news.html.twig')
     {
         $em = $this->getDoctrine()->getManager();
 
-        $category = $em->getRepository('KardiNewsBundle:Category')
-            ->getCategoryBySlug($categorySlug);
-
+        $category = $em->getRepository('KardiNewsBundle:Category');
+        if (is_numeric($categoryIdOrSlug)) {
+            $category->findOneBy(['id' => $categoryIdOrSlug]);
+        } else {
+            $category->getCategoryBySlug($categoryIdOrSlug);
+        }
         if (!$category) {
             return new Response();
         }
 
         $newsList = $em->getRepository('KardiNewsBundle:News')
-            ->getLastCategoryNewsList($category->getId(), $numberOfNews);
+            ->getLastCategoryNewsList($categoryIdOrSlug, $quantity);
 
-        return $this->render('KardiNewsBundle:Default:last_category_news.html.twig', ['newsList' => $newsList, 'category' => $category]);
+        return $this->render('KardiNewsBundle:Default:' . $template, ['newsList' => $newsList, 'category' => $category]);
     }
 
     public function latestCommentsAction($numberOfComments = 3)
@@ -106,12 +111,23 @@ class DefaultController extends Controller
         $commentForm = $this->createForm(Comment::class);
         $commentForm->get('parent_id')->setData($parentId);
         $commentForm->get('news_id')->setData($newsId);
-
         $commentForm->handleRequest($request);
 
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
+
+            $em = $this->getDoctrine()->getManager();
+            $newsRepo = $em->getRepository('KardiNewsBundle:News');
+            $news = $newsRepo->find($newsId);
+            if (empty($_POST['g-recaptcha-response'])) {
+                $this->addFlash(
+                    'comment.error',
+                    'Missing captcha value'
+                );
+                $newsRoute = $this->container->get('kardi_news.provider.route.news')->generateNewsUrl($news);
+
+                return $this->redirect($newsRoute);
+            }
+
             $comment = $commentForm->getData();
             $comment->setIp($_SERVER['REMOTE_ADDR']);
             $comment->setHostname(gethostbyaddr($_SERVER['REMOTE_ADDR']));
@@ -150,9 +166,8 @@ class DefaultController extends Controller
                 $message
             );
 
-            $newsRouter = $this->container->get('kardi_news.router.news');
+            $newsRoute = $this->container->get('kardi_news.provider.route.news')->generateNewsUrl($news);
 
-            $newsRoute = $newsRouter->generateNewsUrl($news);
             return $this->redirect($newsRoute);
         }
 
@@ -172,7 +187,7 @@ class DefaultController extends Controller
         $newsListQuery = $em->getRepository('KardiNewsBundle:News')
             ->getCategoryNewsListQuery($category->getId(), null);
 
-        $paginator  = $this->get('knp_paginator');
+        $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $newsListQuery,
             $request->query->getInt('page', 1),
@@ -194,7 +209,7 @@ class DefaultController extends Controller
         $newsListQuery = $em->getRepository('KardiNewsBundle:News')
             ->getTagNewsListQuery($tag->getId(), null);
 
-        $paginator  = $this->get('knp_paginator');
+        $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $newsListQuery,
             $request->query->getInt('page', 1),
@@ -214,7 +229,11 @@ class DefaultController extends Controller
         $newsListQuery = $em->getRepository('KardiNewsBundle:News')
             ->getAllNewsListQuery(null);
 
-        $paginator  = $this->get('knp_paginator');
+        $page = $em->getRepository('KardiPageBundle:Page')
+            ->getPageByType('news');
+
+
+        $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $newsListQuery,
             $request->query->getInt('page', 1),
@@ -222,7 +241,47 @@ class DefaultController extends Controller
         );
 
         return $this->render('KardiNewsBundle:Default:show_news_list.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'page' => $page
+        ]);
+    }
+
+    public function searchNewsAction(Request $request)
+    {
+        $form = $this->createForm(Search::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $data = $form->getData();
+
+                $em = $this->getDoctrine()->getManager();
+                $newsResultQuery = $em->getRepository('KardiNewsBundle:News')
+                    ->searchForNewsesQuery($data['search'], $request->getLocale());
+
+                $paginator = $this->get('knp_paginator');
+                $pagination = $paginator->paginate(
+                    $newsResultQuery,
+                    $request->query->getInt('page', 1),
+                    $this->categoryNewsNumber
+                );
+
+                $page = $em->getRepository('KardiPageBundle:Page')
+                    ->getPageByType('news');
+
+                return $this->render('KardiNewsBundle:Default:search_news_list.html.twig', [
+                    'pagination' => $pagination,
+                    'page' => $page
+                ]);
+
+            } else {
+                return $this->redirectToRoute('kardi_news_all');
+            }
+        }
+
+        return $this->render('KardiNewsBundle:Default:search.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }

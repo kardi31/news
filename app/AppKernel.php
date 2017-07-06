@@ -7,7 +7,6 @@ class AppKernel extends Kernel
 {
     public function registerBundles()
     {
-//        die('beforedep');
         $bundles = array_merge([
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
@@ -17,16 +16,17 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new BeSimple\I18nRoutingBundle\BeSimpleI18nRoutingBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
+            new BeSimple\I18nRoutingBundle\BeSimpleI18nRoutingBundle(),
+            new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
         ],
             $this->loadKardiBundles(),
-//            $this->loadEmigrantBundles(),
+//            $this->loadEmigrantBundles()
             $this->loadGardenBundles()
 
         );
@@ -77,7 +77,8 @@ class AppKernel extends Kernel
         return [
             new Garden\LayoutBundle\GardenLayoutBundle(),
             new Garden\MenuBundle\GardenMenuBundle(),
-            new Garden\NewsBundle\GardenNewsBundle()
+            new Garden\NewsBundle\GardenNewsBundle(),
+            new \Garden\PageBundle\GardenPageBundle()
         ];
     }
 

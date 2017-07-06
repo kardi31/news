@@ -8,7 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-
         $em = $this->getDoctrine()->getManager();
         $homepage = $em->getRepository('KardiPageBundle:Page')
             ->getHomepage();

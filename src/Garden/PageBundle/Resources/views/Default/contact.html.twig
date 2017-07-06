@@ -1,0 +1,94 @@
+{% extends '@GardenLayout/layout.html.twig' %}
+
+{% block subheader %}
+    {{ parent() }}
+    <!--Page Title-->
+    <section class="page-title">
+        <div class="auto-container">
+            <h1>
+                {% block pageTitle %}
+                    Kontakt
+                {% endblock pageTitle %}
+            </h1>
+
+            {% block breadcrumbs %}
+                <ul class="bread-crumb">
+                    <li><a href="{{ path('garden_layout_homepage') }}">Strona główna</a></li>
+                    <li><a href="#">Kontakt</a></li>
+                </ul>
+            {% endblock breadcrumbs %}
+
+        </div>
+
+        <!--Go Down Button-->
+        <div class="go-down">
+            <div class="curve scroll-to-target" data-target="#sidebar-section"><span
+                        class="icon fa fa-arrow-down"></span></div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block content %}
+    <div class="contact-section" id="contact-section">
+
+        <div class="auto-container">
+            <div class="row clearfix">
+
+                <!--Content Side-->
+                <div class="col-md-8 col-sm-7 col-xs-12 column pull-right">
+                    <div class="sec-title">
+                        <h3>Napisz do nas</h3>
+                        <div class="line"></div>
+                    </div>
+                    <div class="form-box">
+                        {% form_theme form with ['GardenLayoutBundle:Form:form_comment_style.html.twig', _self] %}
+                        {{ form_start(form) }}
+                        <div class="row clearfix">
+                            <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                                {{ form_row(form.name) }}
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                                {{ form_row(form.email) }}
+                            </div>
+                            <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                {{ form_row(form.message) }}
+                            </div>
+                            <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                {{ form_row(form.recaptcha) }}
+                            </div>
+
+                            <div class="form-group col-md-12 col-sm-12 col-xs-12 text-right">
+                                {{ form_row(form.submit, {'attr': {'class': 'normal-btn theme-btn', 'rows': '10'}}) }}
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+
+                </div>
+
+                <!--Left Side-->
+                <div class="col-md-4 col-sm-5 col-xs-12 column pull-left">
+                    <div class="sec-title">
+                        <h2>Polub nas</h2>
+                        <div class="line"></div>
+                    </div>
+
+                    <div class="info-box">
+                        {{ include('GardenLayoutBundle:Default:facebook_box.html.twig') }}
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+    <style>
+        .header-wrapper {
+            background-image: url('{{ page.photo.mainPhoto.show('1920x554') }}');
+        }
+    </style>
+{% endblock styles %}

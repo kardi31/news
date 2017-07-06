@@ -1,0 +1,11 @@
+<!-- Search Form -->
+<div class="widget search-form">
+    <h3>Szukaj</h3>
+    {% form_theme form '@KardiFramework/Form/form_submit_with_icon.html.twig' %}
+    {{ form_start(form, {'action': path('kardi_news_search')}) }}
+        <div class="form-group">
+            {{ form_row(form.search) }}
+            {{ form_row(form.submit_search, {'fa': 'fa-search', 'right': 'true'}) }}
+        </div>
+    {{ form_end(form) }}
+</div>

@@ -11,7 +11,32 @@ use Kardi\AdminBundle\Repository\DataTableRepository;
  */
 class CategoryRepository extends DataTableRepository
 {
-    public function getCategoryBySlug($slug)
+    /**
+     * @param string $locale
+     * @param array $order
+     * @return mixed
+     */
+    public function getAllCategories(string $locale, array $order = [])
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->join('c.translations', 'ct');
+        $qb->andWhere($qb->expr()->like('ct.lang', ':locale'));
+        $qb->setParameter('locale', $locale);
+
+        if ($order) {
+            $qb->addOrderBy($order[0], $order[1]);
+        }
+
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+    }
+
+    /**
+     * @param string $slug
+     * @return mixed
+     */
+    public function getCategoryBySlug(string $slug)
     {
         $qb = $this->createQueryBuilder('c');
         $qb->join('c.translations', 't');
@@ -25,7 +50,11 @@ class CategoryRepository extends DataTableRepository
         return $query->getOneOrNullResult();
     }
 
-    public function getCategoryNames($locale)
+    /**
+     * @param string $locale
+     * @return array
+     */
+    public function getCategoryNames(string $locale)
     {
         $qb = $this->createQueryBuilder('c');
         $qb->select('c.id, t.title');

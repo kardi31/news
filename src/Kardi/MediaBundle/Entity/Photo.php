@@ -236,12 +236,35 @@ class Photo
     }
 
     /**
+     * @param $childNo
+     * @return $this|array
+     */
+    public function getChild($childNo)
+    {
+        $children = $this->getChildren();
+
+        if (empty($children)) {
+            return $this;
+        }
+
+        $child = $children->slice($childNo - 1, 1);
+        $child = $child[0];
+
+        if (!$child) {
+            return $this;
+        }
+
+        return $child;
+    }
+
+    /**
      * @return bool
      */
     public function hasChildren()
     {
         return !$this->getChildren()->isEmpty();
     }
+
     /**
      * Set root
      *
@@ -306,11 +329,11 @@ class Photo
     {
         if (strlen($this->getPhoto())) {
 //            if (!$size) {
-                if ($size) {
-                    return sprintf('/photos/%s/%s', $size, $this->getPhoto());
-                }
+            if ($size) {
+                return sprintf('/photos/%s/%s', $size, $this->getPhoto());
+            }
 
-                return '/photos/' . $this->getPhoto();
+            return '/photos/' . $this->getPhoto();
 //            }
         }
 
