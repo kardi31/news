@@ -1,0 +1,5 @@
+form.email: Adres email
+form.username: Nazwa użytkownika
+form.password: Hasło
+form.password_confirmation: Powtórz hasło
+form.role: Uprawnienia

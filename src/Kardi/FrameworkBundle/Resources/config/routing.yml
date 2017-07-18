@@ -1,0 +1,9 @@
+kardi_framework_mapping:
+    path: '/framework/mapping/'
+    defaults: { _controller: KardiFrameworkBundle:Command:mappingInfo }
+kardi_framework_cache:
+    path: '/framework/cache/'
+    defaults: { _controller: KardiFrameworkBundle:Command:cacheClear }
+kardi_framework_entity:
+    path: '/framework/entity/'
+    defaults: { _controller: KardiFrameworkBundle:Command:generateEntity }

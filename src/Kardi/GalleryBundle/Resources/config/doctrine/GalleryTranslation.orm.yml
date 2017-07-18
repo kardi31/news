@@ -24,6 +24,7 @@ Kardi\GalleryBundle\Entity\GalleryTranslation:
       gallery:
         targetEntity: Gallery
         inversedBy: translations
+        cascade: ["persist"]
         joinColumn:
           name: gallery_id
           referencedColumnName: id

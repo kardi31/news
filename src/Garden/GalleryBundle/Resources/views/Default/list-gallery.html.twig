@@ -1,0 +1,70 @@
+{% extends '@GardenLayout/layout.html.twig' %}
+
+{% block subheader %}
+    {{ parent() }}
+    <!--Page Title-->
+    <section class="page-title">
+        <div class="auto-container">
+            <h1>
+                Nasze realizacje
+            </h1>
+
+            {% block breadcrumbs %}
+                <ul class="bread-crumb">
+                    <li><a href="{{ path('garden_layout_homepage') }}">Strona główna</a></li>
+                    <li><a href="#">Nasze realizacje</a></li>
+                </ul>
+            {% endblock breadcrumbs %}
+        </div>
+
+        <!--Go Down Button-->
+        <div class="go-down">
+            <div class="curve scroll-to-target" data-target="#sidebar-section"><span
+                        class="icon fa fa-arrow-down"></span></div>
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block content %}
+
+    <!--Team Section-->
+    <section class="team-section layer-overlay overlay-dark-8">
+        <div class="auto-container">
+            <div class="sec-title style-two">
+                {{ page.trans('content') | raw }}
+            </div>
+            <div class="row clearfix">
+
+                {% for gallery in galleries %}
+                    {% set galleryLink = path('garden_gallery_show', {'slug': gallery.trans('slug'), 'id': gallery.id}) %}
+                    <div class="col-md-3 col-sm-6 col-xs-12 column wow fadeInLeft"
+                         data-wow-delay="{{ loop.index * 300 }}ms"
+                         data-wow-duration="1500ms">
+                        <article class="inner-box">
+                            <figure class="image"><a href="{{ galleryLink }}"><img
+                                            src="{{ gallery.photo.show('370x250') }}"
+                                            alt="{{ gallery.trans('title') }}"></a>
+                            </figure>
+                            <div class="content">
+                                <div class="title-box">
+                                    <a class="h4" href="{{ galleryLink }}">{{ gallery.trans('title') }}</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+
+    <style>
+        .header-wrapper {
+            background-image: url('{{ page.photo.mainPhoto.show('1920x554') }}');
+        }
+    </style>
+{% endblock styles %}

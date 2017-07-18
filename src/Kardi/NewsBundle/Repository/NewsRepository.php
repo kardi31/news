@@ -16,6 +16,7 @@ class NewsRepository extends DataTableRepository
         $qb = $this->createQueryBuilder('n');
         $qb->orderBy('n.id', 'DESC');
         $qb->andWhere('n.breakingNews = 1');
+        $qb->andWhere('n.active = 1');
 
         $query = $qb->getQuery();
 
@@ -27,6 +28,7 @@ class NewsRepository extends DataTableRepository
         $qb = $this->createQueryBuilder('n');
         $qb->orderBy('n.id', 'DESC');
         $qb->setMaxResults(1);
+        $qb->andWhere('n.active = 1');
 
         $query = $qb->getQuery();
 
@@ -39,6 +41,7 @@ class NewsRepository extends DataTableRepository
         $qb->orderBy('n.id', 'DESC');
         $qb->setFirstResult($offset);
         $qb->setMaxResults($limit);
+        $qb->andWhere('n.active = 1');
 
         if ($excludeId) {
             $qb->andWhere($qb->expr()->neq('n.id', ':excludeId'));
@@ -64,6 +67,7 @@ class NewsRepository extends DataTableRepository
         $qb->andWhere('n.categoryId = :categoryId');
         $qb->setParameter('categoryId', $categoryId);
         $qb->orderBy('n.id', 'DESC');
+        $qb->andWhere('n.active = 1');
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -80,6 +84,7 @@ class NewsRepository extends DataTableRepository
         $qb->andWhere('t.id = :tag_id');
         $qb->setParameter('tag_id', $tagId);
         $qb->orderBy('n.id', 'DESC');
+        $qb->andWhere('n.active = 1');
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -93,6 +98,7 @@ class NewsRepository extends DataTableRepository
     {
         $qb = $this->createQueryBuilder('n');
         $qb->orderBy('n.id', 'DESC');
+        $qb->andWhere('n.active = 1');
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -176,6 +182,17 @@ class NewsRepository extends DataTableRepository
                 'queryString' => strtolower($queryString)
             ])
             ->groupBy('n.id');
+        $qb->andWhere('n.active = 1');
         return $qb->getQuery();
+    }
+
+
+    public function countActiveArticles()
+    {
+        $qb = $this->createQueryBuilder('n');
+        $qb->select('count(n)');
+        $qb->andWhere('n.active = 1');
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }

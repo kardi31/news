@@ -1,4 +1,20 @@
 services:
-#    kardi_gallery.example:
-#        class: Kardi\GalleryBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    kardi_gallery.service.gallery:
+        class: Kardi\GalleryBundle\Service\GalleryService
+        arguments:
+            - %languages%
+    kardi_gallery.form.admin.gallery:
+        class: Kardi\GalleryBundle\Form\Type\Admin\Gallery
+        arguments:
+            - '@kardi_gallery.provider.category'
+        tags:
+            - { name: form.type }
+    kardi_gallery.repository.category:
+        class: Kardi\GalleryBundle\Repository\CategoryRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - Kardi\GalleryBundle\Entity\Category
+    kardi_gallery.provider.category:
+        class: Kardi\GalleryBundle\Provider\CategoryProvider
+        arguments:
+            - '@kardi_gallery.repository.category'

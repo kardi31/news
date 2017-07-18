@@ -1,0 +1,42 @@
+Kardi\UserBundle\Entity\Admin:
+  type: entity
+  repositoryClass: Kardi\UserBundle\Repository\AdminRepository
+  table: user_admin
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    firstname:
+      type: string
+      length: 255
+      nullable: true
+    lastname:
+      type: string
+      length: 255
+      nullable: true
+    email:
+      type: string
+      length: 255
+    active:
+      type: boolean
+      options:
+          default: 0
+    salt:
+      type: string
+      length: 255
+    password:
+      type: string
+      length: 255
+    lastLogin:
+      type: datetime
+      nullable: true
+    createdAt:
+      type: datetime
+      nullable: true
+    updatedAt:
+      type: datetime
+      nullable: true
+  lifecycleCallbacks:
+      prePersist: [setCreatedAt, setUpdatedAt]
+

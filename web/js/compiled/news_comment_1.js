@@ -1,5 +1,6 @@
 $(function () {
     $('.reply-comment').on('click', function () {
+
         var that = $(this);
         var id = that.data('id');
         var targetElement = $('.writecomment[rel=' + id + ']');

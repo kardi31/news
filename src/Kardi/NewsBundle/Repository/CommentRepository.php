@@ -46,4 +46,13 @@ class CommentRepository extends NestedTreeRepository
 
         return $query->getSingleScalarResult();
     }
+
+    public function countActiveComments()
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->select('count(c)');
+        $qb->andWhere('c.active = 1');
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

@@ -144,9 +144,10 @@ class DefaultController extends BaseController
             $this->categoryNewsNumber
         );
 
-        return $this->render('KardiNewsBundle:Default:show_tag_news_list.html.twig', [
+        return $this->render('GardenNewsBundle:Default:show_tag_news_list.html.twig', [
             'pagination' => $pagination,
-            'tag' => $tag
+            'tag' => $tag,
+            'page' => $page
         ]);
     }
 }

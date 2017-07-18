@@ -1,0 +1,9 @@
+garden_gallery_show:
+    locales:  { en: "/projects/{slug}/{id}", pl: "/realizacje/{slug}/{id}" }
+    defaults: { _controller: GardenGalleryBundle:Default:show }
+garden_gallery_list:
+    locales:  { en: "/projects", pl: "/realizacje" }
+    defaults: { _controller: GardenGalleryBundle:Default:listGallery }
+    options:
+         linkable: true
+         title: 'Realizacje'

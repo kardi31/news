@@ -1,5 +1,7 @@
 imports:
     - { resource: config.yml }
+    - { resource: parameters.yml }
+    - { resource: parameters_dev.yml }
 
 framework:
     router:
@@ -30,5 +32,13 @@ monolog:
         #    type:   chromephp
         #    level:  info
 
-#swiftmailer:
-#    delivery_addresses: ['me@example.com']
+swiftmailer:
+    delivery_addresses: ['tomektest22@gmail.com']
+    transport: gmail
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+
+doctrine:
+    dbal:
+        unix_socket: '/Applications/MAMP/tmp/mysql/mysql.sock'

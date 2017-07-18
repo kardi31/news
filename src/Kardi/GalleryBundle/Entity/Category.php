@@ -2,10 +2,12 @@
 
 namespace Kardi\GalleryBundle\Entity;
 
+use Kardi\FrameworkBundle\Entity\Translation;
+
 /**
  * Category
  */
-class Category
+class Category extends Translation
 {
     /**
      * @var integer
@@ -107,5 +109,16 @@ class Category
     public function getTranslations()
     {
         return $this->translations;
+    }
+
+    /**
+     * @param $field
+     * @return string
+     */
+    public function trans($field)
+    {
+        $this->setTranslations($this->translations);
+
+        return parent::trans($field);
     }
 }

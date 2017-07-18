@@ -1,0 +1,9 @@
+services:
+    kardi_user.factory.user_form:
+        class: Kardi\UserBundle\Factory\UserFormFactory
+    kardi_user.redirect.after.logout:
+       class: Kardi\UserBundle\Redirection\AfterLogoutRedirection
+       arguments: ['@router', '@security.token_storage']
+    kardi_user.redirect.after.login:
+       class: Kardi\UserBundle\Redirection\AfterLoginRedirection
+       arguments: ['@router']

@@ -1,0 +1,90 @@
+{% extends 'KardiAdminBundle:Template:edit.html.twig' %}
+
+{% block pageTitle %}
+    Edytuj galerie
+{% endblock pageTitle %}
+
+{% block content %}
+    {% set breadcrumbItems = {'kardi_admin_news': 'Galeria', '':(block('pageTitle'))} %}
+    {% if sidebarItems is not defined %}
+        {% set sidebarItems = [
+        {'href': 'form_content', 'icon': 'fa-newspaper-o', 'title': 'Treść'},
+        {'href': 'form_photo', 'icon': 'fa-photo', 'title': 'Zdjęcia'},
+        {'href': 'form_settings', 'icon': 'fa-cog', 'title': 'Ustawienia'},
+        {'href': 'form_meta', 'icon': 'fa-tag', 'title': 'Meta tagi'},
+        ] %}
+    {% endif %}
+    {{ parent() }}
+{% endblock content %}
+
+{% block pageContent %}
+    <!-- BEGIN PAGE BASE CONTENT -->
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-photo"></i> {{ block('pageTitle') }}
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    {% form_theme form with ['@KardiAdmin/Default/Form/metronic_layout.html.twig', _self] %}
+                    {{ form_start(form) }}
+                    <div class="tab-content">
+                        {% include '@KardiGallery/Admin/Gallery/Partial/content.html.twig' %}
+                        {% if gallery.photo %}
+                            {% include '@KardiGallery/Admin/Gallery/Partial/photo.html.twig' %}
+                        {% endif %}
+                        {% include '@KardiGallery/Admin/Gallery/Partial/settings.html.twig' %}
+                    </div>
+                    {{ form_row(form.submit, { 'cancelUrl': path('kardi_admin_gallery') }) }}
+                    {{ form_end(form) }}
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock pageContent %}
+
+{% block styles %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/kardiadmin/assets/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{ asset('bundles/kardiadmin/assets/global/plugins/select2/css/select2-bootstrap.min.css') }}"
+          rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('bundles/kardiadmin/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}"
+          rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('bundles/kardiadmin/assets/global/plugins/fancybox/source/jquery.fancybox.css') }}"
+          rel="stylesheet" type="text/css"/>
+{% endblock styles %}
+
+{% block footer_javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/kardiadmin/assets/global/plugins/select2/js/select2.full.min.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ asset('bundles/kardiadmin/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}"
+            type="text/javascript"></script>a
+    <script src="{{ asset('bundles/kardiadmin/assets/custom/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/kardiadmin/assets/custom/scripts.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/kardiadmin/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ asset('bundles/kardiadmin/assets/global/plugins/plupload/js/plupload.full.min.js') }}"
+            type="text/javascript"></script>
+
+    {% javascripts
+    '@KardiAdminBundle/Resources/Public/images.js'
+    output='js/compiled/images.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {{ block('additional_js') }}
+{% endblock footer_javascripts %}
+
+{% block additional_js %}
+    <script>
+        $(function () {
+            EditImages.init('KardiGalleryBundle', 'Gallery',{{ gallery.id }});
+        });
+    </script>
+{% endblock additional_js %}

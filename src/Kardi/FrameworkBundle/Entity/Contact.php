@@ -2,6 +2,7 @@
 
 namespace Kardi\FrameworkBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 /**
  * Contact
  */

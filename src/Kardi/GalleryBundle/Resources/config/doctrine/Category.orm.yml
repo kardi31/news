@@ -10,6 +10,8 @@ Kardi\GalleryBundle\Entity\Category:
     gallery:
       targetEntity: Gallery
       mappedBy: category
+      cascade: ["persist"]
     translations:
       targetEntity: CategoryTranslation
       mappedBy: category
+      cascade: ["persist"]

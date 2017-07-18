@@ -1,3 +1,8 @@
+garden_gallery:
+    resource: "@GardenGalleryBundle/Resources/config/routing.yml"
+    type: be_simple_i18n
+    prefix:   /
+
 garden_news:
     resource: "@GardenNewsBundle/Resources/config/routing.yml"
     prefix:   /
@@ -14,6 +19,9 @@ garden_layout:
 #    resource: "@EmigrantLayoutBundle/Resources/config/routing.yml"
 #    prefix:   /
 
+kardi_framework:
+    resource: "@KardiFrameworkBundle/Resources/config/routing.yml"
+    prefix:   /
 garden_page:
     resource: "@GardenPageBundle/Resources/config/routing.yml"
     prefix:   /
@@ -34,3 +42,12 @@ kardi_ad:
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+_wdt:
+    resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
+    prefix:   /_wdt
+
+_profiler:
+    resource: "@WebProfilerBundle/Resources/config/routing/profiler.xml"
+    prefix:   /_profiler
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

@@ -4,7 +4,6 @@ namespace Kardi\NewsBundle\Form\Type\Admin;
 
 use Kardi\AdminBundle\Form\Type\TranslationForm;
 use Kardi\NewsBundle\Entity\NewsTranslation;
-use Kardi\NewsBundle\Form\Type\Admin\Translation;
 use Kardi\NewsBundle\Entity\News as NewsEntity;
 use Kardi\NewsBundle\Provider\CategoryProvider;
 use Kardi\NewsBundle\Provider\TagProvider;

@@ -235,6 +235,18 @@ class Photo
         return $this->children;
     }
 
+    public function getChildrenWithParent()
+    {
+        $children = $this->getChildren();
+
+        if (!empty($children)) {
+            return array_merge([$this], $children->toArray());
+        }
+
+        return [$this];
+
+    }
+
     /**
      * @param $childNo
      * @return $this|array
@@ -248,6 +260,8 @@ class Photo
         }
 
         $child = $children->slice($childNo - 1, 1);
+        if (!isset($child[0]))
+            return $this;
         $child = $child[0];
 
         if (!$child) {
@@ -343,4 +357,3 @@ class Photo
         return 'http://placehold.it/' . $size . '?text=Brak+zdjęcia';
     }
 }
-

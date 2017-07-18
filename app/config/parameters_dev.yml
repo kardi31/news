@@ -1,0 +1,9 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: localhost
+    database_port: 3306
+    database_name: emi
+    database_user: root
+    database_password: root
+    mailer_user: tomektest22@gmail.com
+    mailer_password: haslo123

@@ -35,15 +35,18 @@ Kardi\GalleryBundle\Entity\Gallery:
     translations:
       targetEntity: GalleryTranslation
       mappedBy: gallery
+      cascade: ["persist"]
   manyToOne:
       category:
         targetEntity: Category
         inversedBy: gallery
+        cascade: ["persist"]
         joinColumn:
           name: category_id
           referencedColumnName: id
       photo:
         targetEntity: Kardi\MediaBundle\Entity\Photo
+        cascade: ["persist"]
         joinColumn:
           name: photo_root_id
           referencedColumnName: id

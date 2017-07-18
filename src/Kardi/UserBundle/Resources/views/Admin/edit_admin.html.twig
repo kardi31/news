@@ -1,0 +1,30 @@
+{% extends 'KardiAdminBundle:Template:metronic.html.twig' %}
+
+{% block pageTitle %}
+    Edytuj administratora
+{% endblock pageTitle %}
+
+{% block content %}
+    {% set breadcrumbItems = {'kardi_admin_user_admin_list': 'Lista administratorów','':(block('pageTitle'))} %}
+    {{ parent() }}
+{% endblock content %}
+
+{% block pageContent %}
+
+    {% trans_default_domain 'FOSUserBundle' %}
+
+    {% form_theme form with ['@KardiAdmin/Default/Form/metronic_layout.html.twig', _self] %}
+    {{ form_start(form, {'method': 'post'}) }}
+    {{ form_widget(form) }}
+    <div class="form-actions">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn red">
+                    <i class="fa fa-check"></i> Zapisz
+                </button>
+                <a href="{{ path('kardi_admin_user_admin_list') }}" class="btn default">Anuluj</a>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock pageContent %}

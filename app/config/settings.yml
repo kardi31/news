@@ -1,8 +1,7 @@
 parameters:
-    application_name: Emigrant
+    application_name: Evergreen
     comments_active: true
     comments_moderate: false
     meta_title: Portal wiadomości
     languages:
       - pl
-      - en

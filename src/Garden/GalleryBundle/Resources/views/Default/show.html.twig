@@ -1,0 +1,70 @@
+{% extends '@GardenLayout/layout.html.twig' %}
+
+{% block subheader %}
+    {{ parent() }}
+    <!--Page Title-->
+    <section class="page-title">
+        <div class="auto-container">
+            <h1>
+                {{ gallery.trans('title') }}
+            </h1>
+
+            {% block breadcrumbs %}
+                <ul class="bread-crumb">
+                    <li><a href="{{ path('garden_layout_homepage') }}">Strona główna</a></li>
+                    {#<li><a href="{{ path('kardi_news_all') }}">Blog</a></li>#}
+                    <li><a href="#">{{ gallery.trans('title') }}</a></li>
+                </ul>
+            {% endblock breadcrumbs %}
+        </div>
+
+        <!--Go Down Button-->
+        <div class="go-down">
+            <div class="curve scroll-to-target" data-target="#sidebar-section"><span
+                        class="icon fa fa-arrow-down"></span></div>
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block content %}
+    <section id="gallery-section" class="gallery-section layer-overlay overlay-dark-8">
+        <div class="container">
+            <div class="sec-title style-two">
+                {{ gallery.trans('content') | raw }}
+                <div class="line"></div>
+            </div>
+            <div class="row clearfix">
+                {% for photo in gallery.photo.childrenWithParent %}
+                    <!--Column-->
+                    <div class="col-md-3 col-sm-4 col-xs-12 column wow fadeIn" data-wow-delay="{{ loop.index * 300 }}ms"
+                         data-wow-duration="1500ms">
+                        <figure class="image">
+                            <a href="{{ photo.show }}" rel="{{ gallery.trans('slug') }}"
+                               class="link lightbox-image"><img src="{{ photo.show('370x250') }}"
+                                                                alt="{{ gallery.trans('title') }}"></a>
+                        </figure>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <br><br>
+        </div>
+    </section>
+{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+
+    <style>
+        .header-wrapper {
+            background-image: url('{{ gallery.photo.mainPhoto.show('1920x554') }}');
+        }
+    </style>
+{% endblock styles %}
+
+{% block topscripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/gardenlayout/theme/js/script.js') }}"></script>
+    <script src="{{ asset('bundles/kardiadmin/assets/global/plugins/fancybox/lib/jquery.mousewheel-3.0.6.pack.js') }}"></script>
+{% endblock %}

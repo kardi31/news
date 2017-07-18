@@ -1,0 +1,19 @@
+{% extends 'KardiGalleryBundle:Admin/Gallery:edit_gallery.html.twig' %}
+
+{% block pageTitle %}
+    Dodaj galerię
+{% endblock pageTitle %}
+
+{% block content %}
+    {% set breadcrumbItems = {'kardi_admin_news': 'Galeria', '':(block('pageTitle'))} %}
+    {% set sidebarItems = [
+    {'href': 'form_content', 'icon': 'fa-newspaper-o', 'title': 'Treść'},
+    {'href': 'form_settings', 'icon': 'fa-cog', 'title': 'Ustawienia'},
+    {'href': 'form_meta', 'icon': 'fa-tag', 'title': 'Meta tagi'},
+    ] %}
+
+    {{ parent() }}
+{% endblock content %}
+
+{% block additional_js %}
+{% endblock additional_js %}

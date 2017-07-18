@@ -37,7 +37,7 @@ services:
         tags:
             - { name: form.type }
 
-    kardi_news.form.admin.search:
+    kardi_news.form.search:
         class: Kardi\NewsBundle\Form\Type\Search
         arguments:
             - '@router'

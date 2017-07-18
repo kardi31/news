@@ -47,9 +47,42 @@ class DefaultController extends Controller
         $form = $this->createForm(Contact::class);
         $form->handleRequest($request);
 
+        $contactEmail = $this->container->getParameter('contact_email');
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dump('formvalid');exit;
+            $contact = $form->getData();
+
+            $em->persist($contact);
+            $em->flush();
+
+            $contactEmail = $this->container->getParameter('contact_email');
+            $mailerFrom = $this->container->getParameter('mailer_user');
+
+            $mailer = $this->container->get('mailer');
+            $message = (new \Swift_Message('Wiadomość kontaktowa ze strony'))
+                ->setFrom($mailerFrom)
+                ->setTo($contactEmail)
+                ->setReplyTo($contact->getEmail(), $contact->getName())
+                ->setBody(
+                    $this->renderView(
+                        'emails/contact.html.twig',
+                        [
+                            'message' => $contact->getMessage(),
+                            'name' => $contact->getName(),
+                            'email' => $contact->getEmail()
+                        ]
+                    ),
+                    'text/html'
+                );
+
+            $mailer->send($message);
+
+            $this->addFlash(
+                'contact.success',
+                'Dziękujemy za wiadomość. Skontaktujemy się z Tobą wkrótce'
+            );
+
+            return $this->redirectToRoute('kardi_page_contact');
         }
 
         return $this->render('GardenPageBundle:Default:contact.html.twig', [

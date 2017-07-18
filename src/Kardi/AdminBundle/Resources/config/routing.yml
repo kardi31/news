@@ -13,3 +13,13 @@ kardi_menu:
 kardi_page:
     resource: "@KardiPageBundle/Resources/config/routing/admin.yml"
     prefix:   /page
+kardi_gallery:
+    resource: "@KardiGalleryBundle/Resources/config/routing/admin.yml"
+    prefix:   /gallery
+kardi_user:
+    resource: "@KardiUserBundle/Resources/config/routing/admin.yml"
+    prefix:   /user
+
+kardi_admin_login:
+    defaults: { _controller: KardiUserBundle:Admin/User:login }
+    path:   /login

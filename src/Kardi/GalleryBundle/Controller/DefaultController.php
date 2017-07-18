@@ -10,7 +10,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $latestGalleries = $em->getRepository('KardiGalleryBundle:Gallery')
-            ->getLatestGalleries($limit);
+            ->getGalleries($limit);
 
         return $this->render('KardiGalleryBundle:Default:latest_galleries.html.twig', ['latestGalleries' => $latestGalleries]);
     }

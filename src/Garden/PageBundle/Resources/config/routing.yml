@@ -1,4 +1,4 @@
-kardi_news:
+kardi_page:
     resource: "@KardiPageBundle/Resources/config/routing.yml"
     type: be_simple_i18n
     prefix:   /

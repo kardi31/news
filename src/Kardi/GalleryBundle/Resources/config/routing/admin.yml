@@ -1,0 +1,47 @@
+kardi_admin_gallery:
+    path:  /list-gallery
+    defaults: { _controller: KardiGalleryBundle:Admin/Gallery:listGallery}
+kardi_admin_gallery_data:
+    path:  /list-gallery-data
+    defaults: { _controller: KardiGalleryBundle:Admin/Gallery:listGalleryData}
+    options:
+        expose: true
+kardi_admin_edit_gallery:
+    path:  /edit-gallery/{id}
+    defaults: { _controller: KardiGalleryBundle:Admin/Gallery:editGallery}
+    requirements:
+        id: '\d+'
+kardi_admin_delete_gallery:
+    path:  /delete-gallery/{id}
+    defaults: { _controller: KardiGalleryBundle:Admin/Gallery:deleteGallery}
+    requirements:
+        id: '\d+'
+kardi_admin_add_gallery:
+    path:  /add-gallery
+    defaults: { _controller: KardiGalleryBundle:Admin/Gallery:addGallery}
+kardi_admin_gallery_toggle_active:
+    path:  /toggle-active/{id}
+    defaults: { _controller: KardiGalleryBundle:Admin/Gallery:toggleActive}
+    requirements:
+        id: '\d+'
+kardi_admin_gallery_category:
+    path:  /list-category
+    defaults: { _controller: KardiGalleryBundle:Admin/Category:listCategory}
+kardi_admin_category_data:
+    path:  /list-category-data
+    defaults: { _controller: KardiGalleryBundle:Admin/Category:listCategoryData}
+    options:
+        expose: true
+kardi_admin_edit_category:
+    path:  /edit-category/{id}
+    defaults: { _controller: KardiGalleryBundle:Admin/Category:editCategory}
+    requirements:
+        id: '\d+'
+kardi_admin_add_category:
+    path:  /add-category
+    defaults: { _controller: KardiGalleryBundle:Admin/Category:addCategory}
+kardi_admin_category_toggle_active:
+    path:  /category-toggle-active/{id}
+    defaults: { _controller: KardiGalleryBundle:Admin/Category:toggleActive}
+    requirements:
+        id: '\d+'

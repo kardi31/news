@@ -15,16 +15,24 @@
                 <!-- End Toggle Button -->
                 <!-- BEGIN LOGO -->
                 <a id="index" class="page-logo" href="{{ path('kardi_admin_homepage') }}">
-                    <span>KM</span>CMS
+                    <img src="{{ asset('bundles/kardiadmin/img/kmcms_icon.png') }}" alt="KM CMS" />
                 </a>
                 <!-- END LOGO -->
                 <!-- BEGIN TOPBAR ACTIONS -->
                 <div class="topbar-actions">
-                    <!-- BEGIN QUICK SIDEBAR TOGGLER -->
-                    <a href="#" class="quick-sidebar-toggler">
-                        <i class="icon-logout"></i> Wyloguj się
-                    </a>
 
+                    <div class="btn-group-img btn-group">
+                        <button type="button" class="btn btn-sm md-skip dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <span>Cześć {{ app.user.username }}</span>
+                            <img src="{{asset('bundles/kardiadmin/assets/layouts/layout/img/avatar11.jpg')}}" alt=""> </button>
+                    </div>
+
+
+                    <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+                    <a href="{{ path('fos_user_security_logout') }}" class="quick-sidebar-toggler">
+                        <i class="icon-logout"></i>
+                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                    </a>
                     <!-- END QUICK SIDEBAR TOGGLER -->
                 </div>
                 <!-- END TOPBAR ACTIONS -->
@@ -32,7 +40,7 @@
             <!-- BEGIN HEADER MENU -->
             <div class="nav-collapse collapse navbar-collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown dropdown-fw dropdown-fw-disabled active open selected">
+                    <li class="dropdown dropdown-fw dropdown-fw-disabled">
                         <a href="javascript:;" class="text-uppercase">
                             <i class="fa fa-newspaper-o"></i> Aktualności
                         </a>
@@ -57,52 +65,25 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown dropdown-fw dropdown-fw-disabled  ">
-                        <a href="javascript:;" class="text-uppercase">
-                            <i class="fa fa-bars"></i> Menu </a>
-                        <ul class="dropdown-menu dropdown-menu-fw">
-                            <li>
-                                <a href="table_static_basic.html"> Basic Tables </a>
-                            </li>
-                            <li>
-                                <a href="table_static_responsive.html"> Responsive Tables </a>
-                            </li>
-                            <li>
-                                <a href="table_bootstrap.html"> Bootstrap Tables </a>
-                            </li>
-                            <li class="dropdown more-dropdown-sub">
-                                <a href="javascript:;"> Datatables </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="table_datatables_managed.html"> Managed Datatables </a>
-                                    </li>
-                                    <li>
-                                        <a href="table_datatables_buttons.html"> Buttons Extension </a>
-                                    </li>
-                                    <li>
-                                        <a href="table_datatables_colreorder.html"> Colreorder Extension </a>
-                                    </li>
-                                    <li>
-                                        <a href="table_datatables_rowreorder.html"> Rowreorder Extension </a>
-                                    </li>
-                                    <li>
-                                        <a href="table_datatables_scroller.html"> Scroller Extension </a>
-                                    </li>
-                                    <li>
-                                        <a href="table_datatables_fixedheader.html"> FixedHeader Extension </a>
-                                    </li>
-                                    <li>
-                                        <a href="table_datatables_responsive.html"> Responsive Extension </a>
-                                    </li>
-                                    <li>
-                                        <a href="table_datatables_editable.html"> Editable Datatables </a>
-                                    </li>
-                                    <li>
-                                        <a href="table_datatables_ajax.html"> Ajax Datatables </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                    <li class="dropdown dropdown-fw dropdown-fw-disabled">
+                        <a href="{{ path('kardi_admin_gallery') }}" class="text-uppercase">
+                            <i class="fa fa-photo-o"></i> Galeria
+                        </a>
+                    </li>
+                    <li class="dropdown dropdown-fw dropdown-fw-disabled">
+                        <a href="{{ path('kardi_admin_page') }}" class="text-uppercase">
+                            <i class="fa fa-photo-o"></i> Strony
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('kardi_admin_menu_list') }}" class="text-uppercase">
+                            <i class="fa fa-list-o"></i> Menu
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('kardi_admin_user_admin_list') }}" class="text-uppercase">
+                            <i class="fa fa-user-o"></i> Administratorzy
+                        </a>
                     </li>
                 </ul>
             </div>

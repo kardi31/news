@@ -37,7 +37,10 @@ comment.success: Twój komentarz został dodany
 comment.error.title: Wystąpił błąd. Twój komentarz nie został dodany.
 comment.moderate.success: Dziękujemy za dodanie komentarza. Twój komentarz oczekuje na moderacje i pojawi się na stronie wkrótce.
 comment.number: '{0}Komentarzy|{1}Komentarz|]1,5[Komentarze|]4,Inf[Komentarzy'
-Write a comment: Dodaj komentarz
+gallery.number: '{0}Galerii|{1}Galeria|]1,5[Galerie|]4,Inf[Galerii'
+news.number: '{0}Aktualności|{1}Aktualność|]1,Inf[Aktualności'
+admin.number: '{0}Administratorów|{1}Administrator|]1,Inf[Administratorów'
+write_comment: Dodaj komentarz
 Social media: Media społecznościowe
 Share this article: Udostępnij ten artykuł
 Share this advertisement: Udostępnij to ogłoszenie

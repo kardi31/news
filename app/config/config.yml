@@ -43,6 +43,7 @@ twig:
     globals:
         locale: %locale%
         recaptcha: %recaptcha%
+        application_name: %application_name%
 
 # Doctrine Configuration
 doctrine:
@@ -54,7 +55,7 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        unix_socket: '/Applications/MAMP/tmp/mysql/mysql.sock'
+#        unix_socket: '/Applications/MAMP/tmp/mysql/mysql.sock'
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.root_dir%/../var/data/data.sqlite"
@@ -120,3 +121,11 @@ assetic:
 ewz_recaptcha:
     public_key:  6Lf2UycUAAAAAIe3lAj-QlxNgV231DDa9ZsWvYP-
     private_key: 6Lf2UycUAAAAAEP_Tz6teiGw3cwoX_NklYVRNSKW
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: Kardi\UserBundle\Entity\User
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"

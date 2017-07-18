@@ -1,0 +1,27 @@
+services:
+    kardi_gallery.command.handler.delete:
+        class: Kardi\GalleryBundle\Command\Handler\DeleteGalleryCommandHandler
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@kardi_media.service.photo'
+        tags:
+            - { name: command_handler, handles: Kardi\GalleryBundle\Command\DeleteGalleryCommand }
+    kardi_gallery.command.handler.add:
+        class: Kardi\GalleryBundle\Command\Handler\AddGalleryCommandHandler
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@kardi_gallery.repository.category'
+        tags:
+            - { name: command_handler, handles: Kardi\GalleryBundle\Command\AddGalleryCommand }
+    kardi_gallery.command.handler.category_add:
+        class: Kardi\GalleryBundle\Command\Handler\AddCategoryCommandHandler
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: command_handler, handles: Kardi\GalleryBundle\Command\AddCategoryCommand }
+    kardi_gallery.command.handler.category_edit:
+        class: Kardi\GalleryBundle\Command\Handler\EditCategoryCommandHandler
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: command_handler, handles: Kardi\GalleryBundle\Command\EditCategoryCommand }

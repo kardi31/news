@@ -1,6 +1,9 @@
 kardi_photo_upload:
     path:  /upload
     defaults: { _controller: KardiMediaBundle:Admin:upload }
+    options:
+        expose: true
+
 kardi_media_upload_photo:
     path:  /upload-photo
     defaults: { _controller: KardiMediaBundle:Admin:uploadPhoto }

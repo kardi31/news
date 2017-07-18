@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             new BeSimple\I18nRoutingBundle\BeSimpleI18nRoutingBundle(),
             new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
+            new \FOS\UserBundle\FOSUserBundle()
         ],
             $this->loadKardiBundles(),
 //            $this->loadEmigrantBundles()
@@ -31,13 +32,13 @@ class AppKernel extends Kernel
 
         );
 
-        if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
+//        if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
             $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
-        }
+//        }
 
         return $bundles;
     }
@@ -78,7 +79,8 @@ class AppKernel extends Kernel
             new Garden\LayoutBundle\GardenLayoutBundle(),
             new Garden\MenuBundle\GardenMenuBundle(),
             new Garden\NewsBundle\GardenNewsBundle(),
-            new \Garden\PageBundle\GardenPageBundle()
+            new \Garden\PageBundle\GardenPageBundle(),
+            new \Garden\GalleryBundle\GardenGalleryBundle()
         ];
     }
 
@@ -96,7 +98,8 @@ class AppKernel extends Kernel
             new Kardi\GalleryBundle\KardiGalleryBundle(),
             new Kardi\MediaBundle\KardiMediaBundle(),
             new Kardi\AdBundle\KardiAdBundle(),
-            new Kardi\AdminBundle\KardiAdminBundle()
+            new Kardi\AdminBundle\KardiAdminBundle(),
+            new \Kardi\UserBundle\KardiUserBundle()
         ];
     }
 }

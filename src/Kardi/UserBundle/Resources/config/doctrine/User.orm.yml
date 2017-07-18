@@ -1,0 +1,9 @@
+Kardi\UserBundle\Entity\User:
+ type:  entity
+ repositoryClass: Kardi\UserBundle\Repository\UserRepository
+ table: user_user
+ id:
+     id:
+         type: integer
+         generator:
+             strategy: AUTO

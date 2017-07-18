@@ -26,7 +26,7 @@ class Gallery extends Translation
     /**
      * @var boolean
      */
-    private $active = 0;
+    private $active = true;
 
     /**
      * @var boolean
@@ -337,5 +337,29 @@ class Gallery extends Translation
     public function getPhotoRootId()
     {
         return $this->photo_root_id;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param \Kardi\MediaBundle\Entity\Photo $photo
+     *
+     * @return Gallery
+     */
+    public function setPhoto(\Kardi\MediaBundle\Entity\Photo $photo = null)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return \Kardi\MediaBundle\Entity\Photo
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
     }
 }

@@ -1,5 +1,7 @@
 {% extends '@GardenLayout/layout.html.twig' %}
 
+{% import 'KardiFrameworkBundle:Message:display_flash_message.html.twig' as flash_macro %}
+
 {% block subheader %}
     {{ parent() }}
     <!--Page Title-->
@@ -36,8 +38,10 @@
 
                 <!--Content Side-->
                 <div class="col-md-8 col-sm-7 col-xs-12 column pull-right">
+
+                    {{ flash_macro.display_flash_message('contact') }}
                     <div class="sec-title">
-                        <h3>Napisz do nas</h3>
+                        <h3 class="h2">Napisz do nas</h3>
                         <div class="line"></div>
                     </div>
                     <div class="form-box">

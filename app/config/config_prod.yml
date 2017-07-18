@@ -19,3 +19,12 @@ monolog:
             level: debug
         console:
             type:  console
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     localhost
+        port:     3306
+        dbname:   kardi311_ogrod
+        user:     kardi311_ogrod
+        password: d51UQrYN
+        charset:  UTF8

@@ -26,7 +26,7 @@ class Gallery extends Translation
     /**
      * @var boolean
      */
-    private $active = 0;
+    private $active = true;
 
     /**
      * @var boolean

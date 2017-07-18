@@ -2,6 +2,13 @@
 
 {% import 'KardiFrameworkBundle:Message:display_flash_message.html.twig' as flash_macro %}
 
+{% block title %}
+    {{ news.trans('title') }} - {{ parent() }}
+{% endblock title %}
+
+{% block meta_description %}
+    {{ news.trans('content') }}
+{% endblock %}
 
 {% block topscripts %}
     {{ parent() }}
@@ -98,10 +105,9 @@
                             {#alt="{{ news.trans('title') }}">#}
                             {#</div>#}
                             <div class="post-data">
-                                {{ news.trans('content') }}
+                                {{ news.trans('content') | raw}}
                             </div>
                         </article>
-
 
                         <!--About Author-->
                         <div class="post-author">
@@ -143,8 +149,7 @@
                         <div id="writecomment" class="comment-form wow fadeInUp" data-wow-delay="200ms"
                              data-wow-duration="1500ms">
 
-                            <div class="sec-title style-three"><strong class="h2">{% trans %}Write a
-                                    comment {% endtrans %}</strong>
+                            <div class="sec-title style-three"><strong class="h2">{{ 'write_comment' | trans() }}</strong>
                                 <div class="line"></div>
                             </div>
 
